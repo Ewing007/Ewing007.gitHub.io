@@ -16,33 +16,99 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/purple/pace-theme-center-atom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/purple/pace-theme-minimal.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ewing007.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Welcome to [Hexo](https:&#x2F;&#x2F;hexo.io&#x2F;)! This is your very first post. Check [documentation](https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;) for more info. If you get any problems when using Hexo, you can find the answer in [trou">
+    <meta name="description" content="深入理解计算机系统笔记第一章 计算机系统漫游1.1 信息就是位+上下文程序的生命周期是从一个源程序开始的 大部分的现代计算机系统都使用 ASCII 标准来表示文本字符，这种方式实际上就是用一个唯一的单字节大小的整数值来表示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
+<meta property="og:title" content="深入理解计算机系统笔记">
 <meta property="og:url" content="https://ewing007.cn/title.html">
 <meta property="og:site_name" content="Ewing的博客">
-<meta property="og:description" content="Welcome to [Hexo](https:&#x2F;&#x2F;hexo.io&#x2F;)! This is your very first post. Check [documentation](https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;) for more info. If you get any problems when using Hexo, you can find the answer in [trou">
+<meta property="og:description" content="深入理解计算机系统笔记第一章 计算机系统漫游1.1 信息就是位+上下文程序的生命周期是从一个源程序开始的 大部分的现代计算机系统都使用 ASCII 标准来表示文本字符，这种方式实际上就是用一个唯一的单字节大小的整数值来表示">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-15T02:29:32.480Z">
-<meta property="article:modified_time" content="2024-04-17T10:14:22.739Z">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107133206363.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107133853847.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/image-20240107140622299.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/image-20240107141436768.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107141631629.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107141835310.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107142501484.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107142833382.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107143348824.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107143706152.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107144344259.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107144715513.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107150758559.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107152002844.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107152541751.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107162147608.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107185129383.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107185615804.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107191638330.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107192046120.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/image-20240108164435315.png">
+<meta property="og:image" content="d:\%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\img\image-20240108164612332.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107192837473.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193258276.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193522142.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193840259.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193856134.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107194039998.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107194800640.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108133433817.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108134100909.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108134423521.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108134848746.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108135515978.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108141715701.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/image-20240108171337134.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108184618733.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108185203546.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108185649855.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108190641765.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108191145597.png">
+<meta property="og:image" content="d:\%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\img\image-20240108191225036.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108191259748.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108191931368.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108192014260.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108192112607.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108195614430.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108200054307.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108201535929.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108202548726.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108202610638.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108203022317.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108203044062.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108203937650.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240109230727427.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240109231620782.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240109233635314.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110001856080.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110003246620.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110003604512.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110003625153.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110004030750.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110004106685.png">
+<meta property="og:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110004133113.png">
+<meta property="og:image" content="d:\%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0\img\image-20240110004152648.png">
+<meta property="article:published_time" content="2024-04-17T10:23:47.869Z">
+<meta property="article:modified_time" content="2024-04-17T13:03:20.485Z">
 <meta property="article:author" content="Ewing">
-<meta property="article:tag" content="-hello">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ewing007.cn/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107133206363.png">
 
 
 <link rel="canonical" href="https://ewing007.cn/title.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ewing007.cn/title.html","path":"title.html","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ewing007.cn/title.html","path":"title.html","title":"深入理解计算机系统笔记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Ewing的博客</title>
+<title>深入理解计算机系统笔记 | Ewing的博客</title>
   
 
 
@@ -90,7 +156,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -141,7 +207,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">深入理解计算机系统笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8"><span class="nav-number">1.1.</span> <span class="nav-text">第一章 计算机系统漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BF%A1%E6%81%AF%E5%B0%B1%E6%98%AF%E4%BD%8D-%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 信息就是位+上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E7%A8%8B%E5%BA%8F%E8%A2%AB%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F%E7%BF%BB%E8%AF%91%E6%88%90%E4%B8%8D%E5%90%8C%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2程序被其他程序翻译成不同的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E5%A4%84%E7%90%86%E5%99%A8%E8%AF%BB%E5%B9%B6%E8%A7%A3%E9%87%8A%E5%82%A8%E5%AD%98%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3处理器读并解释储存在内存中的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.3.1 系统的硬件组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E8%BF%90%E8%A1%8Chello%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.3.2 运行hello程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.4 高速缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5%E5%AD%98%E5%82%A8%E8%AE%BE%E5%A4%87%E5%BD%A2%E6%88%90%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.7.</span> <span class="nav-text">1.5存储设备形成层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.1.8.</span> <span class="nav-text">1.6 操作系统管理硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.1.9.</span> <span class="nav-text">1.6.1 进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.1.10.</span> <span class="nav-text">1.6.2 线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.1.11.</span> <span class="nav-text">1.6.3 虚拟内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-4-%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.12.</span> <span class="nav-text">1.6.4 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E7%B3%BB%E7%BB%9F%E4%B9%8B%E9%97%B4%E5%88%A9%E7%94%A8%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1"><span class="nav-number">1.1.13.</span> <span class="nav-text">1.7 系统之间利用网络通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86%E5%92%8C%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">第二章 信息的处理和表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 信息存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E5%8D%81%E5%85%AD%E4%BD%8D%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.1.1 十六位进制表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.1.2 数据大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-%E5%AF%BB%E5%9D%80%E5%92%8C%E5%AD%97%E8%8A%82%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.1.3 寻址和字节顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4-%E8%A1%A8%E7%A4%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.1.4 表示字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-5-%E5%B8%83%E5%B0%94%E4%BB%A3%E6%95%B0%E7%AE%80%E4%BB%8B"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.1.5 布尔代数简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-7-C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BA%A7%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.1.7 C语言中的位级运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.2 整型数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">第三章 程序的机器级表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%A8%8B%E5%BA%8F%E7%BC%96%E7%A0%81"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 程序编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 数据格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E8%AE%BF%E9%97%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 访问信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 操作数指示符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.4.1 数据传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.4.2 数据传输示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E6%A0%88%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.7.</span> <span class="nav-text">3.4.3 压入和弹出栈数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E7%AE%97%E6%9C%AF%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.8.</span> <span class="nav-text">3.5 算术和逻辑操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-1-%E5%8A%A0%E8%BD%BD%E6%9C%89%E6%95%88%E5%9C%B0%E5%9D%80"><span class="nav-number">1.3.9.</span> <span class="nav-text">3.5.1 加载有效地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-2-%E4%B8%80%E5%85%83%E5%92%8C%E4%BA%8C%E5%85%83%E6%93%8D%E7%BA%B5"><span class="nav-number">1.3.10.</span> <span class="nav-text">3.5.2 一元和二元操纵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-3-%E7%A7%BB%E4%BD%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.11.</span> <span class="nav-text">3.5.3 移位操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-4-%E8%AE%A8%E8%AE%BA"><span class="nav-number">1.3.12.</span> <span class="nav-text">3.5.4 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-5-%E7%89%B9%E6%AE%8A%E7%9A%84%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.13.</span> <span class="nav-text">3.5.5 特殊的算术操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.14.</span> <span class="nav-text">3.6 控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-1-%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="nav-number">1.3.15.</span> <span class="nav-text">3.6.1 条件码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-2-%E8%AE%BF%E9%97%AE%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="nav-number">1.3.16.</span> <span class="nav-text">3.6.2 访问条件码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-3-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.17.</span> <span class="nav-text">3.6.3 跳转指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-4-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E7%BC%96%E7%A0%81"><span class="nav-number">1.3.18.</span> <span class="nav-text">3.6.4 跳转指令编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-5-%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6%E5%AE%9E%E7%8E%B0%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="nav-number">1.3.19.</span> <span class="nav-text">3.6.5 条件控制实现条件分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-6-%E7%94%A8%E6%9D%A1%E4%BB%B6%E4%BC%A0%E9%80%81%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="nav-number">1.3.20.</span> <span class="nav-text">3.6.6 用条件传送来实现条件分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-7-%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.3.21.</span> <span class="nav-text">3.6.7 循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-8-switch%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.22.</span> <span class="nav-text">3.6.8 switch语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A0%88"><span class="nav-number">1.3.23.</span> <span class="nav-text">3.7 运行时栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-1%E8%BD%AC%E7%A7%BB%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.24.</span> <span class="nav-text">3.7.1转移控制</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -189,6 +255,21 @@
     </div>
 
     
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+        </ul>
+      </div>
+    </div>
   </aside>
 
 
@@ -218,12 +299,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | Ewing的博客">
-      <meta itemprop="description" content="Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).">
+      <meta itemprop="name" content="深入理解计算机系统笔记 | Ewing的博客">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          深入理解计算机系统笔记
         </h1>
 
         <div class="post-meta-container">
@@ -233,15 +314,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-04-15 10:29:32" itemprop="dateCreated datePublished" datetime="2024-04-15T10:29:32+08:00">2024-04-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-17 18:14:22" itemprop="dateModified" datetime="2024-04-17T18:14:22+08:00">2024-04-17</time>
+      <time title="创建时间：2024-04-17 18:23:47 / 修改时间：21:03:20" itemprop="dateCreated datePublished" datetime="2024-04-17T18:23:47+08:00">2024-04-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,48 +324,587 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">-hexo</span></a>
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
         </span>
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>78</span>
+      <span>11k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>42 分钟</span>
     </span>
 </div>
 
-            <div class="post-description">Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><h1 id="深入理解计算机系统笔记"><a href="#深入理解计算机系统笔记" class="headerlink" title="深入理解计算机系统笔记"></a>深入理解计算机系统笔记</h1><h2 id="第一章-计算机系统漫游"><a href="#第一章-计算机系统漫游" class="headerlink" title="第一章 计算机系统漫游"></a>第一章 计算机系统漫游</h2><h3 id="1-1-信息就是位-上下文"><a href="#1-1-信息就是位-上下文" class="headerlink" title="1.1 信息就是位+上下文"></a>1.1 信息就是位+上下文</h3><p>程序的生命周期是从一个源程序开始的</p>
+<p>大部分的现代计算机系统都使用 ASCII 标准来表示文本字符，这种方式实际上就是用一个唯一的单字节大小的整数值来表示</p>
+<span id="more"></span>每个字符 比如，图 中给出了 hello.c 程序的ASCII 码表示。
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107133206363.png" alt="image-20240107133206363"></p>
+<h3 id="1-2程序被其他程序翻译成不同的格式"><a href="#1-2程序被其他程序翻译成不同的格式" class="headerlink" title="1.2程序被其他程序翻译成不同的格式"></a>1.2程序被其他程序翻译成不同的格式</h3><p>Unix 系统上，从源文件到目标文件的转化是由编译器驱动程序完成的；</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux&gt; gcc -o hello hello.c</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>在这里， GCC 编译器驱动程序读取源程序文件 hello.c ，并把它翻译成一个可执行目标文件 hello 。这个翻译过程可分为四个阶段完成，（<strong>预处理器、编译器、汇编器和链接器</strong>）一起构成了编译系统，如图1-3 所示。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107133853847.png" alt="image-20240107133853847"></p>
+<p>预处理阶段：预处理器（cpp）根据字符#开头的命令，修改原始的c程序，得到以**.i**作为文件扩展名</p>
+<p>编译阶段：编译器（ccl）将文本文件hello.i 翻译成文本文件<strong>hello.s</strong>，包含一个汇编语言程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mian:</span><br><span class="line">	subq $8,%rsp</span><br><span class="line">	movl $.LCO,%edi</span><br><span class="line">	call puts</span><br><span class="line">	movl $0,%eax</span><br><span class="line">	addq $8,%rsp</span><br><span class="line">	ret</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>汇编阶段：汇编器（as）将**.s**翻译成机器语言指令，打包成</p>
+<p>一种叫做可重定位目标程序的格式，并保存在目标文件**.o** .o 文件是个二进制文件，在文本编辑器中打开 <strong>.o</strong> 文件，将看到一堆<strong>乱码</strong>。</p>
+<p>链接阶段：链接器(Id ）就负责处理这种合并。结果就得到 hello 文件，它是 个可执行目标文件（或者简称为可执行文件），可以被加载到内存中，由系统执行。</p>
+<h3 id="1-3处理器读并解释储存在内存中的指令"><a href="#1-3处理器读并解释储存在内存中的指令" class="headerlink" title="1.3处理器读并解释储存在内存中的指令"></a>1.3处理器读并解释储存在内存中的指令</h3><h3 id="1-3-1-系统的硬件组成"><a href="#1-3-1-系统的硬件组成" class="headerlink" title="1.3.1 系统的硬件组成"></a>1.3.1 系统的硬件组成</h3><ol>
+<li><p>总线</p>
+<p> 贯穿整个系统的是一组电子管道，称作总线，它携带信息字节并负责在各个部件间传递。</p>
+<p> 通常总线被设计成传送定长的字节块，也就是字（ word ）。字中的字节数（即字长）是一个基本的系统参数</p>
+</li>
+<li><p>I&#x2F;O设备</p>
+<p> I&#x2F;0 （输入／输出）设备是系统与外部世界的联系通道。我们的示例系统包括四个 I&#x2F;0备：</p>
+<p> ​		作为用户输入的键盘和鼠标，</p>
+<p> ​		作为用户输出的显示器，</p>
+<p> ​		以及用于长期存储数据和程序的磁盘驱动器（磁盘）</p>
+<p> 每个 I&#x2F;0 设备都通过<strong>一个控制器</strong>或适配器与总线相连。</p>
+<p> 控制器是 I&#x2F;0 设备本身或者系统的主印制电路板（主板）上的芯片组。</p>
+<p> 适配器则是一块插在主板插槽上的卡。</p>
+<p> 两者的功能都是在I&#x2F;O 总线和 I&#x2F;O 设备之间传递信息。</p>
+<p> CPU </p>
+ <img src="深入理解计算机系统\image-20240107140622299.png" alt="image-20240107140622299" style="zoom: 200%;" /></li>
+</ol>
+<p>4.处理器</p>
+<p>​	中央处理单元（ CPU ），简称处理器，是解释（执行）存储在主存中指令的引擎。处理器的核心是一个<strong>大小为一个字</strong>的存储设备（寄存器），称为程序计数器（ PC ）。在任何时刻， PC 都指向主存中的某条机器语言指令（即含有该条指令的地址）。</p>
+<h3 id="1-3-2-运行hello程序"><a href="#1-3-2-运行hello程序" class="headerlink" title="1.3.2 运行hello程序"></a>1.3.2 运行hello程序</h3><p>1.在键盘上输入字符串“.／ hello”后， shell 程序将字符逐一读入寄存器，再把它存放到内存中，如图 1-5 所示。</p>
+<img src="深入理解计算机系统\image-20240107141436768.png" alt="image-20240107141436768" style="zoom:67%;" />
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>2.敲回车键时， shell 程序就知道我们已经结束了命令的输入 。然后shell 执行指令加载可执行的 hello 文件，这些指令将 hello 目标文件中的代码和数据从磁盘复制到主存。数据包括最终会被输出的字符串“hello, world\n”，骤如图 1-6 所示。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107141631629.png" alt="image-20240107141631629"></p>
+<p>3.目标文件 hello 中的代码和数据被加载到主存，处理器开始执行 hello 程序的 main 程序中的机器语言令。 这些指令将“hello, world\n”字符串中的字节从主存复制到寄存器文件，再从寄存器文件中复制到显示设备，最终显示在屏幕上。这个步骤如图1-7 所示。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107141835310.png" alt="image-20240107141835310"></p>
+<h3 id="1-4-高速缓存"><a href="#1-4-高速缓存" class="headerlink" title="1.4 高速缓存"></a>1.4 高速缓存</h3><p>为解决处理器与主存之间的读取速率的差距差异，采用高速缓存存储器（ cache 或高速缓存），作为暂时的集结区域，存放处理器近期可能会需要的信息。如图 1-8 展示了一个典型系统中的高速缓存存储器</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107142501484.png"></p>
+<h3 id="1-5存储设备形成层次结构"><a href="#1-5存储设备形成层次结构" class="headerlink" title="1.5存储设备形成层次结构"></a>1.5存储设备形成层次结构</h3><p>层次结构中，从<strong>上至下</strong>，设备的访问速度<strong>越来越慢</strong>、容量<strong>越来越大</strong>，并且每字节的造价也<strong>越来越便宜</strong>。寄存器文件在层次结构中位于最顶部，也就是第0 级或记为 L0 。如图 1-9 所示.</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107142833382.png" alt="image-20240107142833382"></p>
+<p>存储器层次结构的主要思想是上一层的存储器作为低层存储器的高速缓存。如寄存器文件就是 Ll 的高速缓存， Ll 是L2 的高速缓存， L2是 L3 的高速缓存， L3 是主存的高速缓存，而主存又是磁盘的高速缓存。</p>
+<h3 id="1-6-操作系统管理硬件"><a href="#1-6-操作系统管理硬件" class="headerlink" title="1.6 操作系统管理硬件"></a>1.6 操作系统管理硬件</h3><p>如图 1-10 所示。所有应用程序对硬件的操作尝试都必须通过操作系统。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107143348824.png" alt="image-20240107143348824"></p>
+<p>操作系统两个基本功能： </p>
+<p>​	（1）防止硬件被失控的应用程序滥用；</p>
+<p>​	（ 2）向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备。</p>
+<p>操作系统通过几个基本的抽象概念（进程、虚拟内存和文件）来实现这两个功能。如图 1-11 所示，</p>
+<p>​							文件是对I&#x2F;0 设备的抽象表示，</p>
+<p>​							虚拟内存 对主存和磁盘 设备的抽象表示，</p>
+<p>​							进程则 对处理器、主存和设备的抽象表示</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107143706152.png" alt="image-20240107143706152"></p>
+<h3 id="1-6-1-进程"><a href="#1-6-1-进程" class="headerlink" title="1.6.1 进程"></a>1.6.1 进程</h3><p><strong>进程</strong>是操作系统对一个正在运行的程序的一种抽象。在一个系统上可以同时运行多个进程，而每个进程都好像在独占地使用硬件。</p>
+<p><strong>并发</strong>运行，则是说一个进程的指令和另一个进程的指令是交错执行的。</p>
+<p>操作系统保持眼踪进程运行所需的所有状态信息。这种状态，也就是<strong>上下文</strong>，包括许多信息，比如 PC 和寄存器文件的当前值，以及 存的内容。</p>
+<p>当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行<strong>上下文切换</strong>，即保存当前进程的上下文、恢复新进程的上下文，然后将控制权传递到新进程。新进程就会从它上次停止的地方开始。图 1-12 展示了 hello序运行场景的基本理念。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107144344259.png" alt="image-20240107144344259"></p>
+<h3 id="1-6-2-线程"><a href="#1-6-2-线程" class="headerlink" title="1.6.2 线程"></a>1.6.2 线程</h3><p>一个进程实际上可以由多个称为<strong>线程的执行单元</strong>组成，每个线程都运行在进程的上下文中，并共享同样的代码和全局数据。</p>
+<h3 id="1-6-3-虚拟内存"><a href="#1-6-3-虚拟内存" class="headerlink" title="1.6.3 虚拟内存"></a>1.6.3 虚拟内存</h3><p>虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程都在独占地使用主存。</p>
+<p>每个进程看到的内存都是一致的，称为虚拟地址空间。图 1-13 所示的是 Linux 进程的虚拟地址空间。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107144715513.png" alt="image-20240107144715513"></p>
+<p>每个进程看到的虚拟地址空间由大量准确定义的区构成，每个区都有专门的功能。</p>
+<ul>
+<li>程序代码和数据：对所有的进程来说，代码是从同 固定地址开始，紧接着的是和全局变量相对应的数据位置。代码和数据区是直接按照可执行目标文件的内容初始化的。</li>
+<li>堆：代码和数据区后紧随着的是运行时堆。代码和数据区在进程一开始运行时就被指定了大小，与此不同，当调用像 malloc 和 free 这样的C标准库函数时，堆可以在运行时动态地扩展和收缩。</li>
+<li>共享库：在地址空间的中间部分是一块用来存放像C标准库和数学库这样的共享库的代码和数据的区域。</li>
+<li>栈：位于用户虚拟地址空间顶部的是用户栈，编译器用它来实现函数调用。和堆一样，用户栈在程序执行期间可以动态地扩展和收缩。每次我们调用一个函数时，栈就会增长；从一个函数返回时，栈就会收缩 。</li>
+<li>内核虚拟内存：地址空间顶部的区域是为内核保留的。不允许应用程序读写这个区域的内容或者直接调用内核代码定义的函数。它们必须调用内核来执行这些操作。</li>
+</ul>
+<h3 id="1-6-4-文件"><a href="#1-6-4-文件" class="headerlink" title="1.6.4 文件"></a>1.6.4 文件</h3><p>文件就是字节序列。每个 1&#x2F;0 设备，包括磁盘、键盘、显示器，甚至网络，都可以看成是文件。系统中的所有输入输出都是通过使用一小组称为 Unix I&#x2F;O 的系统函数调用读写文件来实现的</p>
+<h3 id="1-7-系统之间利用网络通信"><a href="#1-7-系统之间利用网络通信" class="headerlink" title="1.7 系统之间利用网络通信"></a>1.7 系统之间利用网络通信</h3><p>现代系统经常通过<strong>网络和其他系统</strong>连接到一起。</p>
+<p>从 个单独的系统来看，网络可视为一个I&#x2F;O设备，如图 1-14 所示。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107150758559.png" alt="image-20240107150758559"></p>
+<p>当系统从主存复制一串字节到网络适配器时，数据流经过网络到达另一台机器，而不是比如说到达本地磁盘驱动器。</p>
+<h2 id="第二章-信息的处理和表示"><a href="#第二章-信息的处理和表示" class="headerlink" title="第二章 信息的处理和表示"></a>第二章 信息的处理和表示</h2><h3 id="2-1-信息存储"><a href="#2-1-信息存储" class="headerlink" title="2.1 信息存储"></a>2.1 信息存储</h3><p>大多数数计算机使用<strong>8位</strong>的块，字节（ byte ），作为最小的可寻址的内存单位。</p>
+<p>机器级程序将内存视为一个非常大的字节数组，称为虚拟内存。 内存的每个字节都由 个唯一的数字来标识，称为它的地址。所有可能地址的 合就称为虚拟地址空间。</p>
+<h3 id="2-1-1-十六位进制表示法"><a href="#2-1-1-十六位进制表示法" class="headerlink" title="2.1.1 十六位进制表示法"></a>2.1.1 十六位进制表示法</h3><p>一个字节由8位组成。在二进制表示法中，它的值域是 00000000 - 11111111，看成十进制就是0 - 255。</p>
+<p>十六进制（“hex”）使用数字’0’～’9’以及字符‘ A’～‘ F’来表示 16 个可能的值。</p>
+<p>图 2-2 展示了 16 个十六进制数字对应的十进制值和二进制值。用十六进制书写，一个字节的值域为 00 ~FF</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107152002844.png" alt="image-20240107152002844"></p>
+<p>在C语言中，以 0X, 0x 开头的数字常量被认为是十六进制的值。字符‘A’～‘F’ 既可以是大写 ，也可以是小写。我们可以将数字 FA1D37B1 OxFAlD37B ，或者Oxfald37b ，甚至是大小写棍合，比如， 0xFalD37b 。</p>
+<h3 id="2-1-2-数据大小"><a href="#2-1-2-数据大小" class="headerlink" title="2.1.2 数据大小"></a>2.1.2 数据大小</h3><p>每台计算机都有一个字长，指明指针数据的标称大小。</p>
+<p>对于一个字长为 位的机器而言，虚拟地址的范围为 0～2^n -1, 程序最多访问 四个字节。</p>
+<p>图 2-3 展示了为 语言各种数据类型分配的字节数。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107152541751.png" alt="image-20240107152541751"></p>
+<h3 id="2-1-3-寻址和字节顺序"><a href="#2-1-3-寻址和字节顺序" class="headerlink" title="2.1.3 寻址和字节顺序"></a>2.1.3 寻址和字节顺序</h3><p>两个字节有两种方法：</p>
+<p>​		如数字0x12 34 56 78在内存中的表示形式。</p>
+<p>​		<strong>大端模式：Big-Endian就是高位字节排放在内存的低地址端，低位字节排放在内存的高地址端。</strong></p>
+<pre><code>    低地址 --------------------&gt; 高地址
+    0x12  |  0x34  |  0x56  |  0x78
+</code></pre>
+<p>​		<strong>小端模式：Little-Endian就是低位字节排放在内存的低地址端，高位字节排放在内存的高地址端。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">低地址 --------------------&gt; 高地址</span><br><span class="line">0x78  |  0x56  |  0x34  |  0x12</span><br></pre></td></tr></table></figure>
+
+
+
+<p>16bit宽的数0x1234在小端模式（以及大端模式）CPU内存中的存放方式（假设从地址0x4000开始存放）为：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>内存地址</strong></th>
+<th align="center"><strong>小端模式存放内容</strong></th>
+<th align="center"><strong>大端模式存放内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0x4000</td>
+<td align="center">0x34</td>
+<td align="center">0x12</td>
+</tr>
+<tr>
+<td align="center">0x4001</td>
+<td align="center">0x12</td>
+<td align="center">0x34</td>
+</tr>
+</tbody></table>
+<p>32bit宽的数0x12345678在小端模式以及大端模式）CPU内存中的存放方式（假设从地址0x4000开始存放）为：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>内存地址</strong></th>
+<th align="center"><strong>小端模式存放内容</strong></th>
+<th align="center"><strong>大端模式存放内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0x4000</td>
+<td align="center">0x78</td>
+<td align="center">0x12</td>
+</tr>
+<tr>
+<td align="center">0x4001</td>
+<td align="center">0x56</td>
+<td align="center">0x34</td>
+</tr>
+<tr>
+<td align="center">0x4002</td>
+<td align="center">0x34</td>
+<td align="center">0x56</td>
+</tr>
+<tr>
+<td align="center">0x4003</td>
+<td align="center">0x12</td>
+<td align="center">0x78</td>
+</tr>
+</tbody></table>
+<p><strong>数组在大端小端情况下的存储</strong>:</p>
+<p>　　以unsigned int value &#x3D; 0x12345678为例，分别看看在两种字节序下其存储情况，我们可以用unsigned char buf[4]来表示value：</p>
+<p>大端: 低地址存放高位，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">高地址</span><br><span class="line">		---------------</span><br><span class="line">        buf[3] (0x78) -- 低位</span><br><span class="line">        buf[2] (0x56)</span><br><span class="line">        buf[1] (0x34)</span><br><span class="line">        buf[0] (0x12) -- 高位</span><br><span class="line">		---------------</span><br><span class="line">低地址</span><br></pre></td></tr></table></figure>
+
+<p>小端: 低地址存放低位，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">高地址</span><br><span class="line">        ---------------</span><br><span class="line">        buf[3] (0x12) -- 高位</span><br><span class="line">        buf[2] (0x34)</span><br><span class="line">        buf[1] (0x56)</span><br><span class="line">        buf[0] (0x78) -- 低位</span><br><span class="line">        --------------</span><br><span class="line">低地址</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-4-表示字符串"><a href="#2-1-4-表示字符串" class="headerlink" title="2.1.4 表示字符串"></a>2.1.4 表示字符串</h3><p>C语言中字符串被编码为一个以 <strong>null （其值为 0）字符结尾</strong>的字符数组。</p>
+<h3 id="2-1-5-布尔代数简介"><a href="#2-1-5-布尔代数简介" class="headerlink" title="2.1.5 布尔代数简介"></a>2.1.5 布尔代数简介</h3><p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107162147608.png" alt="image-20240107162147608"></p>
+<p>举个例子，假设 w&#x3D;4 ，参数 a&#x3D; [0110] , llOO 那么 种运算 <em>a&amp;b</em> 、a|b、a^b 和～b 分别得到以下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  0110    0110    0110    </span><br><span class="line">&amp; 1100  | 1100  ~ 1100    ~ 1100</span><br><span class="line">  0100    1110    1010      0011</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-7-C语言中的位级运算"><a href="#2-1-7-C语言中的位级运算" class="headerlink" title="2.1.7 C语言中的位级运算"></a>2.1.7 C语言中的位级运算</h3><p>C语言所使用的：｜就是 OR （或），＆就是 AND （与），～就是 NOT （取反），而&#96;就是 EXCLUSIVE-OR （异或 ）</p>
+<table>
+<thead>
+<tr>
+<th>C的表达</th>
+<th>二进制表达式</th>
+<th>二进制结果</th>
+<th>十六进制结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>~0x41</td>
+<td>~[0100 0001]</td>
+<td>[1011 1110]</td>
+<td>0xBE</td>
+</tr>
+<tr>
+<td>~0x00</td>
+<td>~[0000 0000]</td>
+<td>[11111111]</td>
+<td>0xFF</td>
+</tr>
+<tr>
+<td>0x69&amp;0x55</td>
+<td>[0110 1001]&amp;[0101 0101]</td>
+<td>[0100 0001]</td>
+<td>0x41</td>
+</tr>
+<tr>
+<td>0x691 | 0x55</td>
+<td>[0110 1001]  | [ [0101 0101]</td>
+<td>[0100 0001]</td>
+<td>0x7D</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-整型数据类型"><a href="#2-2-整型数据类型" class="headerlink" title="2.2 整型数据类型"></a>2.2 整型数据类型</h3><p>大多数 64 位机器使用 个字节的表示，比 32 位机器上使用的 个字节的表示的取值范围大很多。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107185129383.png" alt="image-20240107185129383"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107185615804.png" alt="image-20240107185615804"></p>
+<h2 id="第三章-程序的机器级表示"><a href="#第三章-程序的机器级表示" class="headerlink" title="第三章 程序的机器级表示"></a>第三章 程序的机器级表示</h2><h3 id="3-1-程序编码"><a href="#3-1-程序编码" class="headerlink" title="3.1 程序编码"></a>3.1 程序编码</h3><p>假设有两个文件 pl.c p2.c，执行下面代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux&gt; gee -Og -o p p1.c p2.c</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>C预处理器扩展源代码，插入所有用 #inelude 命令指定的文件，并扩展所有用＃define 声明指定的宏。</li>
+<li>编译器产生两个源文件的汇编代码，名字分别为 p1.s 和 p2.s 。</li>
+<li>汇编器将汇编代码转化成二进制目标代码文件 p1.o p2.o 目标代码是机器代码的一种形式，它包含所有指令的二进制表示，但是还没有填入全局值的地址。</li>
+<li>链接器将两个目标代码文件与实现库函数（例如 printf）的代码合井，并产生最终的可执行代码文件p（由命令行指示符－o p 指定的）</li>
+</ol>
+<h3 id="3-2-数据格式"><a href="#3-2-数据格式" class="headerlink" title="3.2 数据格式"></a>3.2 数据格式</h3><p>“字”表示 16 位数据类型。因此，称 32 位数为“双字”，称 64 位数为“四字”。3-1 给出了 语言基本数据类型对应的 x86-64 表示。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107191638330.png" alt="image-20240107191638330"></p>
+<p>浮点数主要有两种形式：单精度（ 字节）值，对应于C语言数据类型 float ；双精度(8 字节）值，对应于C语言数据类型 double </p>
+<p>数据传送指令有四个变种： movb （传送字节）、 movw （传送字）、 movl （传送双字）和 movq （传送四字）。后缀‘ l‘用来表示双字，因为 32 位数被看成是“长字（ long word）＂</p>
+<h3 id="3-3-访问信息"><a href="#3-3-访问信息" class="headerlink" title="3.3 访问信息"></a>3.3 访问信息</h3><p>x86-64 的中央处理单元（ CPU ）包含一组 16 个存储 64 位值的通用目的寄存器。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107192046120.png" alt="image-20240107192046120"></p>
+<p>如图 3-2 中嵌套的方框标明的，指令可以对这 16 个寄存器的低位字节中存放的不同大小的数据进行操作。</p>
+<p>字节级操作可以访问最低的字节， 16 位操作可以访问最低的 个字节， 32 位操作可以访问最低的 个字节，而 64 位操作可以访问整个寄存器。</p>
+<h3 id="3-4-操作数指示符"><a href="#3-4-操作数指示符" class="headerlink" title="3.4 操作数指示符"></a>3.4 操作数指示符</h3><p>各种不同的操作数的可能性被分为三种类型：</p>
+<ul>
+<li><p>立即数（ immediate ），用来表示常数值。在 ATT 格式的汇编代码中，立即数的书写方式是 ’$‘后面跟一个用C标准示法表示的整数，比如，$－577 $0x1F 。</p>
+</li>
+<li><p>寄存器（ register ），它表示某个寄存器的内容， 16 个寄存器的低位1字节、2字节、4字节或 8字节中的一个作为操作数，这些字节数分别对应于 8位、 16 位、 32 位或 64 位。</p>
+  <img src="深入理解计算机系统\image-20240108164435315.png" alt="image-20240108164435315" style="zoom:200%;" />
+</li>
+<li><p>内存引用，它会根据计算出来的地址（通常称为有效地址）访问某个内存位置。</p>
+  <img src="D:\阅读笔记\img\image-20240108164612332.png" alt="image-20240108164612332" style="zoom:150%;" /></li>
+</ul>
+<p>如图 3-3所示，有多种不同的寻址模式，允许不同形式的内存引用。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107192837473.png" alt="image-20240107192837473"></p>
+<h3 id="3-4-1-数据传送指令"><a href="#3-4-1-数据传送指令" class="headerlink" title="3.4.1 数据传送指令"></a>3.4.1 数据传送指令</h3><p>最频繁使用的指令是将数据从一个位置复制到另一个位置的指令。</p>
+<p>图3-4列出的是最简单形式的数据传送指令一MOV 类。这些指令把数据<strong>从源位置复制到目的位置</strong>，<strong>不做任何变化</strong>。</p>
+<p>MOV 类由四条指令组成： </p>
+<ul>
+<li>movb</li>
+<li>movw </li>
+<li>movl</li>
+<li>movq</li>
+</ul>
+<p>这些指令都执行同样的操作，主要区别在于它们操作的数据大小不同：分别是1、2、4、8字节。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193258276.png" alt="image-20240107193258276"></p>
+<p>图3-2 ，这些指令的寄存器操作数可以是 16 个寄存器有标号部分中的任意一个，寄存器部分的大小必须与指令最后一个字符（‘ b’，‘w ’，‘ l’或‘q ’）指定的大小匹配。</p>
+<p>下面的 MOV 指令示例给出了源和目的类型的五种可能的组合。记住，第一个是源操作数，第二个是目的操作数：</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193522142.png" alt="image-20240107193522142"></p>
+<p>图3-4 中记录的最后一条指令是处理 64 位立即数数据的。</p>
+<p>图3-5 和图 3-6 记录的是两类数据移动指令，在将较小的源值复制到较大的目的时使用。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193840259.png" alt="image-20240107193840259"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107193856134.png" alt="image-20240107193856134"></p>
+<p>所有这些指令都把数据从摞（在寄存器或内存中）复制到目的寄存器 MOVZ 类中的指令把目的中剩余的字节填充为 ，而 MOVS 类中的指令通过符号扩展来填充，把源操作的最高位进行复制。</p>
+<p><strong>注：</strong></p>
+<p>​	理解数据传送如何改变目的寄存器</p>
+<p>​	<img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107194039998.png" alt="image-20240107194039998"></p>
+<p>​	在这个例子中，第 1行的指令把寄存器%rax 初始化为位模式 0011223344556677。 剩下的指令的源操作数值是立即数值-1.</p>
+<p>因此 movb 指令（第2行）把 %rax 的低位字节设直为FF，而 movw 指令（第3行）把低2位字节设直为FFFF，剩下的字节保持不变。movl 指令（第4行）将低4个字节设直为 FFFFFFFF ，同时把高位4字节设直为 00000000 最后 movq 指令（第5行）把整个寄存器设直为 FFFFFFFFFFFFFFFF。</p>
+<p>图3-6 还给出 cltq 指令。这条指令没有操作数：它总是以寄存器%eax 作为源，%rax为符号扩展结果的目的。它的效果与指令 movslq %eax，%rax 完全一致。</p>
+<p><strong>注：</strong></p>
+<p>​	字节传送指令比较</p>
+<p>​	下面这个示例说明了不同的数据传送指令如何改变或者不改变目的的高位字节 仔细观察可以发现，三个字节传送指令 movb movsbq movzbq 之间有细微的差别 示例如下：</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240107194800640.png" alt="image-20240107194800640"></p>
+<p>​	代码的头2行将寄存器%rax和%dl分别初始化为0011223344556677 和AA。剩下的指令都是将%rdx 的低位字节复制到 %rax的低位字节。movb 指令（第 3行）不改变其他字节。根据源字节的最高位， movsbq 指令（第4行〉将其他7个字节设为全0或全1由于十六进制A表示二进制值 1010 ，符号扩展会把高位字节都设直为 FF movzbq 指令（第5 行）总是将其他7个字节全都设直为0。</p>
+<h3 id="3-4-2-数据传输示例"><a href="#3-4-2-数据传输示例" class="headerlink" title="3.4.2 数据传输示例"></a>3.4.2 数据传输示例</h3><p>图 3-7中所示的数据交换函数，既有代码，也有 GCC 产生的汇编代码。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108133433817.png" alt="image-20240108133433817"></p>
+<p>如图 3-7b 所示，函数 exchange 由三条指令实现：两个数据传送（ movq ），加上一条返回函数被调用点的指令（ ret ）</p>
+<p>过程：</p>
+<p>​	当过程开始执行时，过程参数 xp 和y分别存储在寄存器%rdi %rsi 中。然后，指令从内存中读出 x，把它存放到寄存器%rax 中，直接实现了c程序中的操作 x &#x3D; *xp 稍后，用寄存器 %rax 从这个函数返回一个值，因而返回值就是 x。指令 3写入到寄存器%rdii 中的 xp 指向的内存位置，直接实现了操作＊xp&#x3D;y 。</p>
+<h3 id="3-4-3-压入和弹出栈数据"><a href="#3-4-3-压入和弹出栈数据" class="headerlink" title="3.4.3 压入和弹出栈数据"></a>3.4.3 压入和弹出栈数据</h3><p>如图 3-8所示，两个数据传送操作可以将数据压人程序栈中，以及从程序栈中弹出数据</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108134100909.png" alt="image-20240108134100909"></p>
+<p>栈是一种数据结构，可以添加或者删除值，过要遵循“后进先出”的原则，push 操作把数据压入栈中，通过 pop 操作删除数据</p>
+<p>栈可以实现为一个数组，总是从数组的一端插入和删除元素 这一端被称为栈顶。</p>
+<p>如图3-9 所示，栈向下增长，栈顶元素的地址是所有栈中元素地址中最低的。（根据惯例，我们的栈是倒过来画的，栈“顶”在图的底部。）栈指针%rsp 保存着栈顶元素的地址。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108134423521.png" alt="image-20240108134423521"></p>
+<p>将一个四字值压入栈中，首先要将栈指针减8 ，然后将值写到新的栈顶地址 。</p>
+<p>指令 pushq rbp 的行为等价于下面两条指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subq $8,%rsp</span><br><span class="line">moveq %rbp,(%rsp)</span><br></pre></td></tr></table></figure>
+
+<p>在机器代码中 pushq 指令编码为1个字节，而上面那两条指令一共需要8个字节。</p>
+<p>图 3-9 中前两栏给出的是，当% rsp为0x108 ，%rax为0x123 时，执行指令pushq %rax 的效果。首先%rsp 会减 8，得到 0x100 ，然后会将 0x123 存放到内存地址0x100 处。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108134848746.png" alt="image-20240108134848746"></p>
+<p>指令 popq %rax 等价于下面两条指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">moveq (%rsp),%rax</span><br><span class="line">addq $8,%rsp</span><br></pre></td></tr></table></figure>
+
+<p>图3-9 的第三栏说明的是在执行完 pushq 后立即执行指令 popq %rdx 的效果。先从内存中读出值 0x123 ，再写到寄存器%rdx 中，然后，寄存器%rsp 的值将增加回到 0x108。</p>
+<p>如图中所示，值 0x123 仍然会保持在内存位置 0x100 中，直到被覆盖。</p>
+<h3 id="3-5-算术和逻辑操作"><a href="#3-5-算术和逻辑操作" class="headerlink" title="3.5 算术和逻辑操作"></a>3.5 算术和逻辑操作</h3><p>指令类ADD 由四条加法指令组成： addb addw addl addq ，分别是字节加法、字加法、双字加法和四字加法。</p>
+<p>四种不同大小数据的指令分为四组：</p>
+<ul>
+<li>​	加载有效地址</li>
+<li>一元操作</li>
+<li>二元操作和移位</li>
+<li>二元操作有两个操作数，</li>
+</ul>
+<p>图3-10 列出了 x86-64 的一些整数和逻辑操作</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108135515978.png" alt="image-20240108135515978"></p>
+<h3 id="3-5-1-加载有效地址"><a href="#3-5-1-加载有效地址" class="headerlink" title="3.5.1 加载有效地址"></a>3.5.1 加载有效地址</h3><p><strong>加载有效地址指令</strong> leaq 实际上是 movq 指令的变形。</p>
+<p>指令形式是从内存读数据到寄存器，但实际上它根本就没有引用内存。</p>
+<p>例如，如果寄存器%rdx 的值为 x，那么指令 leaq 7 (%rdx ，%rdx，4), %rax 将设置寄存器%rax 的值为 5x + 7</p>
+<p>为了说明 leaq 在编译出的代码中的使用，看看下面这个c程序：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">scale</span><span class="params">(<span class="type">long</span> x,<span class="type">long</span> y,<span class="type">long</span> z)</span>&#123;</span><br><span class="line">	<span class="type">long</span> t = x +<span class="number">4</span> * y + <span class="number">12</span> * z;</span><br><span class="line">	<span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译时，该函数的算术运算以三条 leaq 指令实现，就像右边注释说明的那样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">long scale(long x,long y,long x)</span><br><span class="line">x in %rdi,y in %rsi,z in %rdx</span><br><span class="line">scale:</span><br><span class="line">	leaq	(%rdi,%rsi,4),%rax		x+4*y</span><br><span class="line">	leaq	(%rdx,%rdx,2),%rdx		z+2*z=3*z</span><br><span class="line">	leaq	(%rax,%rdx,4),%rax		(x+4*y)+4*(3*z)=x+4*y+12*z</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-2-一元和二元操纵"><a href="#3-5-2-一元和二元操纵" class="headerlink" title="3.5.2 一元和二元操纵"></a>3.5.2 一元和二元操纵</h3><p>第二组中的操作是一元操作，只有一个操作数，既是源又是目的。这个操作数可以是一个寄存器，也可以是一个内存位置。</p>
+<p>比如说，指令 incq （% rsp ）会使栈顶的8字节元素加1。与C语言中的加1运算符（++）和减1运算符（–）。</p>
+<p>第三组是二元操作，其中，第二个操作数既是源又是目的。</p>
+<p>如C语言中的赋值运算符，例如 x-&#x3D;y 。</p>
+<p>例如，指令 subq %rax,%rdx 使寄存器%rdx值减去%rax 中的值。（将指令解读成“从%rdx 中减去%rax ”会有所帮助。）</p>
+<p>第一个操作数可以是立即数、寄存器或是内存位置。第二个操作数可以是寄存器或是内存位置。</p>
+<p>注：</p>
+<p>​	当第二个操作数为内存地址时，处理器必须从内存读出值，执行操作，再把结果写回内存。</p>
+<h3 id="3-5-3-移位操作"><a href="#3-5-3-移位操作" class="headerlink" title="3.5.3 移位操作"></a>3.5.3 移位操作</h3><p>先给出移位 ，然后第二项给出的是要移位的数。</p>
+<p>可以进行算术和逻辑右移。移位量可以是一个立即数，或者放在单字节寄存器%cl 中。</p>
+<p>例如当寄存器 %cl 的十六进制值为 0x FF 时，指令 salb 会移 7位， salw 会移 15 位， sall 会移31 位，而 salq 会移 63 位。</p>
+<p>（x86 - 64 中，移位操作对 w位长的数据值进行操作，移位量是由 %cl 寄存器的低m位决定的，这里 2^m＝w。高位会被忽略）</p>
+<p>如图 3-10 所示，左移指令有两个名字： SAL 和 SHL 。两者的效果是一样的，都是将右边填上0 。右移指令不同，SAR 执行算术移位（填上符号位），而 SHR 执行逻辑移位（填上0）</p>
+<h3 id="3-5-4-讨论"><a href="#3-5-4-讨论" class="headerlink" title="3.5.4 讨论"></a>3.5.4 讨论</h3><p>图3-11 给出了一个执行算术操作的函数示例，以及它的汇编代码。参数x、y和z初始时分别存放在内存%rdi 、%rsi 和%rdx 中。第2行计算 x^y 的值。指令 3和4 用leaq 和移位指令的组合来实现表达式 z* 48 。第 5行计算t1 0x0F0F0F0F的 AND值。第6 行计算最后的减法 由于减法的目的寄存器是%rax ，函数会返回这个值。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108141715701.png" alt="image-20240108141715701"></p>
+<h3 id="3-5-5-特殊的算术操作"><a href="#3-5-5-特殊的算术操作" class="headerlink" title="3.5.5 特殊的算术操作"></a>3.5.5 特殊的算术操作</h3><p>x86-64 指令集对 128 (16 字节）数的操作提供有限的支持。延续字（ 字节）、双字（ 字节）和四字（ 字节）的命名惯例， Intel 16 字节的数称为八字</p>
+<p>图 3-12描述的是支持产生两个 64 位数字的全 128 位乘积以及整数除法的指令。</p>
+<img src="深入理解计算机系统\image-20240108171337134.png" alt="image-20240108171337134" style="zoom:150%;" />
+
+<p>x86-64 指令集还提供了两条不同的“单操作数”乘法指令，以计算两个 64值的全 128 位乘积：</p>
+<ol>
+<li>​	一个是无符号数乘法（ mulq ）</li>
+<li>另一个是补码乘法（ imulq ）</li>
+</ol>
+<p>。这两</p>
+<p>这两条指令都要求一个参数必须在寄存器%rax 中，而另一个作为指令的源操作数给出。</p>
+<p>然后乘积存放在寄存器%rdx （高 64 位）和 %rax （低 64 位）中。</p>
+<p>下面这段 代码是一个示例，说明了如何从两个无符号 64 位数字 生成 128位的乘积：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;inttypes.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">signed</span> __ int128 <span class="type">uint128_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">store_uprod</span><span class="params">(<span class="type">uint128_t</span> *dest, <span class="type">uint64_t</span> x, <span class="type">uint64_t</span> y)</span> &#123; </span><br><span class="line">*dest = x * (<span class="type">uint128_t</span>) y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>GCC 生成的汇编代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void store_uprod(uint128_t *dest , uint64_t x, uint64_t y) </span><br><span class="line">dest in %rdi, x in %rsi, yin %rdx</span><br><span class="line">store_uprod: </span><br><span class="line">    movq %rsi,%rax			Copy x to multiplicand</span><br><span class="line">    mulq %rdx 				Multiply by y</span><br><span class="line">    movq %rax,(%rdi) 		Store lower 8 bytes at dest </span><br><span class="line">    movq %rdx,8(%rdi) 		Store upper 8 bytes at dest+8</span><br><span class="line">    ret</span><br></pre></td></tr></table></figure>
+
+<p>可以观察到，存储乘积需要两个 movq 指令：一个存储低 个字节（4 行），一个存储高8个字节（第 5行）。由于生成这段代码针对的是小端法机器，所以高位字节存储在大地址，正如地址 8(%rdi ）表明的那样。</p>
+<p>C 函数来说明 x86~64 如何实现除法，它计算了两个 64 位有符号数的商和余数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void remdiv(long x, long y, long *qp, long *rp) &#123; </span><br><span class="line">    long q = x/y; </span><br><span class="line">    long r = x%y; </span><br><span class="line">    *qp = q; </span><br><span class="line">    *rp = r; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该函数编译得到如下汇编代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void remdi v(long x, long y, long *qp, long *rp) </span><br><span class="line">x in %rdi , y in %rsi , qp in %rdx, rp in %rcx</span><br><span class="line">remdiv: </span><br><span class="line">    movq 	%rdx, %r8		Copy qp </span><br><span class="line">    movq 	%rdi, %rax		Move x to lower bytes of dividend</span><br><span class="line">    cqto					Sign-extend to upper 8 bytes of dividend</span><br><span class="line">    idivq 	%rsi 			Divide by y</span><br><span class="line">    movq 	%rax,(%r8)		Store quotient at qp</span><br><span class="line">    movq 	%rdx, (%rcx)	Store remainder at rp</span><br><span class="line">    ret 	</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，必须首先把 qp 保存到另一个寄存器中（第 2行），因为除法操作要使用参数寄存器 %rdx 。接下来，第3~4 行准备被除数，复制并符号扩展 x。除法之后，寄存器%rax 中的商被保存在 qp (第6行 )，而寄存器%rdx 中的余数被保存在 rp （第 7行。</p>
+<p>无符号除法使用 divq 指令 通常，寄存器%rdx 会事先设置为 0</p>
+<h3 id="3-6-控制"><a href="#3-6-控制" class="headerlink" title="3.6 控制"></a>3.6 控制</h3><p>用 jump 指令可以改变一组机器代码指令的执行顺序， jump 指令指定控制应该被传递到程序的某个其他部分，可能是依赖于某个测试的结果 。</p>
+<h3 id="3-6-1-条件码"><a href="#3-6-1-条件码" class="headerlink" title="3.6.1 条件码"></a>3.6.1 条件码</h3><p>除了整数寄存器， CPU 还维护着一组单个位的<strong>条件码</strong>寄存器，它们描述了最近的算术或逻辑操作的属性 。</p>
+<ul>
+<li>CF ：进位标志。最近的操作使最高位产生了进位。可用来检查无符号操作的溢出</li>
+<li>ZF ：零标志 最近的操作得出的结果为 0 </li>
+<li>SF ：符号标志 最近的操作得到的结果为负数</li>
+<li>OF ：溢出标志。最近的操作导致一个补码溢出 —-正溢出或负溢出</li>
+</ul>
+<p>如图 13 所示 CMP令根据两个操作数之差来设置条件码。除了只设置条件码而不更新目的寄存器之外， CMP 指令与 SUB 指令的行为是一样的。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108184618733.png" alt="image-20240108184618733"></p>
+<h3 id="3-6-2-访问条件码"><a href="#3-6-2-访问条件码" class="headerlink" title="3.6.2 访问条件码"></a>3.6.2 访问条件码</h3><p>条件码通常不会直接读取，常用的使用方法有三种：</p>
+<ol>
+<li><p>可以根据条件码的某种组合，将一个字节设置为 0 或者 1</p>
+</li>
+<li><p>可以条件跳转到程序的某个其他的部分</p>
+</li>
+<li><p>可以有条件地传送数据</p>
+<p> <strong>将这一整类指令称为 SET 指令</strong></p>
+</li>
+</ol>
+<p>例如，指令 setl 和 setb 表示“小于时设置（ set less ）”和“低于时设置（ set below ）” 而不是“设置长字（ set long word ）”和“设置字节（ set byte ）”</p>
+<p>一条 SET 指令的目的操作数是低位单字节寄存器元素（图 3-2 ）之一，或是 个字节的内存位置，指令会将这个字节设置成 0 或者 1。</p>
+<p>为了得到 32 位或 64 位结果，我们必须对高位清零。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108185203546.png" alt="image-20240108185203546"></p>
+<p>一个计算 语言表达式 a&lt;b的典型指令序列如下所示，这里 都是long 类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.nt comp(data_t a, data_t b) </span><br><span class="line">a in %rdi , b in %rsi</span><br><span class="line"></span><br><span class="line">comp: </span><br><span class="line">    cmpq 		%rsi, %rdi 	Compare a :b</span><br><span class="line">    setl 		%al 		Set low-order byte of Zeax to O or 1</span><br><span class="line">    movzbl 		%al, %eax	Clear rest of Zeax (and rest of Zrax)</span><br><span class="line">    ret </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意 cmpq 指令的比较顺序（第 2行）。虽然参数列出的顺序先是%rsi(b ）再是 %rdi （a），实际上比较的是 a 和 b</p>
+<p>setg （表示“设置大于”）和 setnle （表示“设置不小于等于”）指的就是同一条机器指令。编译器和反汇编器会随意决定使用哪个名字。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108185649855.png" alt="image-20240108185649855"></p>
+<h3 id="3-6-3-跳转指令"><a href="#3-6-3-跳转指令" class="headerlink" title="3.6.3 跳转指令"></a>3.6.3 跳转指令</h3><p>跳转（jump ）指令会导致执行切换到程序中一个全新的位置。在汇编代码中，这些跳转的目的地通常用一个标号章程序的(label) 指明。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">movq $0,%rax		Set %rax to 0</span><br><span class="line">jmp .L1				Goto .L1</span><br><span class="line">movq (%rax),%rdx 	Null pointer dereference (skipped)</span><br><span class="line">.L1: </span><br><span class="line">popq %rdx 			Jump target</span><br></pre></td></tr></table></figure>
+
+<p>分析：</p>
+<p>​	指令 jmp .Ll 会导致程序跳过 movq 指令，而从 popq 指令开始继续执行。</p>
+<p>图3-15 列举了不 同的跳转指令。 jmp 指令是无条件跳转：</p>
+<ul>
+<li><p>直接跳转， 即跳转目标是作为指令的一部分编码的；</p>
+<ul>
+<li>直接跳转是给出一个标号作为跳转目标的，例如上面所示代码的标号“ .Ll”</li>
+</ul>
+</li>
+<li><p>也可以是间接跳转，即跳转目标是从寄存器或内存位置中读出的 。</p>
+<ul>
+<li><p>间接跳转的写法是‘＊’后面跟一个操作数指示符，使用图 3-3 中描述的内</p>
+<p>  存操作数格式中的一种。举个例子，指令：jmp *%rax </p>
+<p>  用寄存器 rax 中的值作为跳转目标，而指令：jmp *(%rax)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108190641765.png" alt="image-20240108190641765"></p>
+<h3 id="3-6-4-跳转指令编码"><a href="#3-6-4-跳转指令编码" class="headerlink" title="3.6.4 跳转指令编码"></a>3.6.4 跳转指令编码</h3><p>汇编器，以及后来的链接器，会产生跳转目标的适当编码。跳转指令有几种不同的编码，但是最常用都是 PC 相对的（ PC relative ）</p>
+<p>一个 PC 相对寻址的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    movq	%rdi, %rax</span><br><span class="line">    jmp		.L2</span><br><span class="line">.L3：</span><br><span class="line">	sarq	%rax</span><br><span class="line">.L2：</span><br><span class="line">	testq	%rax，%rax</span><br><span class="line">	jg		.L3</span><br><span class="line">	rep; ret</span><br></pre></td></tr></table></figure>
+
+<p>汇编器产生的”.o” 格式的反汇编版本如下：</p>
+<p>​	<img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108191145597.png" alt="image-20240108191145597"></p>
+<p><img src="D:\阅读笔记\img\image-20240108191225036.png" alt="image-20240108191225036"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108191259748.png" alt="image-20240108191259748"></p>
+<p>注：</p>
+<p>​	指令rep和repz 有什么用：</p>
+<p>​		指令组合 rep; ret 	在反汇编代码中对应 repz retq</p>
+<p>​		可以推测出 repz rep 的同义名，而 retq ret 的同义名。</p>
+<p>​	建议用 rep 后面跟 ret 的组合来避免使 ret 指令成为条件跳转指令的目标 如采没有 rep 指令，当分支不跳转时， jg 指令（汇编代码的第 7行）会继续到 ret 指令</p>
+<h3 id="3-6-5-条件控制实现条件分支"><a href="#3-6-5-条件控制实现条件分支" class="headerlink" title="3.6.5 条件控制实现条件分支"></a>3.6.5 条件控制实现条件分支</h3><p>图 3-16a 给出了一个计算两数之差绝对值的函数的C代码</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108191931368.png" alt="image-20240108191931368"></p>
+<p>GCC 产生的汇编代码如图 3-16c 所示</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108192014260.png" alt="image-20240108192014260"></p>
+<p>把这个机器代码再转换成 语言，我们称之为函数 gotodiff_se （图 3-16b ）</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108192112607.png" alt="image-20240108192112607"></p>
+<p>在goto 代码中（图 3-16b ），第 5 行中的 goto x_ge_y 语句会导致跳转到第 9行中的标号x_ge_y 处（当 x&gt;&#x3D;y  时会进行跳转）</p>
+<p>继续执行，完成函数 absdiff_se else 部分并返回。如果测试 x&gt;&#x3D;y 失败，程序会计算 absdiff_se if 部分指定的步骤并返回。</p>
+<h3 id="3-6-6-用条件传送来实现条件分支"><a href="#3-6-6-用条件传送来实现条件分支" class="headerlink" title="3.6.6 用条件传送来实现条件分支"></a>3.6.6 用条件传送来实现条件分支</h3><p>图3-17a 给出了一个可以用条件传送编译的示例代码。</p>
+<p>GCC 为该函数产 生的 汇编代码如图 3-17c 所示，它与 3-l7b 中所示的 函数cmovdiff 有相似的形式。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108195614430.png" alt="image-20240108195614430"></p>
+<p>它既计算了y-x，也计算了 x-y，分别命名为 rval eva 。然后它再测试 x是否大于等于 y，如果是，就在函数返回 rval前，将 eval 复制到 rval 中。图 3-17c 中的汇编代码有相同的逻辑 关键就在于汇编代码的那条cmovge 指令（第 7行）实现了 cmovdiff 的条件赋值（第 8行）。只有当第 6行的 cmpq指令表明一个值大于等于另一个值（正如后缀 ge 表明的那样）时，才会把数据源寄存器传送到目的。</p>
+<p>图3-18 列举了 x86-64 上一些可用的条件传送指令。每条指令都有两个操作数：源寄存器或者内存地址S，和目的寄存器R。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108200054307.png" alt="image-20240108200054307"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v = test-expr ? then-expr : else-expr;</span><br></pre></td></tr></table></figure>
+
+<p>用条件控制转移的标准方法来编译这个表达式会得到如下形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    if ( ! test-expr) </span><br><span class="line">        goto false; 	</span><br><span class="line">    v = then-expr; </span><br><span class="line">    goto done; </span><br><span class="line">false: </span><br><span class="line">    y＝ else-expr; </span><br><span class="line">do e:</span><br></pre></td></tr></table></figure>
+
+<p>这段代码包含两个代码序列：一个对 then-ex pr 求值，另一个对 else-ex 扩求值。条件</p>
+<p>跳转和无条件跳转结合起来使用是为了保证只有一个序列执行。</p>
+<p>基于条件传送的代码，会对 then-ex pr else-ex pr 都求值，最终值的选择基于对 test-expr 的求值。可以用下面的抽象代码描述：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v = then-expr; </span><br><span class="line">ve = else-expr; </span><br><span class="line">t = test-expr; </span><br><span class="line">if (!t) v = ve;</span><br></pre></td></tr></table></figure>
+
+<p>这个序列中的最后一条语句是用条件传送实现的一一 只有当测试条件 满足时， vt 的值才会被复制到v中。</p>
+<p>不是所有的条件表达式都可以用条件传送来编译。我们给出的抽象代码会对 then- expr 和else-expr 都求值 如果这两个表达式中的任意一个可能产生错误条件或者副作用，就会导致非法的行为 </p>
+<p>考虑下面这个 函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">long cread(long *xp)&#123;</span><br><span class="line">	return (xp ? *xp : 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当指针为空时将结果设置为 0,如下面的汇编代码所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">long cread(long *Xp) </span><br><span class="line">Invalid implementation of function cread </span><br><span class="line">xp in register %rdi</span><br><span class="line"></span><br><span class="line">cread: </span><br><span class="line">    movq 	(%rdi), %rax 	V = *Xp</span><br><span class="line">    testq 	%rdi, %rdi		Test x</span><br><span class="line">    movl 	$0, %edx 		Set ve = 0</span><br><span class="line">    cmove 	%rdx, %rax		If x==O, v = ve</span><br><span class="line">    ret 					Return v</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上述实现是非法的，因为即使当测试为假时， movq 指令（第 2行）对 xp 的间接引用</p>
+<p>发生了，导致一个间接引用空指针的错误 所以，必须用分支代码来编译这段代码。</p>
+<h3 id="3-6-7-循环"><a href="#3-6-7-循环" class="headerlink" title="3.6.7 循环"></a>3.6.7 循环</h3><ol>
+<li>－while 循环</li>
+</ol>
+<p>​	do-while 语句的通用形式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">	body-statement</span><br><span class="line">	while (test-expr);</span><br></pre></td></tr></table></figure>
+
+<p>这种通用形式可以被翻译成如下所示的条件和 goto 语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">loop: </span><br><span class="line">    body-statement </span><br><span class="line">    t = test-expr; </span><br><span class="line">    if (t):</span><br><span class="line">        goto loop;</span><br></pre></td></tr></table></figure>
+
+<p>图 3-19a 给出了一个函数的实现，用 do-while 循环来计算函数参数的阶乘，写作 n！。这个函数只计算n &gt;0 的阶乘的值。</p>
+<p>图3-19b 所示的 goto 代码展示了如何把循环变成低级的测试和条件跳转的组合。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108201535929.png" alt="image-20240108201535929"></p>
+<p>图 3-19c 所示的汇编代码就是 goto 代码的原型。条件跳转指jg （第7行）是实现循环的关键指令，它决定了是需要继续重复还是退出循环。</p>
+<ol start="2">
+<li>while 循环</li>
+</ol>
+<p>​	while 语句的通用形式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while (test-expr) </span><br><span class="line">    body-statement</span><br></pre></td></tr></table></figure>
+
+<p>与do while 的不同之处在于，在第一次执行 body-statement 之前，它会对 test-expr求值，循环有可能就中止了。</p>
+<p>第一种翻译方法，我们称之为跳转到中问（jump to middle ），它执行一个无条件跳转跳到循环结尾处的 试，以此来执行初始的测试。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    goto test; </span><br><span class="line">loop : </span><br><span class="line">    body-statement </span><br><span class="line">test: </span><br><span class="line">    t = test-expr; </span><br><span class="line">    if Ct) </span><br><span class="line">        goto loop;</span><br></pre></td></tr></table></figure>
+
+<p>对于如下C代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">long loop_while(long a, long b) </span><br><span class="line">&#123; </span><br><span class="line">    long result = ______;</span><br><span class="line">    while (____) &#123; </span><br><span class="line">        result =____ ; </span><br><span class="line">        a= ____; </span><br><span class="line">    &#125; </span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以命令行选项－Og 运行 GCC 产生如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">long loop_while(long a, long b) </span><br><span class="line">a in %rdi, b in %rsi</span><br><span class="line">loop_while:</span><br><span class="line">	movl $1, %eax</span><br><span class="line">	jmp .L2</span><br><span class="line">.L3:</span><br><span class="line">	leaq (%rdi,%rsi), %rdx</span><br><span class="line">	i mulq %rdx, %rax</span><br><span class="line">	addq $1, %rdi</span><br><span class="line">.L2:</span><br><span class="line">	cmpq %rsi, %rdi</span><br><span class="line">	jl			.L3</span><br><span class="line">	rep; ret</span><br></pre></td></tr></table></figure>
+
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108202548726.png" alt="image-20240108202548726"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108202610638.png" alt="image-20240108202610638"></p>
+<p>第二种翻译方法，我们称之为guarded-do ，首先用条件分支，如果初始条件不成就跳过循环 ，把代码变换为 do-whil 循环 。</p>
+<p>把通用的 while 循环格式翻译成 do-while 循环：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">t = test-expr;</span><br><span class="line">if (!t)</span><br><span class="line">	goto done;</span><br><span class="line">do</span><br><span class="line">	body-statement</span><br><span class="line">	while(test-expr);</span><br><span class="line">done;</span><br><span class="line">相应地，还可以把它翻译成 goto 代码如下：</span><br><span class="line">t = test-expr; </span><br><span class="line">if ( ! t) </span><br><span class="line">    goto done; </span><br><span class="line">loop: </span><br><span class="line">    body-statement </span><br><span class="line">    t = test-expr; </span><br><span class="line">    if (t) </span><br><span class="line">        goto loop; </span><br><span class="line">done:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108203022317.png" alt="image-20240108203022317"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108203044062.png" alt="image-20240108203044062"></p>
+<ol start="3">
+<li>for 循环</li>
+</ol>
+<p>​	for 循环的通用形式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (init-expr; test-expr; update-expr)</span><br><span class="line">	body-statement</span><br></pre></td></tr></table></figure>
+
+<p>GCC 为for 循环产生的代码是 while 循环的两种翻译之一，这取决于优化的等级。也就是，跳转到中间策略会得到如下 goto 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">init-expr; </span><br><span class="line">goto test; </span><br><span class="line"></span><br><span class="line">loop: </span><br><span class="line">    body-statement </span><br><span class="line">    update-expr; </span><br><span class="line">test: </span><br><span class="line">    t = test-expr; </span><br><span class="line">    if (t) </span><br><span class="line">        goto loop;</span><br></pre></td></tr></table></figure>
+
+<p>guarded-do 策略得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    init-expr; </span><br><span class="line">    t = test-expr; </span><br><span class="line">    if ( ! t) </span><br><span class="line">    goto done; </span><br><span class="line">loop : </span><br><span class="line">    body-statement </span><br><span class="line">    update-expr; </span><br><span class="line">    t = test-expr; </span><br><span class="line">    if (t) </span><br><span class="line">        goto loop; </span><br><span class="line">done:</span><br></pre></td></tr></table></figure>
+
+<p>作为一个 例，考虑用 for 循环写的阶乘函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">long fact_for(long n)</span><br><span class="line">&#123;</span><br><span class="line">	long i;</span><br><span class="line">	long result = i;</span><br><span class="line">	for(i = 2; i &lt;= n;i++)</span><br><span class="line">		result *= i;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上述代码所示 for 循环编写阶乘函数最自然的方式就是将从 2一直到 n 的因子乘起来，因此，这个函数与我们使用 while 或者 do-while 循环的代码很不一样。</p>
+<p>这段代码中的 for 循环的不同组成部分如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">init-expr i = 2 </span><br><span class="line">test-expr i &lt;= n </span><br><span class="line">update-expr i ++ </span><br><span class="line">body-statement result *= i;</span><br></pre></td></tr></table></figure>
+
+<p>用这些部分替换前面给出的模板中相应的位置，就把 for 循环转换成了 while 循环，得到下面的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">long fact_for_while(long n) </span><br><span class="line">&#123; </span><br><span class="line">    long i = 2; </span><br><span class="line">    long result = 1; </span><br><span class="line">    while (i &lt;= n) &#123; </span><br><span class="line">        result*= i; </span><br><span class="line">        i++; </span><br><span class="line">    &#125; </span><br><span class="line">    return result; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对while 循环进行跳转到中间变换，得到如下 goto 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">long fact_for_jrn_goto(long n) </span><br><span class="line">&#123; </span><br><span class="line">    long i = 2; </span><br><span class="line">    long result= 1; </span><br><span class="line">    goto test; </span><br><span class="line">loop: </span><br><span class="line">    result ＊＝i；</span><br><span class="line">    i++；</span><br><span class="line">test: </span><br><span class="line">    if (i &lt;= n) </span><br><span class="line">        goto loop; </span><br><span class="line">    return result;</span><br></pre></td></tr></table></figure>
+
+<p>使用命令行选项–Og GCC 产生的汇编代码，会发现它非常接近于以下模板：</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240108203937650.png" alt="image-20240108203937650"></p>
+<h3 id="3-6-8-switch语句"><a href="#3-6-8-switch语句" class="headerlink" title="3.6.8 switch语句"></a>3.6.8 switch语句</h3><p>图3-22a 是一个 语言 switch 语句的示例。</p>
+<p>图3-23是编译 switch eg 时产生的汇编代码。这段代码的行为用 语言来描述就是图3-22b 中的过程 swit_eg_impl。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240109230727427.png" alt="image-20240109230727427"></p>
+<p>数组 jt 包含 7个表项，每个都是一个代码块的地址。这些位置由代码中的标号定义，在 jt 的表项 由代码指针指明，由标号加上 ‘＆＆＇前缀组成。</p>
+<p>原始 C代码有针对 100、102- 104 和106 情况，但是开关变量 n可以是任意整数。编译器首先将 n 减去 100 ，把取值范围移 0 到 6之间，创建一个新的程序变量，在我们的本中称为 index 。</p>
+<p>在 C和汇编代码中 ，根据 index 值，有五个不同的跳转位置： loc_A(在汇编代码中标识为 .L3), loc_B(.L5)， loc_c(.L6), loc_o(.L7 ）和 loc_def ( .L8 ），最后一个是默认的目的地址。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240109231620782.png" alt="image-20240109231620782"></p>
+<p>执行 switch 语句的关键步骤是通过跳转表来访问代码位置。在 代码中是第 16 行，一条 goto语句引用 了跳转表 jt。 GCC 支持计算 goto( comp ut ed goto ），是对C语言的扩展。在我们的汇编代码版本中，类似的操作是在第5行， jmp 指令的操作数有前缀 ’*’，表明这是一个间接跳转，操作数指定一个内存位置，索引由寄存器 %rsi 给出，这个寄存器保存着 index 的值。</p>
+<p>C代码将跳转表声明为一个有 7个元素的数组，每个元素都是一个指向代码位置的指针。这些元素跨越 index 的值 0<del>6，对应于n的值 100</del>106 。可以观察到，跳转表对重复情况的处理就是简单地对表项 用同样的代码标号 loc_D），而对于缺失的情况的处理就是对表项 使用默认情况的标号（ loc_def ）。</p>
+<p>在汇编代码中，跳转表用以下声明表示，我们添加了一些注释：</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240109233635314.png" alt="image-20240109233635314"></p>
+<p>“ .rodata”（只读数据， Read-Only Data ）的目标代码文件的</p>
+<p>段中，应该有一组 7个“四”字（ 个字节），每个字的值都是与指定的汇编代码标号（例如.L3 ）相关联的指令地址。标号 .L4 标记出这个分配地址的起始。与这个标号相对应的地址会作为间接跳转（第 5行）的基地址。</p>
+<h3 id="3-7-运行时栈"><a href="#3-7-运行时栈" class="headerlink" title="3.7 运行时栈"></a>3.7 运行时栈</h3><p> x86-64 的栈向低地址方向增长，而栈指针 %rsp 指向栈顶元素。</p>
+<p>x86-64 过程需要的存储空间超出寄存器能够存放的大小时，就会在栈上分配空间。这个部分称为过程的栈帧（ stack fram ）。</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110001856080.png" alt="image-20240110001856080"></p>
+<p>图 3-25 给出了 行时桔的通用结构，包括把它划分为钱帧。</p>
+<p>当过 P调用过程 Q时， 把返回地址压入栈中，指明 Q返回时，要从P 程序的哪个位置执行。我们把这个返回地址当做P的战帧的 部分，因为它存放的是与P相关的状态 Q的代码会扩展当前拢的边界，分配它的战帧所需要的空间在这个空间中，它可以保存寄存器的值，分配局部变量空间，为它调用的过程设置参数 大多数过程的战帧都是定长的，在过程的开始就分配好了</p>
+<p>为了提高空间和时间效率， x86-64 过程只分配自己所需要的战帧部分。</p>
+<h3 id="3-7-1转移控制"><a href="#3-7-1转移控制" class="headerlink" title="3.7.1转移控制"></a>3.7.1转移控制</h3><p>将控制从函数 转移到函数 要简单地把程序计数器（pc ）设置为 的代码的起始位置，当稍后从 Q返回的时候，处理器必须记录好它 要继续 P的执行的代码位置</p>
+<p>x86 -64 机器中，这个信息是用指令 call Q调用过程 Q来记录的。</p>
+<p>该指 会把地址 压入战中，并将 PC 设置为 Q的起始地址 压入的地址 A被称为返回地址， 紧跟在 call 指令后面的那条指令的地址。对应的指令 ret 从战中弹出地址 A，并把 PC 设置为A</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110003246620.png" alt="image-20240110003246620"></p>
+<p>表给出的是 call和 ret 指令的 般形式：</p>
+<p>（这些指令在程序 OBJDUMP 的反汇编输出中被称为 callq retq 。添加的后缀‘q’只是为了强调这些是 x86 64 版本的调用和返回，而不是 IA32 的</p>
+<p>在汇编代码中，直接调用的目标是一个标号，而间接调用的目标是* 后面跟 一个操作数指示符，使用的是图 3-3 中描述的格式之一。</p>
+<p>图3-26 说明了 3. 2. 节中介 multstore 和main 函数的 call 和ret 指令的执行情况 下面是这两个函数的反汇编代码的节选：</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110003604512.png" alt="image-20240110003604512"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110003625153.png" alt="image-20240110003625153"></p>
+<p>在这段代码中我们可以看到，在 main 函数中，地址为 0x400563 call 指令调用函multstore 。此时的状态如图 3-26a 所示，指明了钱指针%rsp 和程序计数器%rip 的值。call 的效果是将返回地址 0x400568 压入栈中，并跳到函数 multstore 的第一条指令，地址为 Ox0400540 （图 26b ）。函数 mu ltst re 续执行，直到遇到 地址 Ox40 054d 处的ret 指令。这条 令从技中弹出值 Ox400568 ，然后跳转到这个地址， 就在 ca ll 令之后，继续 main 函数的执行</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110004030750.png" alt="image-20240110004030750"></p>
+<p>， 3-27a 出了两个函数 op leaf</p>
+<p>的反汇编代码，以及 main 函数中调用 top 处的代码 。每 条指令都以标号标出： Ll L2</p>
+<p>Cleaf 中） , Tl T4 (main 中）和 M2Cma 中）。该图的 分给出了这段代码执</p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110004106685.png" alt="image-20240110004106685"></p>
+<p><img src="/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%5Cimage-20240110004133113.png" alt="image-20240110004133113"></p>
+<p><img src="D:\阅读笔记\img\image-20240110004152648.png" alt="image-20240110004152648"></p>
 
     </div>
 
@@ -300,7 +914,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/hello/" rel="tag"># -hello</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
           </div>
 
         
@@ -329,6 +943,44 @@
     </span>
     <span class="author" itemprop="copyrightHolder">Ewing</span>
   </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("12/1/2023 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
 
     </div>
   </footer>
@@ -363,6 +1015,7 @@
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -375,4 +1028,5 @@
 </body>
 </html>
 
+<!-- 页面点击小红心 --> <script type="text/javascript" src="/js/clicklove.js"></script>
 
