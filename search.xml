@@ -1,6 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>汇编基础</title>
+    <url>/posts/84aee333.html</url>
+    <content><![CDATA[<h3 id="数据宽度"><a href="#数据宽度" class="headerlink" title="数据宽度"></a>数据宽度</h3><p><em><strong>容器的大小其实就是数据宽度</strong></em></p>
+<p>数学上的数字，是没有大小限制的，可以无限的大。但在计算机中，由于受硬件的制约，<strong>数据都是有长度限制的</strong>（我们称为数据宽度）。</p>
+<h3 id="数据宽度的表示"><a href="#数据宽度的表示" class="headerlink" title="数据宽度的表示"></a>数据宽度的表示</h3><h4 id="4位宽度表示：假设计算机只能存储4位2进制数"><a href="#4位宽度表示：假设计算机只能存储4位2进制数" class="headerlink" title="4位宽度表示：假设计算机只能存储4位2进制数"></a>4位宽度表示：假设计算机只能存储4位2进制数</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111</span><br><span class="line">0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F</span><br></pre></td></tr></table></figure>
+
+<p><img src="/posts/84aee333/2024-04-19_09-18-05.png" alt="2024-04-19_09-18-05"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 5 6 7 8 9 A B C D E F</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 </span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8</span><br><span class="line">		  F  E  D  C  B  A  9  8</span><br></pre></td></tr></table></figure>
+
+<h4 id="8位宽度表示：假设计算机只能存储8位2进制数"><a href="#8位宽度表示：假设计算机只能存储8位2进制数" class="headerlink" title="8位宽度表示：假设计算机只能存储8位2进制数"></a>8位宽度表示：假设计算机只能存储8位2进制数</h4><p><img src="/posts/84aee333/2024-04-19_09-25-38.png" alt="2024-04-19_09-25-38"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7F</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ... -128</span><br><span class="line">		 FF FE FD FC FB FA F9 F8 F7 F6 F5 F4...80</span><br></pre></td></tr></table></figure>
+
+<h4 id="16位宽度表示：假设计算机只能存储16位2进制数"><a href="#16位宽度表示：假设计算机只能存储16位2进制数" class="headerlink" title="16位宽度表示：假设计算机只能存储16位2进制数"></a>16位宽度表示：假设计算机只能存储16位2进制数</h4><p><img src="/posts/84aee333/20240419092929733.png" alt="image-20240419092929733"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFF FFFE FFFD FFFC FFFB FFFA FFF9 FFF8 ...</span><br></pre></td></tr></table></figure>
+
+<h4 id="32位宽度表示：假设计算机只能存储32位2进制数"><a href="#32位宽度表示：假设计算机只能存储32位2进制数" class="headerlink" title="32位宽度表示：假设计算机只能存储32位2进制数"></a>32位宽度表示：假设计算机只能存储32位2进制数</h4><p><img src="/posts/84aee333/20240419093214090.png" alt="image-20240419093214090"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFFFFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFFFFFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFFFFFF FFFFFFFE FFFFFFFD FFFFFFFC FFFFFFFB FFFFFFFA FFFFFFF9 FFFFFFF8 ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="二级制的逻辑运算符"><a href="#二级制的逻辑运算符" class="headerlink" title="二级制的逻辑运算符"></a>二级制的逻辑运算符</h3><h4 id="逻辑运算：或（or-）-只要有一个1就是1"><a href="#逻辑运算：或（or-）-只要有一个1就是1" class="headerlink" title="逻辑运算：或（or | ） 只要有一个1就是1"></a>逻辑运算：或（or | ） 只要有一个1就是1</h4><p><img src="/posts/84aee333/20240419093840769.png" alt="image-20240419093840769"></p>
+<h4 id="逻辑运算：与（and-两个都为1才是1"><a href="#逻辑运算：与（and-两个都为1才是1" class="headerlink" title="逻辑运算：与（and &amp;) 两个都为1才是1"></a>逻辑运算：与（and &amp;) 两个都为1才是1</h4><p><img src="/posts/84aee333/20240419093907504.png" alt="image-20240419093907504"></p>
+<h4 id="逻辑运算：异或（xor-）不一样位1"><a href="#逻辑运算：异或（xor-）不一样位1" class="headerlink" title="逻辑运算：异或（xor  ^）不一样位1"></a>逻辑运算：异或（xor  ^）不一样位1</h4><p><img src="/posts/84aee333/20240419093935716.png" alt="image-20240419093935716"></p>
+<h4 id="逻辑运算：非（not-！）1是0-0是1"><a href="#逻辑运算：非（not-！）1是0-0是1" class="headerlink" title="逻辑运算：非（not ！）1是0 0是1"></a>逻辑运算：非（not ！）1是0 0是1</h4><p><img src="/posts/84aee333/20240419094001630.png" alt="image-20240419094001630"></p>
+<h3 id="32位通用寄存器"><a href="#32位通用寄存器" class="headerlink" title="32位通用寄存器"></a>32位通用寄存器</h3><h4 id="32位通用寄存器的指定用途："><a href="#32位通用寄存器的指定用途：" class="headerlink" title="32位通用寄存器的指定用途："></a>32位通用寄存器的指定用途：</h4><table>
+<thead>
+<tr>
+<th>寄存器</th>
+<th>主要用途</th>
+<th>编号</th>
+<th>储存数据的范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EAX</td>
+<td>累加器</td>
+<td>0</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>ECX</td>
+<td>计数</td>
+<td>1</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EDX</td>
+<td>I&#x2F;O指针</td>
+<td>2</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EBX</td>
+<td>DS段的数据指针</td>
+<td>3</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>堆栈指针</td>
+<td>4</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EBP</td>
+<td>SS段的数据指针</td>
+<td>5</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>ESI</td>
+<td>字符串操作的源指针：SS段的数据指针</td>
+<td>6</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>字符串操作的目标指针：ES段的数据指针</td>
+<td>7</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>通用寄存器</th>
+<th></th>
+<th>编号（二进制）</th>
+<th>编号（十进制）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>32位</td>
+<td>16位</td>
+<td>8位</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>EAX</td>
+<td>AX</td>
+<td>AL</td>
+<td>000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ECX</td>
+<td>CX</td>
+<td>CL</td>
+<td>001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDX</td>
+<td>DX</td>
+<td>DL</td>
+<td>010</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EBX</td>
+<td>BX</td>
+<td>BL</td>
+<td>011</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>SP</td>
+<td>AH</td>
+<td>100</td>
+<td>4</td>
+</tr>
+<tr>
+<td>EBP</td>
+<td>BP</td>
+<td>CH</td>
+<td>101</td>
+<td>5</td>
+</tr>
+<tr>
+<td>ESI</td>
+<td>SI</td>
+<td>DH</td>
+<td>110</td>
+<td>6</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>DI</td>
+<td>BH</td>
+<td>111</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p><img src="/posts/84aee333/20240419095409509.png" alt="image-20240419095409509"></p>
+<h4 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h4><h5 id="MOV的语法："><a href="#MOV的语法：" class="headerlink" title="MOV的语法："></a>MOV的语法：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. MOV r/m8,r8				r通用寄存器</span><br><span class="line">2. MOV r/m16,r16			m代表内存</span><br><span class="line">3. MOV r/m32,r32			imm代表立即数</span><br><span class="line">4. MOV r8,r/m8				r8代表8位通用寄存器</span><br><span class="line">5. MOV r16,r/m16			m8代表8位内存</span><br><span class="line">6. MOV r32,r/m32			imm8代表8位立即数</span><br><span class="line">7. MOV r8,imm8				...</span><br><span class="line">8. MOV r16,imm16</span><br><span class="line">9. MOV r32,imm32</span><br></pre></td></tr></table></figure>
+
+<h5 id="MOV使用"><a href="#MOV使用" class="headerlink" title="MOV使用"></a>MOV使用</h5><p>指令格式：<strong>MOV 目标操作数，源操作数</strong></p>
+<p><strong>作用：拷贝源操作数到目标操作数</strong></p>
+<ul>
+<li>源操作数可以是立即数、通用寄存器、段寄存器、或者内存单元.</li>
+<li>目标操作数可以是通用寄存器、段寄存器或者内存单元.</li>
+<li>操作数的宽度必须一样.</li>
+<li>源操作数和目标操作数不能同时为内存单元.</li>
+</ul>
+<h4 id="ADD指令"><a href="#ADD指令" class="headerlink" title="ADD指令"></a>ADD指令</h4><h5 id="ADD语法"><a href="#ADD语法" class="headerlink" title="ADD语法"></a>ADD语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ADD AL, imm8 </span><br><span class="line"></span><br><span class="line">ADD AX, imm16</span><br><span class="line"></span><br><span class="line">ADD EAX, imm32</span><br><span class="line"></span><br><span class="line">ADD r/m8, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m16,imm16</span><br><span class="line"></span><br><span class="line">ADD r/m32,imm32</span><br><span class="line"></span><br><span class="line">ADD r/m16, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m32, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m8, r8</span><br><span class="line"></span><br><span class="line">ADD r/m16, r16</span><br><span class="line"></span><br><span class="line">ADD r/m32, r32</span><br><span class="line"></span><br><span class="line">ADD r8, r/m8</span><br><span class="line"></span><br><span class="line">ADD r16, r/m16</span><br><span class="line"></span><br><span class="line">ADD r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="ADD作用"><a href="#ADD作用" class="headerlink" title="ADD作用"></a>ADD作用</h5><p><strong>ADD指令用于将两个数相加，并将结果存储在第一个操作数中。</strong></p>
+<h4 id="SUB指令"><a href="#SUB指令" class="headerlink" title="SUB指令"></a>SUB指令</h4><h5 id="SUB语法"><a href="#SUB语法" class="headerlink" title="SUB语法"></a>SUB语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SUB AL, imm8 </span><br><span class="line"></span><br><span class="line">SUB AX, imm16</span><br><span class="line"></span><br><span class="line">SUB EAX, imm32</span><br><span class="line"></span><br><span class="line">SUB r/m8, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m16,imm16</span><br><span class="line"></span><br><span class="line">SUB r/m32,imm32</span><br><span class="line"></span><br><span class="line">SUB r/m16, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m32, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m8, r8</span><br><span class="line"></span><br><span class="line">SUB r/m16, r16</span><br><span class="line"></span><br><span class="line">SUB r/m32, r32</span><br><span class="line"></span><br><span class="line">SUB r8, r/m8</span><br><span class="line"></span><br><span class="line">SUB r16, r/m16</span><br><span class="line"></span><br><span class="line">SUB r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="SUB指令作用"><a href="#SUB指令作用" class="headerlink" title="SUB指令作用"></a>SUB指令作用</h5><p><strong>SUB用于从第一个操作数中减去第二个操作数的值</strong></p>
+<h4 id="AND指令"><a href="#AND指令" class="headerlink" title="AND指令"></a>AND指令</h4><h5 id="AND语法"><a href="#AND语法" class="headerlink" title="AND语法"></a>AND语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">AND AL, imm8</span><br><span class="line"></span><br><span class="line">AND AX, imm16</span><br><span class="line"></span><br><span class="line">AND EAX, imm32</span><br><span class="line"></span><br><span class="line">AND r/m8, imm8</span><br><span class="line"></span><br><span class="line">AND r/m16,imm16</span><br><span class="line"></span><br><span class="line">AND r/m32,imm32</span><br><span class="line"></span><br><span class="line">AND r/m16, imm8</span><br><span class="line"></span><br><span class="line">AND r/m32, imm8</span><br><span class="line"></span><br><span class="line">AND r/m8, r8</span><br><span class="line"></span><br><span class="line">AND r/m16, r16</span><br><span class="line"></span><br><span class="line">AND r/m32, r32</span><br><span class="line"></span><br><span class="line">AND r8, r/m8</span><br><span class="line"></span><br><span class="line">AND r16, r/m16</span><br><span class="line"></span><br><span class="line">AND r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="AND指令操作"><a href="#AND指令操作" class="headerlink" title="AND指令操作"></a>AND指令操作</h5><p>指令格式：<strong>AND 目标操作数 源操作数</strong></p>
+<p>作用：对两个操作数进行按位逻辑与操作，结果送回目的操作数，即目的←目的^源</p>
+<ul>
+<li>用于操作数的某些保留（和“1”相与），而使某些位清除（和”0”相与）</li>
+</ul>
+<h4 id="OR指令"><a href="#OR指令" class="headerlink" title="OR指令"></a>OR指令</h4><h5 id="OR语法"><a href="#OR语法" class="headerlink" title="OR语法"></a>OR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">OR AL, imm8</span><br><span class="line"></span><br><span class="line">OR AX, imm16</span><br><span class="line"></span><br><span class="line">OR EAX, imm32</span><br><span class="line"></span><br><span class="line">OR r/m8, imm8</span><br><span class="line"></span><br><span class="line">OR r/m16,imm16</span><br><span class="line"></span><br><span class="line">OR r/m32,imm32</span><br><span class="line"></span><br><span class="line">OR r/m16, imm8</span><br><span class="line"></span><br><span class="line">OR r/m32, imm8</span><br><span class="line"></span><br><span class="line">OR r/m8, r8</span><br><span class="line"></span><br><span class="line">OR r/m16, r16</span><br><span class="line"></span><br><span class="line">OR r/m32, r32</span><br><span class="line"></span><br><span class="line">OR r8, r/m8</span><br><span class="line"></span><br><span class="line">OR r16, r/m16</span><br><span class="line"></span><br><span class="line">OR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="OR指令使用"><a href="#OR指令使用" class="headerlink" title="OR指令使用"></a>OR指令使用</h5><p>指令格式：<strong>OR 目的操作数 源操作数</strong></p>
+<p>作用：<strong>对两个操作数进行按位逻辑或操作，结果送回目的操作数，即目的←目的V源</strong></p>
+<ul>
+<li>用于使操作数的某些位保留(和”0”相或)，而使某些位置1（和”1”相或）</li>
+</ul>
+<h4 id="XOR指令"><a href="#XOR指令" class="headerlink" title="XOR指令"></a>XOR指令</h4><h5 id="XOR语法"><a href="#XOR语法" class="headerlink" title="XOR语法"></a>XOR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XOR AL, imm8</span><br><span class="line"></span><br><span class="line">XOR AX, imm16</span><br><span class="line"></span><br><span class="line">XOR EAX, imm32</span><br><span class="line"></span><br><span class="line">XOR r/m8, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m16,imm16</span><br><span class="line"></span><br><span class="line">XOR r/m32,imm32</span><br><span class="line"></span><br><span class="line">XOR r/m16, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m32, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m8, r8</span><br><span class="line"></span><br><span class="line">XOR r/m16, r16</span><br><span class="line"></span><br><span class="line">XOR r/m32, r32</span><br><span class="line"></span><br><span class="line">XOR r8, r/m8</span><br><span class="line"></span><br><span class="line">XOR r16, r/m16</span><br><span class="line"></span><br><span class="line">XOR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="XOR指令使用"><a href="#XOR指令使用" class="headerlink" title="XOR指令使用"></a>XOR指令使用</h5><p>指令格式：<strong>XOR 目的操作数 源操作数</strong></p>
+<p>作用：逻辑异或运算，二进制位相同0，不同为1</p>
+<h4 id="NOT指令"><a href="#NOT指令" class="headerlink" title="NOT指令"></a>NOT指令</h4><h5 id="NOT语法"><a href="#NOT语法" class="headerlink" title="NOT语法"></a>NOT语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NOT r/m8</span><br><span class="line"></span><br><span class="line">NOT r/m16</span><br><span class="line"></span><br><span class="line">NOT r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="NOT指令使用"><a href="#NOT指令使用" class="headerlink" title="NOT指令使用"></a>NOT指令使用</h5><p>指令格式：<strong>NOT 源操作数</strong></p>
+<p>作用：逻辑取反运算，二进制位0变为1，1变为0</p>
+]]></content>
+      <categories>
+        <category>汇编</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>freemarker模板生成器</title>
+    <url>/posts/ba4d2b82.html</url>
+    <content><![CDATA[<h2 id="FreeMarker介绍"><a href="#FreeMarker介绍" class="headerlink" title="FreeMarker介绍"></a>FreeMarker介绍</h2><p>FreeMarker是Apache的开源模板引擎，入门简单、灵活扩展</p>
+<p>FreeMarker官方文档：<a href="https://freemarker.apache.org/docs/index.html">Apache FreeMarker Manual</a></p>
+<h2 id="FreeMarker常用语法"><a href="#FreeMarker常用语法" class="headerlink" title="FreeMarker常用语法"></a>FreeMarker常用语法</h2><h3 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$&#123;xxx&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="if指令"><a href="#if指令" class="headerlink" title="if指令"></a>if指令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;<span class="comment">#if user==&#x27;xxx&#x27;&gt;</span></span><br><span class="line">  存在用户</span><br><span class="line">&lt;<span class="comment">#else&gt;</span></span><br><span class="line">  用户不存在</span><br><span class="line">&lt;/<span class="comment">#if&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="list指令"><a href="#list指令" class="headerlink" title="list指令"></a>list指令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">假设 <span class="built_in">users</span> 包含 [<span class="string">&#x27;Joe&#x27;</span>, <span class="string">&#x27;Kate&#x27;</span>, <span class="string">&#x27;Fred&#x27;</span>] 序列：</span><br><span class="line">&lt;<span class="comment">#list users as user&gt;</span></span><br><span class="line">  &lt;p&gt;<span class="variable">$&#123;user&#125;</span></span><br><span class="line">&lt;/<span class="comment">#list&gt;</span></span><br><span class="line"></span><br><span class="line">  &lt;p&gt;Joe</span><br><span class="line">  &lt;p&gt;Kate</span><br><span class="line">  &lt;p&gt;Fred</span><br></pre></td></tr></table></figure>
+
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>FreeMarker 对变量的空值校验是很严格的，如果模板中某个对象为空，FreeMarker 将会报错而导致模板生成中断。</p>
+<p>为了防止这个问题，建议给可能为空的参数都设置默认值。使用 <code>表达式!默认值</code> 的语法，示例代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$&#123;user!&quot;用户为空&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h3><p>在 FreeMarker 中，使用 <code>macro</code> 指令来定义宏。</p>
+<p>card 是宏的名称，userName 是宏接受的参数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;<span class="comment">#macro card userName&gt;     </span></span><br><span class="line">---------    </span><br><span class="line"><span class="variable">$&#123;userName&#125;</span></span><br><span class="line">---------</span><br><span class="line">&lt;/<span class="comment">#macro&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以用 <code>@</code> 语法来使用宏</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;@card userName=<span class="string">&quot;xxx&quot;</span>/&gt;</span><br><span class="line">&lt;@card userName=<span class="string">&quot;xxx&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">---------    </span><br><span class="line">xxx</span><br><span class="line">---------</span><br><span class="line">---------    </span><br><span class="line">xxx</span><br><span class="line">---------</span><br></pre></td></tr></table></figure>
+
+<h3 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h3><p>内建函数是 FreeMarker 为了提高开发者处理参数效率而提供的的语法糖，通过 <code>?</code> 来调用内建函数。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">将字符串转为大写：</span><br><span class="line"><span class="variable">$&#123;userName?upper_case&#125;</span></span><br><span class="line">输出序列的长度：</span><br><span class="line"><span class="variable">$&#123;myList?size&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="其他内涵参考大全"><a href="#其他内涵参考大全" class="headerlink" title="其他内涵参考大全"></a><a href="http://freemarker.foofun.cn/ref_builtins.html">其他内涵参考大全</a></h3><h2 id="FreeMarker-在java项目中使用"><a href="#FreeMarker-在java项目中使用" class="headerlink" title="FreeMarker 在java项目中使用"></a>FreeMarker 在java项目中使用</h2><h3 id="FreeMaker使用流程"><a href="#FreeMaker使用流程" class="headerlink" title="FreeMaker使用流程"></a>FreeMaker使用流程</h3><ol>
+<li>新建Spring Boot项目</li>
+<li>导入依赖</li>
+<li>新建控制类</li>
+<li>编写FreeMarker</li>
+<li>启动项目</li>
+</ol>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">| springboot_FreeMarker</span><br><span class="line">| pom.xml</span><br><span class="line">|</span><br><span class="line">|_src</span><br><span class="line">	|-main</span><br><span class="line">	|	|-com</span><br><span class="line">	|	|	|_FreeMarker</span><br><span class="line">	|	|		|_config</span><br><span class="line">	|	|		| 		Application.java	</span><br><span class="line">	|	|		|</span><br><span class="line">	|	|		|_controller</span><br><span class="line">	|	|		|		TestController.java</span><br><span class="line">	|	|		|_ftl</span><br><span class="line">	|	|		|	test.ftl</span><br><span class="line">	|	|		|</span><br><span class="line">	|	|		|util</span><br><span class="line">	|	|		|	FreeMarkerUtil.java</span><br><span class="line">	|	|		|</span><br><span class="line">	|	|		|server</span><br><span class="line">	|	|		|	ServerGenerator</span><br><span class="line">	|	|		|</span><br><span class="line">	|	|		|<span class="built_in">test</span></span><br><span class="line">	|	|			</span><br><span class="line">	|	|_rescources</span><br><span class="line">	|		|_templates</span><br><span class="line">	|		</span><br><span class="line">	|_test</span><br><span class="line">		|_java</span><br></pre></td></tr></table></figure>
+
+<h3 id="引入FreeMarker的jar包"><a href="#引入FreeMarker的jar包" class="headerlink" title="引入FreeMarker的jar包"></a>引入FreeMarker的jar包</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;--模板引擎FreeMarker&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.freemarker&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;freemarker&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建启动类"><a href="#新建启动类" class="headerlink" title="新建启动类"></a>新建启动类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.FreeMarker.config;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2024-04-02-15:51</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(Application.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建控制类"><a href="#新建控制类" class="headerlink" title="新建控制类"></a>新建控制类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.FreeMarker.controller;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2024-04-02-15:51</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/test&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">(Model model)</span> &#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;FreeMarker&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;FreeMarker&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FreeMarker文件"><a href="#FreeMarker文件" class="headerlink" title="FreeMarker文件"></a>FreeMarker文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.FreeMarker.ftl.$&#123;domain&#125;;</span><br><span class="line"></span><br><span class="line">public class $&#123;domain&#125; &#123;</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FreeMarkerUtil工具类"><a href="#FreeMarkerUtil工具类" class="headerlink" title="FreeMarkerUtil工具类"></a>FreeMarkerUtil工具类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.FreeMarker.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> freemarker.template.Configuration;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.DefaultObjectWrapper;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.Template;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.TemplateException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2024-04-02-18:51</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FreemarkerUtil</span> &#123;</span><br><span class="line">	<span class="comment">//FreeMarker ftl模板路径</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> <span class="string">&quot;springboot_FreeMarker/src/main/com/FreeMarker/ftl/&quot;</span>;</span><br><span class="line">    <span class="comment">//Temple类型变量</span></span><br><span class="line">    <span class="keyword">static</span> Template temp;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//模板初始化</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title function_">initConfig</span><span class="params">(String ftlname)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    	<span class="comment">//创建和调整配置单例</span></span><br><span class="line">        <span class="type">Configuration</span> <span class="variable">configuration</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Configuration</span>(Configuration.VERSION_2_3_0);</span><br><span class="line">        <span class="comment">//配置ftl path</span></span><br><span class="line">        configuration.setDirectoryForTemplateLoading(<span class="keyword">new</span> <span class="title class_">File</span>(path));</span><br><span class="line">        <span class="comment">//设置默认对象包装器的属性</span></span><br><span class="line">        configuration.setObjectWrapper(<span class="keyword">new</span> <span class="title class_">DefaultObjectWrapper</span>(Configuration.VERSION_2_3_0));</span><br><span class="line">        <span class="comment">//从缓存获取Template对象并赋值</span></span><br><span class="line">        temp = configuration.getTemplate(ftlname);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">generator</span><span class="params">(String ftlname, Map&lt;String,Object&gt; map)</span> <span class="keyword">throws</span> IOException, TemplateException &#123;</span><br><span class="line">    	<span class="comment">//创建字符输出流类对象和ftl文件相关联</span></span><br><span class="line">        <span class="type">FileWriter</span> <span class="variable">fileWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(ftlname);</span><br><span class="line">        <span class="comment">//创建BufferedWriter类对象</span></span><br><span class="line">        <span class="type">BufferedWriter</span> <span class="variable">bufferedWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(fileWriter);</span><br><span class="line">        <span class="comment">//使用提供的数据模型执行模板，将生成的输出写入提供的编写器。</span></span><br><span class="line">        temp.process(map,bufferedWriter);</span><br><span class="line">        <span class="comment">//关闭fileWrite对象</span></span><br><span class="line">        fileWriter.close();</span><br><span class="line">        <span class="comment">//关闭bufferedWriter对象</span></span><br><span class="line">        bufferedWriter.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="FreeMarker启动测试-ServerGenerator"><a href="#FreeMarker启动测试-ServerGenerator" class="headerlink" title="FreeMarker启动测试-ServerGenerator"></a>FreeMarker启动测试-ServerGenerator</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.FreeMarker.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.java.train.generator.util.DbUtil;</span><br><span class="line"><span class="keyword">import</span> com.java.train.generator.util.FreemarkerUtil;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.Document;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentException;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.Node;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.SAXReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2024-04-02-18:51</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerGenerator</span> &#123;</span><br><span class="line">    <span class="comment">//模板路径</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">String</span> <span class="variable">filepath</span> <span class="operator">=</span> <span class="string">&quot;springboot_FreeMarker/src/main/FreeMarker/test/&quot;</span>;</span><br><span class="line">	</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> <span class="type">String</span> <span class="variable">servicepath</span> <span class="operator">=</span> <span class="string">&quot;FreeMarker[module]/src/main/FreeMarker/[module]/&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> <span class="type">String</span> <span class="variable">pom</span> <span class="operator">=</span> <span class="string">&quot;springboot_FreeMarker/pom.xml&quot;</span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">File</span>(servicepath).mkdirs();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        FreemarkerUtil.initConfig(<span class="string">&quot;test.ftl&quot;</span>);</span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;domain&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        FreemarkerUtil.generator(filepath+<span class="string">&quot;test.java&quot;</span>,map);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成模板java类"><a href="#生成模板java类" class="headerlink" title="生成模板java类"></a>生成模板java类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.FreeMarker.test;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Date</span>: 2024-04-02-18:31</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java 工具类</category>
+      </categories>
+      <tags>
+        <tag>java FreeMarker 模板</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>深入理解计算机系统笔记</title>
     <url>/posts/bd0b7c1a.html</url>
     <content><![CDATA[<h2 id="第一章-计算机系统漫游"><a href="#第一章-计算机系统漫游" class="headerlink" title="第一章 计算机系统漫游"></a>第一章 计算机系统漫游</h2><h3 id="1-1-信息就是位-上下文"><a href="#1-1-信息就是位-上下文" class="headerlink" title="1.1 信息就是位+上下文"></a>1.1 信息就是位+上下文</h3><p>程序的生命周期是从一个源程序开始的</p>
@@ -554,208 +819,6 @@
       </categories>
       <tags>
         <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇编基础</title>
-    <url>/posts/84aee333.html</url>
-    <content><![CDATA[<h3 id="数据宽度"><a href="#数据宽度" class="headerlink" title="数据宽度"></a>数据宽度</h3><p><em><strong>容器的大小其实就是数据宽度</strong></em></p>
-<p>数学上的数字，是没有大小限制的，可以无限的大。但在计算机中，由于受硬件的制约，<strong>数据都是有长度限制的</strong>（我们称为数据宽度）。</p>
-<h3 id="数据宽度的表示"><a href="#数据宽度的表示" class="headerlink" title="数据宽度的表示"></a>数据宽度的表示</h3><h4 id="4位宽度表示：假设计算机只能存储4位2进制数"><a href="#4位宽度表示：假设计算机只能存储4位2进制数" class="headerlink" title="4位宽度表示：假设计算机只能存储4位2进制数"></a>4位宽度表示：假设计算机只能存储4位2进制数</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111</span><br><span class="line">0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F</span><br></pre></td></tr></table></figure>
-
-<p><img src="/posts/84aee333/2024-04-19_09-18-05.png" alt="2024-04-19_09-18-05"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 5 6 7 8 9 A B C D E F</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 </span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8</span><br><span class="line">		  F  E  D  C  B  A  9  8</span><br></pre></td></tr></table></figure>
-
-<h4 id="8位宽度表示：假设计算机只能存储8位2进制数"><a href="#8位宽度表示：假设计算机只能存储8位2进制数" class="headerlink" title="8位宽度表示：假设计算机只能存储8位2进制数"></a>8位宽度表示：假设计算机只能存储8位2进制数</h4><p><img src="/posts/84aee333/2024-04-19_09-25-38.png" alt="2024-04-19_09-25-38"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7F</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ... -128</span><br><span class="line">		 FF FE FD FC FB FA F9 F8 F7 F6 F5 F4...80</span><br></pre></td></tr></table></figure>
-
-<h4 id="16位宽度表示：假设计算机只能存储16位2进制数"><a href="#16位宽度表示：假设计算机只能存储16位2进制数" class="headerlink" title="16位宽度表示：假设计算机只能存储16位2进制数"></a>16位宽度表示：假设计算机只能存储16位2进制数</h4><p><img src="/posts/84aee333/20240419092929733.png" alt="image-20240419092929733"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFF FFFE FFFD FFFC FFFB FFFA FFF9 FFF8 ...</span><br></pre></td></tr></table></figure>
-
-<h4 id="32位宽度表示：假设计算机只能存储32位2进制数"><a href="#32位宽度表示：假设计算机只能存储32位2进制数" class="headerlink" title="32位宽度表示：假设计算机只能存储32位2进制数"></a>32位宽度表示：假设计算机只能存储32位2进制数</h4><p><img src="/posts/84aee333/20240419093214090.png" alt="image-20240419093214090"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFFFFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFFFFFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFFFFFF FFFFFFFE FFFFFFFD FFFFFFFC FFFFFFFB FFFFFFFA FFFFFFF9 FFFFFFF8 ...</span><br></pre></td></tr></table></figure>
-
-<h3 id="二级制的逻辑运算符"><a href="#二级制的逻辑运算符" class="headerlink" title="二级制的逻辑运算符"></a>二级制的逻辑运算符</h3><h4 id="逻辑运算：或（or-）-只要有一个1就是1"><a href="#逻辑运算：或（or-）-只要有一个1就是1" class="headerlink" title="逻辑运算：或（or | ） 只要有一个1就是1"></a>逻辑运算：或（or | ） 只要有一个1就是1</h4><p><img src="/posts/84aee333/20240419093840769.png" alt="image-20240419093840769"></p>
-<h4 id="逻辑运算：与（and-两个都为1才是1"><a href="#逻辑运算：与（and-两个都为1才是1" class="headerlink" title="逻辑运算：与（and &amp;) 两个都为1才是1"></a>逻辑运算：与（and &amp;) 两个都为1才是1</h4><p><img src="/posts/84aee333/20240419093907504.png" alt="image-20240419093907504"></p>
-<h4 id="逻辑运算：异或（xor-）不一样位1"><a href="#逻辑运算：异或（xor-）不一样位1" class="headerlink" title="逻辑运算：异或（xor  ^）不一样位1"></a>逻辑运算：异或（xor  ^）不一样位1</h4><p><img src="/posts/84aee333/20240419093935716.png" alt="image-20240419093935716"></p>
-<h4 id="逻辑运算：非（not-！）1是0-0是1"><a href="#逻辑运算：非（not-！）1是0-0是1" class="headerlink" title="逻辑运算：非（not ！）1是0 0是1"></a>逻辑运算：非（not ！）1是0 0是1</h4><p><img src="/posts/84aee333/20240419094001630.png" alt="image-20240419094001630"></p>
-<h3 id="32位通用寄存器"><a href="#32位通用寄存器" class="headerlink" title="32位通用寄存器"></a>32位通用寄存器</h3><h4 id="32位通用寄存器的指定用途："><a href="#32位通用寄存器的指定用途：" class="headerlink" title="32位通用寄存器的指定用途："></a>32位通用寄存器的指定用途：</h4><table>
-<thead>
-<tr>
-<th>寄存器</th>
-<th>主要用途</th>
-<th>编号</th>
-<th>储存数据的范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>EAX</td>
-<td>累加器</td>
-<td>0</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>ECX</td>
-<td>计数</td>
-<td>1</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EDX</td>
-<td>I&#x2F;O指针</td>
-<td>2</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EBX</td>
-<td>DS段的数据指针</td>
-<td>3</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>ESP</td>
-<td>堆栈指针</td>
-<td>4</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EBP</td>
-<td>SS段的数据指针</td>
-<td>5</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>ESI</td>
-<td>字符串操作的源指针：SS段的数据指针</td>
-<td>6</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EDI</td>
-<td>字符串操作的目标指针：ES段的数据指针</td>
-<td>7</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>通用寄存器</th>
-<th></th>
-<th>编号（二进制）</th>
-<th>编号（十进制）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>32位</td>
-<td>16位</td>
-<td>8位</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>EAX</td>
-<td>AX</td>
-<td>AL</td>
-<td>000</td>
-<td>0</td>
-</tr>
-<tr>
-<td>ECX</td>
-<td>CX</td>
-<td>CL</td>
-<td>001</td>
-<td>1</td>
-</tr>
-<tr>
-<td>EDX</td>
-<td>DX</td>
-<td>DL</td>
-<td>010</td>
-<td>2</td>
-</tr>
-<tr>
-<td>EBX</td>
-<td>BX</td>
-<td>BL</td>
-<td>011</td>
-<td>3</td>
-</tr>
-<tr>
-<td>ESP</td>
-<td>SP</td>
-<td>AH</td>
-<td>100</td>
-<td>4</td>
-</tr>
-<tr>
-<td>EBP</td>
-<td>BP</td>
-<td>CH</td>
-<td>101</td>
-<td>5</td>
-</tr>
-<tr>
-<td>ESI</td>
-<td>SI</td>
-<td>DH</td>
-<td>110</td>
-<td>6</td>
-</tr>
-<tr>
-<td>EDI</td>
-<td>DI</td>
-<td>BH</td>
-<td>111</td>
-<td>7</td>
-</tr>
-</tbody></table>
-<p><img src="/posts/84aee333/20240419095409509.png" alt="image-20240419095409509"></p>
-<h4 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h4><h5 id="MOV的语法："><a href="#MOV的语法：" class="headerlink" title="MOV的语法："></a>MOV的语法：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. MOV r/m8,r8				r通用寄存器</span><br><span class="line">2. MOV r/m16,r16			m代表内存</span><br><span class="line">3. MOV r/m32,r32			imm代表立即数</span><br><span class="line">4. MOV r8,r/m8				r8代表8位通用寄存器</span><br><span class="line">5. MOV r16,r/m16			m8代表8位内存</span><br><span class="line">6. MOV r32,r/m32			imm8代表8位立即数</span><br><span class="line">7. MOV r8,imm8				...</span><br><span class="line">8. MOV r16,imm16</span><br><span class="line">9. MOV r32,imm32</span><br></pre></td></tr></table></figure>
-
-<h5 id="MOV使用"><a href="#MOV使用" class="headerlink" title="MOV使用"></a>MOV使用</h5><p>指令格式：<strong>MOV 目标操作数，源操作数</strong></p>
-<p><strong>作用：拷贝源操作数到目标操作数</strong></p>
-<ul>
-<li>源操作数可以是立即数、通用寄存器、段寄存器、或者内存单元.</li>
-<li>目标操作数可以是通用寄存器、段寄存器或者内存单元.</li>
-<li>操作数的宽度必须一样.</li>
-<li>源操作数和目标操作数不能同时为内存单元.</li>
-</ul>
-<h4 id="ADD指令"><a href="#ADD指令" class="headerlink" title="ADD指令"></a>ADD指令</h4><h5 id="ADD语法"><a href="#ADD语法" class="headerlink" title="ADD语法"></a>ADD语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ADD AL, imm8 </span><br><span class="line"></span><br><span class="line">ADD AX, imm16</span><br><span class="line"></span><br><span class="line">ADD EAX, imm32</span><br><span class="line"></span><br><span class="line">ADD r/m8, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m16,imm16</span><br><span class="line"></span><br><span class="line">ADD r/m32,imm32</span><br><span class="line"></span><br><span class="line">ADD r/m16, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m32, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m8, r8</span><br><span class="line"></span><br><span class="line">ADD r/m16, r16</span><br><span class="line"></span><br><span class="line">ADD r/m32, r32</span><br><span class="line"></span><br><span class="line">ADD r8, r/m8</span><br><span class="line"></span><br><span class="line">ADD r16, r/m16</span><br><span class="line"></span><br><span class="line">ADD r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="ADD作用"><a href="#ADD作用" class="headerlink" title="ADD作用"></a>ADD作用</h5><p><strong>ADD指令用于将两个数相加，并将结果存储在第一个操作数中。</strong></p>
-<h4 id="SUB指令"><a href="#SUB指令" class="headerlink" title="SUB指令"></a>SUB指令</h4><h5 id="SUB语法"><a href="#SUB语法" class="headerlink" title="SUB语法"></a>SUB语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SUB AL, imm8 </span><br><span class="line"></span><br><span class="line">SUB AX, imm16</span><br><span class="line"></span><br><span class="line">SUB EAX, imm32</span><br><span class="line"></span><br><span class="line">SUB r/m8, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m16,imm16</span><br><span class="line"></span><br><span class="line">SUB r/m32,imm32</span><br><span class="line"></span><br><span class="line">SUB r/m16, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m32, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m8, r8</span><br><span class="line"></span><br><span class="line">SUB r/m16, r16</span><br><span class="line"></span><br><span class="line">SUB r/m32, r32</span><br><span class="line"></span><br><span class="line">SUB r8, r/m8</span><br><span class="line"></span><br><span class="line">SUB r16, r/m16</span><br><span class="line"></span><br><span class="line">SUB r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="SUB指令作用"><a href="#SUB指令作用" class="headerlink" title="SUB指令作用"></a>SUB指令作用</h5><p><strong>SUB用于从第一个操作数中减去第二个操作数的值</strong></p>
-<h4 id="AND指令"><a href="#AND指令" class="headerlink" title="AND指令"></a>AND指令</h4><h5 id="AND语法"><a href="#AND语法" class="headerlink" title="AND语法"></a>AND语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">AND AL, imm8</span><br><span class="line"></span><br><span class="line">AND AX, imm16</span><br><span class="line"></span><br><span class="line">AND EAX, imm32</span><br><span class="line"></span><br><span class="line">AND r/m8, imm8</span><br><span class="line"></span><br><span class="line">AND r/m16,imm16</span><br><span class="line"></span><br><span class="line">AND r/m32,imm32</span><br><span class="line"></span><br><span class="line">AND r/m16, imm8</span><br><span class="line"></span><br><span class="line">AND r/m32, imm8</span><br><span class="line"></span><br><span class="line">AND r/m8, r8</span><br><span class="line"></span><br><span class="line">AND r/m16, r16</span><br><span class="line"></span><br><span class="line">AND r/m32, r32</span><br><span class="line"></span><br><span class="line">AND r8, r/m8</span><br><span class="line"></span><br><span class="line">AND r16, r/m16</span><br><span class="line"></span><br><span class="line">AND r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="AND指令操作"><a href="#AND指令操作" class="headerlink" title="AND指令操作"></a>AND指令操作</h5><p>指令格式：<strong>AND 目标操作数 源操作数</strong></p>
-<p>作用：对两个操作数进行按位逻辑与操作，结果送回目的操作数，即目的←目的^源</p>
-<ul>
-<li>用于操作数的某些保留（和“1”相与），而使某些位清除（和”0”相与）</li>
-</ul>
-<h4 id="OR指令"><a href="#OR指令" class="headerlink" title="OR指令"></a>OR指令</h4><h5 id="OR语法"><a href="#OR语法" class="headerlink" title="OR语法"></a>OR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">OR AL, imm8</span><br><span class="line"></span><br><span class="line">OR AX, imm16</span><br><span class="line"></span><br><span class="line">OR EAX, imm32</span><br><span class="line"></span><br><span class="line">OR r/m8, imm8</span><br><span class="line"></span><br><span class="line">OR r/m16,imm16</span><br><span class="line"></span><br><span class="line">OR r/m32,imm32</span><br><span class="line"></span><br><span class="line">OR r/m16, imm8</span><br><span class="line"></span><br><span class="line">OR r/m32, imm8</span><br><span class="line"></span><br><span class="line">OR r/m8, r8</span><br><span class="line"></span><br><span class="line">OR r/m16, r16</span><br><span class="line"></span><br><span class="line">OR r/m32, r32</span><br><span class="line"></span><br><span class="line">OR r8, r/m8</span><br><span class="line"></span><br><span class="line">OR r16, r/m16</span><br><span class="line"></span><br><span class="line">OR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="OR指令使用"><a href="#OR指令使用" class="headerlink" title="OR指令使用"></a>OR指令使用</h5><p>指令格式：<strong>OR 目的操作数 源操作数</strong></p>
-<p>作用：<strong>对两个操作数进行按位逻辑或操作，结果送回目的操作数，即目的←目的V源</strong></p>
-<ul>
-<li>用于使操作数的某些位保留(和”0”相或)，而使某些位置1（和”1”相或）</li>
-</ul>
-<h4 id="XOR指令"><a href="#XOR指令" class="headerlink" title="XOR指令"></a>XOR指令</h4><h5 id="XOR语法"><a href="#XOR语法" class="headerlink" title="XOR语法"></a>XOR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XOR AL, imm8</span><br><span class="line"></span><br><span class="line">XOR AX, imm16</span><br><span class="line"></span><br><span class="line">XOR EAX, imm32</span><br><span class="line"></span><br><span class="line">XOR r/m8, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m16,imm16</span><br><span class="line"></span><br><span class="line">XOR r/m32,imm32</span><br><span class="line"></span><br><span class="line">XOR r/m16, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m32, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m8, r8</span><br><span class="line"></span><br><span class="line">XOR r/m16, r16</span><br><span class="line"></span><br><span class="line">XOR r/m32, r32</span><br><span class="line"></span><br><span class="line">XOR r8, r/m8</span><br><span class="line"></span><br><span class="line">XOR r16, r/m16</span><br><span class="line"></span><br><span class="line">XOR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="XOR指令使用"><a href="#XOR指令使用" class="headerlink" title="XOR指令使用"></a>XOR指令使用</h5><p>指令格式：<strong>XOR 目的操作数 源操作数</strong></p>
-<p>作用：逻辑异或运算，二进制位相同0，不同为1</p>
-<h4 id="NOT指令"><a href="#NOT指令" class="headerlink" title="NOT指令"></a>NOT指令</h4><h5 id="NOT语法"><a href="#NOT语法" class="headerlink" title="NOT语法"></a>NOT语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NOT r/m8</span><br><span class="line"></span><br><span class="line">NOT r/m16</span><br><span class="line"></span><br><span class="line">NOT r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="NOT指令使用"><a href="#NOT指令使用" class="headerlink" title="NOT指令使用"></a>NOT指令使用</h5><p>指令格式：<strong>NOT 源操作数</strong></p>
-<p>作用：逻辑取反运算，二进制位0变为1，1变为0</p>
-]]></content>
-      <categories>
-        <category>汇编</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
       </tags>
   </entry>
 </search>
