@@ -1,84 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>汇编-内存</title>
-    <url>/posts/648ed1b9.html</url>
-    <content><![CDATA[<h1 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h1><h2 id="寄存器与内存的区别："><a href="#寄存器与内存的区别：" class="headerlink" title="寄存器与内存的区别："></a>寄存器与内存的区别：</h2><ol>
-<li><p>寄存器位于CPU内部，执行速度快，但比较贵</p>
-</li>
-<li><p>内存速度相对较慢，但成本较低，所以可以做的很大。</p>
-</li>
-<li><p>寄存器和内存没有本质区别，都是用于存储数据的容器，都是定宽的。</p>
-</li>
-<li><p>寄存器常用的有8个：EAX、ECX、EDX、EBX、ESP、EBP、ESI、EDI。</p>
-</li>
-<li><p>计算机中的几个常用计量单位：BYTE WORD DWORD</p>
-<p> 字节之间关系：</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">BYTE　字节　＝　8(BIT)		</span><br><span class="line">WORD  字    =   16(BIT)		</span><br><span class="line">DWORD 双字  =   32(BIT)		</span><br><span class="line">		</span><br><span class="line">1KB = 1024 BYTE		</span><br><span class="line">1MB = 1024 KB 		</span><br><span class="line">1GB = 1024 MB</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>内存的数量特别庞大，无法每个内存单元都起一个名字，所以用编号来代替，我们称计算机CPU是32位或者64位，主要指的就是内存编号的宽度，而不是寄存器的宽度。</p>
-</li>
-</ol>
-<p>​	</p>
-<p>计算机内存的每一个字节会有一个编号(即内存编号的单位是字节)，如下图：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">计算机内存的每一个字节会有一个编号(即内存编号的单位是字节)，如下图：							</span><br><span class="line">							</span><br><span class="line">0x00000000				00000000			</span><br><span class="line">0x00000001				00000001			</span><br><span class="line">0x00000002				00000002			</span><br><span class="line">....					...		</span><br><span class="line">0xFFFFFFFF				FFFFFFFF							</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>32位计算机的编号最大是32位，也就是32个1 换成16进制为FFFFFFFF，也就是说，32位计算机内存寻址的最大范围是FFFFFFFF+1 </p>
-<p>内存的单位是字节，那内存中能存储的信息最多为：FFFFFFFF+1 字节  即4G，这也是为什么我们在一个XP的系统上面如果物理内存超过4G是没有意义的原因。</p>
-<h2 id="内存格式"><a href="#内存格式" class="headerlink" title="内存格式"></a>内存格式</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">7	 ______		0</span><br><span class="line">	|______|	[0x00000000]	1、每个内存单元的宽度为8</span><br><span class="line">	|______|					2、[编号]称为地址</span><br><span class="line">	|______|					3、地址的作用：从内存中读取数据或者想向内存中写入数据，首先应该找到要读、写的位置。</span><br><span class="line">	|______|</span><br><span class="line">	|______|</span><br><span class="line">	|______|</span><br><span class="line">	|______|	[0xFFFFFFFF]</span><br></pre></td></tr></table></figure>
-
-<h2 id="从指定内存中写入-读取数据"><a href="#从指定内存中写入-读取数据" class="headerlink" title="从指定内存中写入&#x2F;读取数据"></a>从指定内存中写入&#x2F;读取数据</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mov dword ptr ds:[0x00000000],0x12345678</span><br><span class="line">mov eax, dword ptr ds:[0x11111111]</span><br><span class="line">dword : 要读/写多 此时是4字节， byte==1字节， word==2字节</span><br><span class="line">ptr : Point 代表后面是一个指针(指针的意思就是里面存的不是普通的值，而是个地址)</span><br><span class="line">ds : 段寄存器 </span><br><span class="line">0x00000000: 内存编号，必须是32位的，前面0可以省略</span><br><span class="line">注意 : 地址编号不要随便写，因为内存是有保护的，并不是所有的内存都可以直接读写(需要特别处理)</span><br></pre></td></tr></table></figure>
-
-<h2 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h2><h3 id="公式一：-立即数"><a href="#公式一：-立即数" class="headerlink" title="公式一：[立即数]"></a>公式一：[立即数]</h3><p>读取内存的值：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,DWORD PTR DS:[0x00000000]</span><br><span class="line">MOV EBX,DWORD PTR DS:[0x00000000]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>向内存中写入数据</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV DWORD PTR DS:[0x0],eax</span><br><span class="line">MOV DWORD PTR DS:[0x0],ebx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>获取内存编号</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA EAX,DWORD PTR DS:[0X13FFC4]</span><br><span class="line">LEA EAX,DWORD PTR DS:[ESP+8]</span><br></pre></td></tr></table></figure>
-
-<h3 id="公式三：-reg-reg代表通用寄存器，可以是通用寄存器的任意一个"><a href="#公式三：-reg-reg代表通用寄存器，可以是通用寄存器的任意一个" class="headerlink" title="公式三：[reg] reg代表通用寄存器，可以是通用寄存器的任意一个"></a>公式三：[reg] reg代表通用寄存器，可以是通用寄存器的任意一个</h3><p>读取内存的值：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV ECX,0x13FFD0</span><br><span class="line">MOV EAX,DWORD PTR DS:[ECX]</span><br></pre></td></tr></table></figure>
-
-<p>向内存中写入数据</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EDX,0x13FFD8</span><br><span class="line">MOV DWORD PTR DS:[EDX],0x87654321</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>获取内存编号</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA  EAX,DWORD PTR DS:[EDX]</span><br><span class="line">MOV EAX,DWORD PTR DS:[EDX]</span><br></pre></td></tr></table></figure>
-
-<h3 id="公式四：-reg-reg-1-2-4-8"><a href="#公式四：-reg-reg-1-2-4-8" class="headerlink" title="公式四： [reg+reg*{1,2,4,8}]"></a>公式四： [reg+reg*{1,2,4,8}]</h3><p>读取内存的值：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV EDX,DWORD PTR DS:[EAX+ECX*4]</span><br></pre></td></tr></table></figure>
-
-<p>向内存中写入数据：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV DWORD PTR DS:[EAX+ECX*4],87654321</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>获取内存编号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA EAX,DWORD PTR DS:[EAX+ECX*4]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="公式五：-reg-reg-1，2，4，8-立即数"><a href="#公式五：-reg-reg-1，2，4，8-立即数" class="headerlink" title="公式五： [reg+reg*{1，2，4，8}+立即数]"></a>公式五： [reg+reg*{1，2，4，8}+立即数]</h3><p>读取内存的值：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV EDX,DWORD PTR DS:[EAX+ECX*4+4]</span><br></pre></td></tr></table></figure>
-
-<p>向内存中写入数据：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV DWORD PTR DS:[EAX+ECX*4+4],87654321</span><br></pre></td></tr></table></figure>
-
-<p>获取内存编号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA EAX,DWORD PTR DS:[EAX+ECX*4+2]</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>汇编</category>
-      </categories>
-      <tags>
-        <tag>汇编, 二进制</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>freemarker模板生成器</title>
     <url>/posts/ba4d2b82.html</url>
     <content><![CDATA[<h2 id="FreeMarker介绍"><a href="#FreeMarker介绍" class="headerlink" title="FreeMarker介绍"></a>FreeMarker介绍</h2><p>FreeMarker是Apache的开源模板引擎，入门简单、灵活扩展</p>
@@ -135,7 +57,7 @@
 
 ]]></content>
       <categories>
-        <category>java | 工具类</category>
+        <category>-java -FreeMarker -spring -SpringBoot</category>
       </categories>
       <tags>
         <tag>java | FreeMarker | 模板</tag>
@@ -341,6 +263,84 @@
       </categories>
       <tags>
         <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇编-内存</title>
+    <url>/posts/648ed1b9.html</url>
+    <content><![CDATA[<h1 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h1><h2 id="寄存器与内存的区别："><a href="#寄存器与内存的区别：" class="headerlink" title="寄存器与内存的区别："></a>寄存器与内存的区别：</h2><ol>
+<li><p>寄存器位于CPU内部，执行速度快，但比较贵</p>
+</li>
+<li><p>内存速度相对较慢，但成本较低，所以可以做的很大。</p>
+</li>
+<li><p>寄存器和内存没有本质区别，都是用于存储数据的容器，都是定宽的。</p>
+</li>
+<li><p>寄存器常用的有8个：EAX、ECX、EDX、EBX、ESP、EBP、ESI、EDI。</p>
+</li>
+<li><p>计算机中的几个常用计量单位：BYTE WORD DWORD</p>
+<p> 字节之间关系：</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">BYTE　字节　＝　8(BIT)		</span><br><span class="line">WORD  字    =   16(BIT)		</span><br><span class="line">DWORD 双字  =   32(BIT)		</span><br><span class="line">		</span><br><span class="line">1KB = 1024 BYTE		</span><br><span class="line">1MB = 1024 KB 		</span><br><span class="line">1GB = 1024 MB</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>内存的数量特别庞大，无法每个内存单元都起一个名字，所以用编号来代替，我们称计算机CPU是32位或者64位，主要指的就是内存编号的宽度，而不是寄存器的宽度。</p>
+</li>
+</ol>
+<p>​	</p>
+<p>计算机内存的每一个字节会有一个编号(即内存编号的单位是字节)，如下图：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">计算机内存的每一个字节会有一个编号(即内存编号的单位是字节)，如下图：							</span><br><span class="line">							</span><br><span class="line">0x00000000				00000000			</span><br><span class="line">0x00000001				00000001			</span><br><span class="line">0x00000002				00000002			</span><br><span class="line">....					...		</span><br><span class="line">0xFFFFFFFF				FFFFFFFF							</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>32位计算机的编号最大是32位，也就是32个1 换成16进制为FFFFFFFF，也就是说，32位计算机内存寻址的最大范围是FFFFFFFF+1 </p>
+<p>内存的单位是字节，那内存中能存储的信息最多为：FFFFFFFF+1 字节  即4G，这也是为什么我们在一个XP的系统上面如果物理内存超过4G是没有意义的原因。</p>
+<h2 id="内存格式"><a href="#内存格式" class="headerlink" title="内存格式"></a>内存格式</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">7	 ______		0</span><br><span class="line">	|______|	[0x00000000]	1、每个内存单元的宽度为8</span><br><span class="line">	|______|					2、[编号]称为地址</span><br><span class="line">	|______|					3、地址的作用：从内存中读取数据或者想向内存中写入数据，首先应该找到要读、写的位置。</span><br><span class="line">	|______|</span><br><span class="line">	|______|</span><br><span class="line">	|______|</span><br><span class="line">	|______|	[0xFFFFFFFF]</span><br></pre></td></tr></table></figure>
+
+<h2 id="从指定内存中写入-读取数据"><a href="#从指定内存中写入-读取数据" class="headerlink" title="从指定内存中写入&#x2F;读取数据"></a>从指定内存中写入&#x2F;读取数据</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mov dword ptr ds:[0x00000000],0x12345678</span><br><span class="line">mov eax, dword ptr ds:[0x11111111]</span><br><span class="line">dword : 要读/写多 此时是4字节， byte==1字节， word==2字节</span><br><span class="line">ptr : Point 代表后面是一个指针(指针的意思就是里面存的不是普通的值，而是个地址)</span><br><span class="line">ds : 段寄存器 </span><br><span class="line">0x00000000: 内存编号，必须是32位的，前面0可以省略</span><br><span class="line">注意 : 地址编号不要随便写，因为内存是有保护的，并不是所有的内存都可以直接读写(需要特别处理)</span><br></pre></td></tr></table></figure>
+
+<h2 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h2><h3 id="公式一：-立即数"><a href="#公式一：-立即数" class="headerlink" title="公式一：[立即数]"></a>公式一：[立即数]</h3><p>读取内存的值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,DWORD PTR DS:[0x00000000]</span><br><span class="line">MOV EBX,DWORD PTR DS:[0x00000000]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>向内存中写入数据</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV DWORD PTR DS:[0x0],eax</span><br><span class="line">MOV DWORD PTR DS:[0x0],ebx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取内存编号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA EAX,DWORD PTR DS:[0X13FFC4]</span><br><span class="line">LEA EAX,DWORD PTR DS:[ESP+8]</span><br></pre></td></tr></table></figure>
+
+<h3 id="公式三：-reg-reg代表通用寄存器，可以是通用寄存器的任意一个"><a href="#公式三：-reg-reg代表通用寄存器，可以是通用寄存器的任意一个" class="headerlink" title="公式三：[reg] reg代表通用寄存器，可以是通用寄存器的任意一个"></a>公式三：[reg] reg代表通用寄存器，可以是通用寄存器的任意一个</h3><p>读取内存的值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV ECX,0x13FFD0</span><br><span class="line">MOV EAX,DWORD PTR DS:[ECX]</span><br></pre></td></tr></table></figure>
+
+<p>向内存中写入数据</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EDX,0x13FFD8</span><br><span class="line">MOV DWORD PTR DS:[EDX],0x87654321</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取内存编号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA  EAX,DWORD PTR DS:[EDX]</span><br><span class="line">MOV EAX,DWORD PTR DS:[EDX]</span><br></pre></td></tr></table></figure>
+
+<h3 id="公式四：-reg-reg-1-2-4-8"><a href="#公式四：-reg-reg-1-2-4-8" class="headerlink" title="公式四： [reg+reg*{1,2,4,8}]"></a>公式四： [reg+reg*{1,2,4,8}]</h3><p>读取内存的值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV EDX,DWORD PTR DS:[EAX+ECX*4]</span><br></pre></td></tr></table></figure>
+
+<p>向内存中写入数据：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV DWORD PTR DS:[EAX+ECX*4],87654321</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取内存编号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA EAX,DWORD PTR DS:[EAX+ECX*4]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="公式五：-reg-reg-1，2，4，8-立即数"><a href="#公式五：-reg-reg-1，2，4，8-立即数" class="headerlink" title="公式五： [reg+reg*{1，2，4，8}+立即数]"></a>公式五： [reg+reg*{1，2，4，8}+立即数]</h3><p>读取内存的值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV EDX,DWORD PTR DS:[EAX+ECX*4+4]</span><br></pre></td></tr></table></figure>
+
+<p>向内存中写入数据：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">MOV EAX,13FFC4</span><br><span class="line">MOV ECX,2</span><br><span class="line">MOV DWORD PTR DS:[EAX+ECX*4+4],87654321</span><br></pre></td></tr></table></figure>
+
+<p>获取内存编号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LEA EAX,DWORD PTR DS:[EAX+ECX*4+2]</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>汇编</category>
+      </categories>
+      <tags>
+        <tag>汇编, 二进制</tag>
       </tags>
   </entry>
   <entry>
