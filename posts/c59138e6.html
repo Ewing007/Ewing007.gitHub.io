@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/angle180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/angle32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/angle18x18.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/purple/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="FELAGS寄存器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FELAGS寄存器">
+<meta property="og:url" content="http://example.com/posts/c59138e6.html">
+<meta property="og:site_name" content="Ewing的博客">
+<meta property="og:description" content="FELAGS寄存器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421193957952.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421194813053.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421201444097.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421202057165.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421202645283.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421202832557.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421203105105.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421203727491.png">
+<meta property="og:image" content="http://example.com/image-20240421203940791.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421204329481.png">
+<meta property="og:image" content="http://example.com/posts/undefined/image-20240421204934779.png">
+<meta property="article:published_time" content="2024-04-21T19:27:54.000Z">
+<meta property="article:modified_time" content="2024-04-21T13:07:00.095Z">
+<meta property="article:author" content="Ewing">
+<meta property="article:tag" content="汇编">
+<meta property="article:tag" content="寄存器">
+<meta property="article:tag" content="二进制">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/posts/undefined/image-20240421193957952.png">
+
+
+<link rel="canonical" href="http://example.com/posts/c59138e6.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/c59138e6.html","path":"posts/c59138e6.html","title":"FELAGS寄存器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FELAGS寄存器 | Ewing的博客</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="blogtalk-server.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Ewing的博客" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ewing的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱，奔赴山海</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EFLAGS%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">EFLAGS标志寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E5%9B%BE%E6%89%80%E7%A4%BA%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">如图所示：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OD%E9%87%8C%E9%9D%A2EFLAGS%E7%9A%84%E4%BD%8D%E7%BD%AE%E4%B8%8E%E5%80%BC%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">OD里面EFLAGS的位置与值：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E4%BD%8D%E6%A0%87%E5%BF%97CF%EF%BC%88Carry-Flag%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">进位标志CF（Carry Flag）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%87%E5%81%B6%E6%A0%87%E5%BF%97PF-Parity-Flag"><span class="nav-number">1.4.</span> <span class="nav-text">奇偶标志PF(Parity Flag)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%85%E5%8A%A9%E8%BF%9B%E4%BD%8D%E6%A0%87%E5%BF%97AF-Auxiliary-Carry-Flag"><span class="nav-number">1.5.</span> <span class="nav-text">辅助进位标志AF(Auxiliary Carry Flag)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%B6%E6%A0%87%E5%BF%97ZF-Zero-Flag"><span class="nav-number">1.6.</span> <span class="nav-text">零标志ZF(Zero Flag)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E6%A0%87%E5%BF%97SF-Sign-Flag"><span class="nav-number">1.7.</span> <span class="nav-text">符号标志SF(Sign Flag)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%A2%E5%87%BA%E6%A0%87%E5%BF%97OF-Overflow-Flag"><span class="nav-number">1.8.</span> <span class="nav-text">溢出标志OF(Overflow Flag)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-%E6%98%AF%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E6%BA%A2%E5%87%BA%E7%9A%84"><span class="nav-number">1.9.</span> <span class="nav-text">CPU 是如何检测溢出的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ADC%E6%8C%87%E4%BB%A4%EF%BC%9A%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95"><span class="nav-number">1.10.</span> <span class="nav-text">ADC指令：带进位加法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SBB%E6%8C%87%E4%BB%A4%EF%BC%9A%E5%B8%A6%E5%80%9F%E4%BD%8D%E5%87%8F%E6%B3%95"><span class="nav-number">1.11.</span> <span class="nav-text">SBB指令：带借位减法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCHG%E6%8C%87%E4%BB%A4%EF%BC%9A%E4%BA%A4%E6%8D%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">1.12.</span> <span class="nav-text">XCHG指令：交换数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MOVS%E6%8C%87%E4%BB%A4%EF%BC%9A%E7%A7%BB%E5%8A%A8%E6%95%B0%E6%8D%AE-%E5%86%85%E5%AD%98-%E5%86%85%E5%AD%98"><span class="nav-number">1.13.</span> <span class="nav-text">MOVS指令：移动数据  内存-内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STOS%E6%8C%87%E4%BB%A4%EF%BC%9A%E8%AE%B2Al-AX-EAX%E7%9A%84%E5%80%BC%E5%AD%98%E5%82%A8%E5%88%B0-EDI-%E6%8C%87%E5%AE%9A%E7%9A%84%E5%86%85%E5%AD%98%E5%8D%95%E5%85%83"><span class="nav-number">1.14.</span> <span class="nav-text">STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REP%E6%8C%87%E4%BB%A4%EF%BC%9A%E6%8C%89%E8%AE%A1%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8-ECX-%E4%B8%AD%E6%8C%87%E5%AE%9A%E7%9A%84%E6%AC%A1%E6%95%B0%E9%87%8D%E5%A4%8D%E6%89%A7%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4"><span class="nav-number">1.15.</span> <span class="nav-text">REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ewing"
+      src="/images/ewing.gif">
+  <p class="site-author-name" itemprop="name">Ewing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ewing007" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ewing007" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2742887864@qq.com" title="E-Mail → mailto:2742887864@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c59138e6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ewing.gif">
+      <meta itemprop="name" content="Ewing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ewing的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FELAGS寄存器 | Ewing的博客">
+      <meta itemprop="description" content="FELAGS寄存器">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FELAGS寄存器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-21 19:27:54 / 修改时间：13:07:00" itemprop="dateCreated datePublished" datetime="2024-04-21T19:27:54Z">2024-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B1%87%E7%BC%96/%E5%AF%84%E5%AD%98%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">寄存器</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/c59138e6.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/c59138e6.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">FELAGS寄存器</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="EFLAGS标志寄存器"><a href="#EFLAGS标志寄存器" class="headerlink" title="EFLAGS标志寄存器"></a>EFLAGS标志寄存器</h1><h2 id="如图所示："><a href="#如图所示：" class="headerlink" title="如图所示："></a>如图所示：</h2><p><img src="/posts/undefined/image-20240421193957952.png" alt="image-20240421193957952"></p>
+<h2 id="OD里面EFLAGS的位置与值："><a href="#OD里面EFLAGS的位置与值：" class="headerlink" title="OD里面EFLAGS的位置与值："></a>OD里面EFLAGS的位置与值：</h2><p><img src="/posts/undefined/image-20240421194813053.png" alt="image-20240421194813053"></p>
+<p><strong>将EFL的值 0000 0206 转成二进制 0000 0000 0000 0000 0000 0010 0000 0110</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">从右往左看</span><br><span class="line">CF 第零位	进位标志		值为0</span><br><span class="line">PF 第二位	奇偶标志		值为1</span><br><span class="line">AF 第四位	辅助进位标志		值为0</span><br><span class="line">ZF 第六位	零标志			值为0</span><br><span class="line">SF 第七位	符号标志		值为0</span><br><span class="line">OF 第十一位	溢出标志		值为0</span><br></pre></td></tr></table></figure>
+
+<h2 id="进位标志CF（Carry-Flag）"><a href="#进位标志CF（Carry-Flag）" class="headerlink" title="进位标志CF（Carry Flag）"></a>进位标志CF（Carry Flag）</h2><p>如果运算结果的最高位产生了一个进位或借位，那么，其值为1，否则其值为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MOV AL,0xFF			</span><br><span class="line">ADD AL,2			</span><br></pre></td></tr></table></figure>
+
+<p>对比前后如图所示：</p>
+<p><img src="/posts/undefined/image-20240421201444097.png" alt="image-20240421201444097"></p>
+<h2 id="奇偶标志PF-Parity-Flag"><a href="#奇偶标志PF-Parity-Flag" class="headerlink" title="奇偶标志PF(Parity Flag)"></a>奇偶标志PF(Parity Flag)</h2><p>奇偶标志PF用于反映运算结果中“1”的个数的奇偶性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MOV AL,3</span><br><span class="line">ADD AL,3</span><br><span class="line">ADD AL,2</span><br></pre></td></tr></table></figure>
+
+<p>对比前后运算结果如图:</p>
+<p><img src="/posts/undefined/image-20240421202057165.png" alt="image-20240421202057165"></p>
+<h2 id="辅助进位标志AF-Auxiliary-Carry-Flag"><a href="#辅助进位标志AF-Auxiliary-Carry-Flag" class="headerlink" title="辅助进位标志AF(Auxiliary Carry Flag)"></a>辅助进位标志AF(Auxiliary Carry Flag)</h2><p>在发生下列情况时，辅助进位标志AF的值被置为1，否则其值为0：	</p>
+<ol>
+<li>在字操作时，发生低字节向高字节进位或借位时。</li>
+<li>在字节操作时，发生低4位向高4位进位或借位时。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MOV EAX,0x55EEFFFF						</span><br><span class="line">ADD EAX,2								</span><br><span class="line"></span><br><span class="line">MOV AX,5EFE</span><br><span class="line">ADD AX,2</span><br><span class="line"></span><br><span class="line">MOV AL,4E</span><br><span class="line">ADD AL,1</span><br></pre></td></tr></table></figure>
+
+<p>第一组结果：</p>
+<p><img src="/posts/undefined/image-20240421202645283.png" alt="image-20240421202645283"></p>
+<p>第二组结果：</p>
+<p><img src="/posts/undefined/image-20240421202832557.png" alt="image-20240421202832557"></p>
+<p>第三组结果为：</p>
+<p><img src="/posts/undefined/image-20240421203105105.png" alt="image-20240421203105105"></p>
+<h2 id="零标志ZF-Zero-Flag"><a href="#零标志ZF-Zero-Flag" class="headerlink" title="零标志ZF(Zero Flag)"></a>零标志ZF(Zero Flag)</h2><p>零标志ZF用来反映运算结果是否为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">XOR EAX,EAX	</span><br><span class="line">	</span><br><span class="line">MOV EAX,2	</span><br><span class="line">SUB EAX,2	</span><br></pre></td></tr></table></figure>
+
+<p>三次运算结果：</p>
+<p><img src="/posts/undefined/image-20240421203727491.png" alt="image-20240421203727491"></p>
+<h2 id="符号标志SF-Sign-Flag"><a href="#符号标志SF-Sign-Flag" class="headerlink" title="符号标志SF(Sign Flag)"></a>符号标志SF(Sign Flag)</h2><p>符号标志SF用来反映运算结果的符号位，它与运算结果的最高位相同。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MOV AL,7F</span><br><span class="line">ADD AL,2</span><br></pre></td></tr></table></figure>
+
+<p>运算结果如图：</p>
+<p><img src="/image-20240421203940791.png" alt="image-20240421203940791"></p>
+<h2 id="溢出标志OF-Overflow-Flag"><a href="#溢出标志OF-Overflow-Flag" class="headerlink" title="溢出标志OF(Overflow Flag)"></a>溢出标志OF(Overflow Flag)</h2><p>溢出标志OF用于反映有符号数加减运算所得结果是否溢出。</p>
+<p>如果运算结果超过当前运算位数所能表示的范围，则称为溢出，OF的值被置为1，否则，OF的值被清为0。</p>
+<p><strong>最高位进位与溢出的区别：</strong></p>
+<ul>
+<li>进位标志表示无符号数运算结果是否超出范围.</li>
+<li>溢出标志表示有符号数运算结果是否超出范围.</li>
+<li>溢出主要是给有符号运算使用的，在有符号的运算中，有如下的规律.</li>
+<li>正 + 正 &#x3D; 正 如果结果是负数，则说明有溢出.</li>
+<li>负 + 负 &#x3D; 负 如果结果是正数，则说明有溢出.</li>
+<li>正 + 负 永远都不会有溢出.</li>
+</ul>
+<p><img src="/posts/undefined/image-20240421204329481.png" alt="image-20240421204329481"></p>
+<p><strong>总结：</strong></p>
+<ol>
+<li><strong>无符号数：0 ….. FF</strong></li>
+<li><strong>负数：80 ….. FF</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1、无符号、有符号都不溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,8	</span><br><span class="line">	ADD AL,8	</span><br><span class="line">		</span><br><span class="line">2、无符号溢出、有符号不溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,FF	</span><br><span class="line">	ADD AL,2	</span><br><span class="line">		</span><br><span class="line">3、无符号不溢出、有符号溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,7F	</span><br><span class="line">	ADD AL,2	</span><br><span class="line">		</span><br><span class="line">4、无符号、有符号都溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,FE	</span><br><span class="line">	ADD AL,80	</span><br></pre></td></tr></table></figure>
+
+<h2 id="CPU-是如何检测溢出的"><a href="#CPU-是如何检测溢出的" class="headerlink" title="CPU 是如何检测溢出的"></a>CPU 是如何检测溢出的</h2><p>在加法和减法运算完成后，CPU 使用一种非常有趣的方法确定溢出标志的值：</p>
+<p>​		<strong>运算结果最高有效位向高位的进位值CF）与到最高有效位的进位值异或，其结果放到溢出标志位中。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例如 8 位二进制数 10000000 和 11111110 相加，第 6 位向最高位有效位（第 7 位）无进位，但第 7 位向高位有进位值（CF=1）。</span><br><span class="line"></span><br><span class="line">	由于 1 XOR 0 = 1，因此 of=1。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/posts/undefined/image-20240421204934779.png" alt="image-20240421204934779"></p>
+<h2 id="ADC指令：带进位加法"><a href="#ADC指令：带进位加法" class="headerlink" title="ADC指令：带进位加法"></a>ADC指令：带进位加法</h2><p><strong>格式：ADC  R&#x2F;M,R&#x2F;M&#x2F;IMM   两边不能同时为内存  宽度要一样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ADC AL,CL		</span><br><span class="line">		</span><br><span class="line">ADC BYTE PTR DS:[12FFC4],2		</span><br><span class="line">		</span><br><span class="line">ADC BYTE PTR DS:[12FFC4],AL		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SBB指令：带借位减法"><a href="#SBB指令：带借位减法" class="headerlink" title="SBB指令：带借位减法"></a>SBB指令：带借位减法</h2><p><strong>格式：SBB  R&#x2F;M,R&#x2F;M   两边不能同时为内存      宽度要一样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SBB AL,CL		</span><br><span class="line">		</span><br><span class="line">SBB BYTE PTR DS:[12FFC4],2		</span><br><span class="line">		</span><br><span class="line">SBB BYTE PTR DS:[12FFC4],AL		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="XCHG指令：交换数据"><a href="#XCHG指令：交换数据" class="headerlink" title="XCHG指令：交换数据"></a>XCHG指令：交换数据</h2><p><strong>格式：XCHG  R&#x2F;M,R&#x2F;M&#x2F;IMM   两边不能同时为内存  宽度要一样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">XCHG AL,CL			</span><br><span class="line">			</span><br><span class="line">XCHG DWORD PTR DS:[12FFC4],EAX			</span><br><span class="line">			</span><br><span class="line">XCHG BYTE PTR DS:[12FFC4],AL			</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="MOVS指令：移动数据-内存-内存"><a href="#MOVS指令：移动数据-内存-内存" class="headerlink" title="MOVS指令：移动数据  内存-内存"></a>MOVS指令：移动数据  内存-内存</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BYTE/WORD/DWORD						</span><br><span class="line">						</span><br><span class="line">MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSB	</span><br><span class="line">						</span><br><span class="line">MOVS WORD PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSW	</span><br><span class="line">						</span><br><span class="line">MOVS DWORD PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">例子：				</span><br><span class="line">				</span><br><span class="line">MOV EDI,12FFD8				</span><br><span class="line">MOV ESI,12FFD0				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">				</span><br><span class="line">修改标志寄存器中D位的值，然后在执行下面的指令：				</span><br><span class="line">				</span><br><span class="line">MOV EDI,12FFD8				</span><br><span class="line">MOV ESI,12FFD0				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="STOS指令：讲Al-AX-EAX的值存储到-EDI-指定的内存单元"><a href="#STOS指令：讲Al-AX-EAX的值存储到-EDI-指定的内存单元" class="headerlink" title="STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元"></a>STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">STOS BYTE PTR ES:[EDI]			简写为STOSB	</span><br><span class="line">				</span><br><span class="line">STOS WORD PTR ES:[EDI]			简写为STOSW	</span><br><span class="line">				</span><br><span class="line">STOS DWORD PTR ES:[EDI]			简写为STOSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">MOV EAX,12345678					</span><br><span class="line">MOV EDI,12FFC4					</span><br><span class="line">STOS BYTE PTR ES:[EDI]				观察EDI的值	</span><br><span class="line">STOS WORD PTR ES:[EDI]					</span><br><span class="line">STOS DWORD PTR ES:[EDI]					</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">修改标志寄存器中D位的值，然后在执行下面的指令：					</span><br><span class="line">					</span><br><span class="line">MOV EAX,12345678					</span><br><span class="line">MOV EDI,12FFC4					</span><br><span class="line">STOS BYTE PTR ES:[EDI]				观察EDI的值	</span><br><span class="line">STOS WORD PTR ES:[EDI]					</span><br><span class="line">STOS DWORD PTR ES:[EDI]					</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="REP指令：按计数寄存器-ECX-中指定的次数重复执行字符串指令"><a href="#REP指令：按计数寄存器-ECX-中指定的次数重复执行字符串指令" class="headerlink" title="REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令"></a>REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MOV ECX,10	</span><br><span class="line">	</span><br><span class="line">REP MOVSD	</span><br><span class="line">	</span><br><span class="line">REP STOSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"># 汇编</a>
+              <a href="/tags/%E5%AF%84%E5%AD%98%E5%99%A8/" rel="tag"># 寄存器</a>
+              <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># 二进制</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/92e57483.html" rel="prev" title="汇编-堆栈">
+                  <i class="fa fa-angle-left"></i> 汇编-堆栈
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ewing</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("12/1/2023 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"blogtalk-server.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/c59138e6.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 --> <script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 页面跟随小星星 --> <script type="text/javascript" src="/js/startflow.js"></script>
+
