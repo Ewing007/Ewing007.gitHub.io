@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/angle180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/angle32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/angle18x18.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/purple/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="DbUtil读取表的字段信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DbUtil读取表的字段信息">
+<meta property="og:url" content="http://example.com/posts/28b38f30.html">
+<meta property="og:site_name" content="Ewing的博客">
+<meta property="og:description" content="DbUtil读取表的字段信息">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-20T20:16:48.000Z">
+<meta property="article:modified_time" content="2024-04-21T06:24:22.710Z">
+<meta property="article:author" content="Ewing">
+<meta property="article:tag" content="jdbc">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="工具类">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/posts/28b38f30.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/28b38f30.html","path":"posts/28b38f30.html","title":"DbUtil读取表的字段信息"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DbUtil读取表的字段信息 | Ewing的博客</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="blogtalk-server.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Ewing的博客" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ewing的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱，奔赴山海</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95%E8%A6%81%E5%86%99DbUtil%E5%B7%A5%E5%85%B7%E7%B1%BB%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%97%E6%AE%B5%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为何要写DbUtil工具类读取数据库的字段？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99DbUtil%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">写DbUtil工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%81%E8%AF%BB%E5%8F%96%E8%A1%A8%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.</span> <span class="nav-text">要读取表的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E7%9B%B8%E5%85%B3mysql%E7%9A%84jar%E5%8C%85"><span class="nav-number">2.2.</span> <span class="nav-text">导入相关mysql的jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1getconnection%E8%8E%B7%E5%8F%96connection%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.</span> <span class="nav-text">创建数据库连接对象getconnection获取connection连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getTableComment%E8%8E%B7%E5%8F%96%E8%A1%A8%E7%9A%84%E6%B3%A8%E9%87%8A"><span class="nav-number">2.4.</span> <span class="nav-text">getTableComment获取表的注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Field%E5%AF%B9%E8%B1%A1%E5%85%B3%E8%81%94%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF"><span class="nav-number">2.4.1.</span> <span class="nav-text">Field对象关联表的字段信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getTableColumnByTableName%E9%80%9A%E8%BF%87%E8%A1%A8%E5%90%8D%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%88%97%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF"><span class="nav-number">2.5.</span> <span class="nav-text">getTableColumnByTableName通过表名获取所有列的所有字段信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8DlineToHump"><span class="nav-number">3.</span> <span class="nav-text">转驼峰命名lineToHump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E5%A4%A7%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8DlineToBigHump"><span class="nav-number">4.</span> <span class="nav-text">转大驼峰命名lineToBigHump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%BF%E5%88%B0%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">拿到结果展示</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ewing"
+      src="/images/ewing.gif">
+  <p class="site-author-name" itemprop="name">Ewing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ewing007" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ewing007" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2742887864@qq.com" title="E-Mail → mailto:2742887864@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/28b38f30.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ewing.gif">
+      <meta itemprop="name" content="Ewing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ewing的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="DbUtil读取表的字段信息 | Ewing的博客">
+      <meta itemprop="description" content="DbUtil读取表的字段信息">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DbUtil读取表的字段信息
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-20 20:16:48" itemprop="dateCreated datePublished" datetime="2024-04-20T20:16:48Z">2024-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-21 06:24:22" itemprop="dateModified" datetime="2024-04-21T06:24:22Z">2024-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">工具类</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/28b38f30.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/28b38f30.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">DbUtil读取表的字段信息</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="为何要写DbUtil工具类读取数据库的字段？"><a href="#为何要写DbUtil工具类读取数据库的字段？" class="headerlink" title="为何要写DbUtil工具类读取数据库的字段？"></a>为何要写DbUtil工具类读取数据库的字段？</h1><p>在我们实际开发中，往往有一些业务处理跟需求是需要我们对数据库字段信息进行提取使用，而像mybatis这类三方集成框架往往并没有暴露接口给我们进行使用，所有就需要自己写一个工具类。</p>
+<h1 id="写DbUtil工具类"><a href="#写DbUtil工具类" class="headerlink" title="写DbUtil工具类"></a>写DbUtil工具类</h1><h2 id="要读取表的信息"><a href="#要读取表的信息" class="headerlink" title="要读取表的信息"></a>要读取表的信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `passenger` (</span><br><span class="line">  `id` <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;id&#x27;</span>,</span><br><span class="line">  `member_id` <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;会员id&#x27;</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">  `id_card` <span class="type">varchar</span>(<span class="number">18</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;身份证&#x27;</span>,</span><br><span class="line">  `type` <span class="type">char</span>(<span class="number">1</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;旅客类型|枚举[PassengerTypeEnum]&#x27;</span>,</span><br><span class="line">  `create_time` datetime(<span class="number">3</span>) comment <span class="string">&#x27;新增时间&#x27;</span>,</span><br><span class="line">  `update_time` datetime(<span class="number">3</span>) comment <span class="string">&#x27;修改时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">primary</span> key (`id`),</span><br><span class="line">  index `member_id_index` (`member_id`)</span><br><span class="line">) engine<span class="operator">=</span>innodb <span class="keyword">default</span> charset<span class="operator">=</span>utf8mb4 comment<span class="operator">=</span><span class="string">&#x27;乘车人&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="导入相关mysql的jar包"><a href="#导入相关mysql的jar包" class="headerlink" title="导入相关mysql的jar包"></a>导入相关mysql的jar包</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建数据库连接对象getconnection获取connection连接"><a href="#创建数据库连接对象getconnection获取connection连接" class="headerlink" title="创建数据库连接对象getconnection获取connection连接"></a>创建数据库连接对象getconnection获取connection连接</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义数据库的连接字段，包括数据库url，uerId，password</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">string</span> <span class="variable">connectionURL</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">passWord</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">userId</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//connection创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title function_">getConnection</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//初始化connection对象</span></span><br><span class="line">    <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//加载mysql连接驱动</span></span><br><span class="line">        Class.forName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">        <span class="comment">//DbUtil导入数据库连接信息</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> DbUtil.connectionURL;</span><br><span class="line">        <span class="type">String</span> <span class="variable">userid</span> <span class="operator">=</span> DbUtil.UserId;</span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> DbUtil.passWord;</span><br><span class="line">        <span class="comment">//连接数据库</span></span><br><span class="line">        connection = DriverManger.getConnection(url,userid,password);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回connection对象</span></span><br><span class="line">    <span class="keyword">return</span> connection;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="getTableComment获取表的注释"><a href="#getTableComment获取表的注释" class="headerlink" title="getTableComment获取表的注释"></a>getTableComment获取表的注释</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获得表的注释</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getTableComment</span><span class="params">(String tableName)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    <span class="comment">//获取connection连接对象</span></span><br><span class="line">    <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> getConnection();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取执行SQL对象statement</span></span><br><span class="line">    <span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.createStatement();</span><br><span class="line">    <span class="comment">//执行sql语句，返回ResultSet对象</span></span><br><span class="line">    <span class="type">ResultSet</span> <span class="variable">resultset</span> <span class="operator">=</span> connectionStatement.executeQuery(<span class="string">&quot;select table_comment from information_schema.tables where table_name = &#x27;&quot;</span> + tableName + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定义表的注释</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">tableNameCh</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果返回结果resultset不为空，则循环读取</span></span><br><span class="line">    <span class="keyword">if</span>(resultset != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(resultset.next())&#123;</span><br><span class="line">            <span class="comment">//对表的注释进行匹配</span></span><br><span class="line">            tableNameCh = resultset.getString(<span class="string">&quot;table_comment&quot;</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//释放reslutset对象，statement对象，connection对象</span></span><br><span class="line">    resultset.close();</span><br><span class="line">    statement.close();</span><br><span class="line">    connection.close();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回表的注释</span></span><br><span class="line">    <span class="keyword">return</span> tableNameCh;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Field对象关联表的字段信息"><a href="#Field对象关联表的字段信息" class="headerlink" title="Field对象关联表的字段信息"></a>Field对象关联表的字段信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Field对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 关联列对应的各种信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Field</span> &#123;</span><br><span class="line">    <span class="comment">//列名</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">//驼峰命名</span></span><br><span class="line">    <span class="keyword">private</span> String nameHump;</span><br><span class="line">    <span class="comment">//大驼峰命名</span></span><br><span class="line">    <span class="keyword">private</span> String nameBigHump;</span><br><span class="line">    <span class="comment">//中文名</span></span><br><span class="line">    <span class="keyword">private</span> String nameCn;</span><br><span class="line">    <span class="comment">//sql对应类型</span></span><br><span class="line">    <span class="keyword">private</span> String type;</span><br><span class="line">    <span class="comment">//java对应类型</span></span><br><span class="line">    <span class="keyword">private</span> String javaType;</span><br><span class="line">    <span class="comment">//列注释</span></span><br><span class="line">    <span class="keyword">private</span> String comment;</span><br><span class="line">    <span class="comment">//是否允许为空</span></span><br><span class="line">    <span class="keyword">private</span> Boolean nullAble;</span><br><span class="line">    <span class="comment">//字段长度</span></span><br><span class="line">    <span class="keyword">private</span> Integer length;</span><br><span class="line">    <span class="comment">//是否为枚举类型</span></span><br><span class="line">    <span class="keyword">private</span> Boolean enums;</span><br><span class="line">    <span class="comment">//枚举常量</span></span><br><span class="line">    <span class="keyword">private</span> String enumsConst;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getNameHump</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> nameHump;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setNameHump</span><span class="params">(String nameHump)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.nameHump = nameHump;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getNameBigHump</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> nameBigHump;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setNameBigHump</span><span class="params">(String nameBigHump)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.nameBigHump = nameBigHump;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getNameCn</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> nameCn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setNameCn</span><span class="params">(String nameCn)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.nameCn = nameCn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getType</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setType</span><span class="params">(String type)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getJavaType</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> javaType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setJavaType</span><span class="params">(String javaType)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.javaType = javaType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getComment</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> comment;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setComment</span><span class="params">(String comment)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.comment = comment;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">getNullAble</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> nullAble;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setNullAble</span><span class="params">(<span class="type">boolean</span> nullAble)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.nullAble = Boolean.valueOf(nullAble);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getLength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">int</span> length)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.length = Integer.valueOf(length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">getEnums</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> enums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setEnums</span><span class="params">(<span class="type">boolean</span> enums)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.enums = Boolean.valueOf(enums);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getEnumsConst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> enumsConst;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setEnumsConst</span><span class="params">(String enumsConst)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.enumsConst = enumsConst;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="getTableColumnByTableName通过表名获取所有列的所有字段信息"><a href="#getTableColumnByTableName通过表名获取所有列的所有字段信息" class="headerlink" title="getTableColumnByTableName通过表名获取所有列的所有字段信息"></a>getTableColumnByTableName通过表名获取所有列的所有字段信息</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*获取表的列的信息,返回List对象</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Field&gt; <span class="title function_">getTableColumnByTableName</span><span class="params">(String tableName)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    <span class="comment">//初始化List对象</span></span><br><span class="line">    List&lt;Field&gt; FieldColumns = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取connection连接对象，执行SQL对象statement</span></span><br><span class="line">    <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> getConnection();</span><br><span class="line">    <span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.createStatement();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//执行sql语句，返回ResultSet对象</span></span><br><span class="line">    <span class="type">ResultSet</span> <span class="variable">resultSet</span> <span class="operator">=</span> statement.executeQuery(<span class="string">&quot;show full columns from`&quot;</span> + tableName + <span class="string">&quot;`&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果返回结果resultset不为空，则循环读取列的字段信息</span></span><br><span class="line">    <span class="keyword">if</span>(resultSet != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span> (resultSet.next())&#123;</span><br><span class="line">                <span class="comment">//获取列名，sql类型，是否为空，注释</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">columnName</span> <span class="operator">=</span> resultSet.getString(<span class="string">&quot;Field&quot;</span>);</span><br><span class="line">                <span class="type">String</span> <span class="variable">type</span> <span class="operator">=</span> resultSet.getString(<span class="string">&quot;Type&quot;</span>);</span><br><span class="line">                <span class="type">String</span> <span class="variable">AbleNull</span> <span class="operator">=</span> resultSet.getString(<span class="string">&quot;Null&quot;</span>);</span><br><span class="line">                <span class="type">String</span> <span class="variable">Comment</span> <span class="operator">=</span> resultSet.getString(<span class="string">&quot;Comment&quot;</span>);</span><br><span class="line">                </span><br><span class="line">                <span class="comment">//初始化Field对象</span></span><br><span class="line">                <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Field</span>();</span><br><span class="line">                </span><br><span class="line">                <span class="comment">//对field对象的属性进行赋值</span></span><br><span class="line">                field.setName(columnName);</span><br><span class="line">                <span class="comment">//转驼峰命名法</span></span><br><span class="line">                field.setNameHump(lineToHump(columnName));</span><br><span class="line">                <span class="comment">//转大驼峰命名法</span></span><br><span class="line">                field.setNameBigHump(lineToBigHump(columnName));</span><br><span class="line">                field.setType(type);</span><br><span class="line">                <span class="comment">//将sql类型转为java对应的类型</span></span><br><span class="line">                field.setJavaType(DbUtil.setJavaType(resultSet.getString(<span class="string">&quot;Type&quot;</span>)));</span><br><span class="line">                <span class="comment">//注释只截取 |前面的 	旅客类型|枚举[PassengerTypeEnum] 截取 旅客类型</span></span><br><span class="line">                <span class="keyword">if</span> (Comment.contains(<span class="string">&quot;|&quot;</span>)) &#123;</span><br><span class="line">                    field.setComment(Comment.substring(<span class="number">0</span>,Comment.indexOf(<span class="string">&quot;|&quot;</span>)));</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    field.setComment(Comment);</span><br><span class="line">                &#125;</span><br><span class="line">				<span class="comment">//如果字段信息为“YES”，设置属性为true</span></span><br><span class="line">                field.setNullAble(<span class="string">&quot;YES&quot;</span>.equals(AbleNull));</span><br><span class="line">                <span class="keyword">if</span>(type.toUpperCase().contains(<span class="string">&quot;varchar&quot;</span>.toUpperCase()))&#123;</span><br><span class="line">                    <span class="comment">//读取类型后面的长度，如varchar(20) =&gt; 20</span></span><br><span class="line">                    <span class="type">String</span> <span class="variable">lenthStr</span> <span class="operator">=</span> type.substring(type.indexOf(<span class="string">&quot;(&quot;</span>) + <span class="number">1</span>, type.length() - <span class="number">1</span>);</span><br><span class="line">                    field.setLength(Integer.valueOf(lenthStr));</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    field.setLength(<span class="number">0</span>);</span><br><span class="line">                &#125;</span><br><span class="line">				<span class="comment">//字段内若存在枚举字样，设置属性为true，读取枚举字样，否则设置为false</span></span><br><span class="line">                <span class="keyword">if</span>(Comment.contains(<span class="string">&quot;枚举&quot;</span>))&#123;</span><br><span class="line">                    field.setEnums(<span class="literal">true</span>);</span><br><span class="line">                    <span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> Comment.indexOf(<span class="string">&quot;[&quot;</span>);</span><br><span class="line">                    <span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> Comment.indexOf(<span class="string">&quot;]&quot;</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="type">String</span> <span class="variable">enumsName</span> <span class="operator">=</span> Comment.substring(start + <span class="number">1</span>, end);</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">//hutool的toUnderlinecase转下划线 PassengerTypeEnum ==&gt; Passenger_Type</span></span><br><span class="line">                    <span class="type">String</span> <span class="variable">enumsConst</span> <span class="operator">=</span> StrUtil.toUnderlineCase(enumsName).toUpperCase().replace(<span class="string">&quot;_ENUM&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                    field.setEnumsConst(enumsConst);</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    </span><br><span class="line">                    field.setEnums(<span class="literal">false</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                FieldColumns.add(field);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//释放reslutset对象，statement对象，connection对象</span></span><br><span class="line">    resultSet.close();</span><br><span class="line">    statement.close();</span><br><span class="line">    connection.close();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回List对象</span></span><br><span class="line">    <span class="keyword">return</span> FieldColumns;</span><br><span class="line">    	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="转驼峰命名lineToHump"><a href="#转驼峰命名lineToHump" class="headerlink" title="转驼峰命名lineToHump"></a>转驼峰命名lineToHump</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *转驼峰命名</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">lineToHump</span><span class="params">(String name)</span>&#123;</span><br><span class="line">    <span class="comment">//定义正则表达式</span></span><br><span class="line">    <span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;_(\\w)&quot;</span>);</span><br><span class="line"></span><br><span class="line">    name = name.toLowerCase();</span><br><span class="line">    <span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(name);</span><br><span class="line"></span><br><span class="line">    <span class="type">StringBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//appendReplacement 和 appendTail 方法用于文本替换</span></span><br><span class="line">    <span class="keyword">while</span> (matcher.find())&#123;</span><br><span class="line">        matcher.appendReplacement(buffer,matcher.group(<span class="number">1</span>).toUpperCase());</span><br><span class="line">    &#125;</span><br><span class="line">    matcher.appendTail(buffer);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> buffer.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="转大驼峰命名lineToBigHump"><a href="#转大驼峰命名lineToBigHump" class="headerlink" title="转大驼峰命名lineToBigHump"></a>转大驼峰命名lineToBigHump</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *转大驼峰命名</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title function_">lineToBigHump</span><span class="params">(String str)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> lineToHump(str);</span><br><span class="line">    <span class="keyword">return</span> s.substring(<span class="number">0</span>,<span class="number">1</span>).toUpperCase() + s.substring(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="拿到结果展示"><a href="#拿到结果展示" class="headerlink" title="拿到结果展示"></a>拿到结果展示</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">列信息：[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;id&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;id&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;Id&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;bigint&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;Long&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;id&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 0,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;member_id&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;memberId&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;MemberId&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;bigint&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;Long&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;会员id&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 0,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;name&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;name&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;Name&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;varchar(20)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;String&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;姓名&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 20,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;id_card&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;idCard&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;IdCard&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;varchar(18)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;String&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;身份证&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 18,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;type&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;type&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;Type&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;char(1)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;String&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;旅客类型&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 0,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&quot;enumsConst&quot;</span>: <span class="string">&quot;PASSENGER_TYPE&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;create_time&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;createTime&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;CreateTime&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;datetime(3)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;Date&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;新增时间&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 0,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;update_time&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameHump&quot;</span>: <span class="string">&quot;updateTime&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nameBigHump&quot;</span>: <span class="string">&quot;UpdateTime&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;datetime(3)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;javaType&quot;</span>: <span class="string">&quot;Date&quot;</span>,</span><br><span class="line">        <span class="string">&quot;comment&quot;</span>: <span class="string">&quot;修改时间&quot;</span>,</span><br><span class="line">        <span class="string">&quot;nullAble&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&quot;length&quot;</span>: 0,</span><br><span class="line">        <span class="string">&quot;enums&quot;</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jdbc/" rel="tag"># jdbc</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+              <a href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag"># 工具类</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/648ed1b9.html" rel="prev" title="汇编-内存">
+                  <i class="fa fa-angle-left"></i> 汇编-内存
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ewing</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("12/1/2023 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"blogtalk-server.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/28b38f30.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 --> <script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 页面跟随小星星 --> <script type="text/javascript" src="/js/startflow.js"></script>
+
