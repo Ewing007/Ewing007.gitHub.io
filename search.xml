@@ -42,6 +42,103 @@
       </tags>
   </entry>
   <entry>
+    <title>FELAGS寄存器</title>
+    <url>/posts/c59138e6.html</url>
+    <content><![CDATA[<h1 id="EFLAGS标志寄存器"><a href="#EFLAGS标志寄存器" class="headerlink" title="EFLAGS标志寄存器"></a>EFLAGS标志寄存器</h1><h2 id="如图所示："><a href="#如图所示：" class="headerlink" title="如图所示："></a>如图所示：</h2><p><img src="/posts/c59138e6/image-20240421193957952.png" alt="image-20240421193957952"></p>
+<h2 id="OD里面EFLAGS的位置与值："><a href="#OD里面EFLAGS的位置与值：" class="headerlink" title="OD里面EFLAGS的位置与值："></a>OD里面EFLAGS的位置与值：</h2><p><img src="/posts/c59138e6/image-20240421194813053.png" alt="image-20240421194813053"></p>
+<p><strong>将EFL的值 0000 0206 转成二进制 0000 0000 0000 0000 0000 0010 0000 0110</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">从右往左看</span><br><span class="line">CF 第零位	进位标志		值为0</span><br><span class="line">PF 第二位	奇偶标志		值为1</span><br><span class="line">AF 第四位	辅助进位标志		值为0</span><br><span class="line">ZF 第六位	零标志			值为0</span><br><span class="line">SF 第七位	符号标志		值为0</span><br><span class="line">OF 第十一位	溢出标志		值为0</span><br></pre></td></tr></table></figure>
+
+<h2 id="进位标志CF（Carry-Flag）"><a href="#进位标志CF（Carry-Flag）" class="headerlink" title="进位标志CF（Carry Flag）"></a>进位标志CF（Carry Flag）</h2><p>如果运算结果的最高位产生了一个进位或借位，那么，其值为1，否则其值为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV AL,0xFF			</span><br><span class="line">ADD AL,2			</span><br></pre></td></tr></table></figure>
+
+<p>对比前后如图所示：</p>
+<p><img src="/posts/c59138e6/image-20240421201444097.png" alt="image-20240421201444097"></p>
+<h2 id="奇偶标志PF-Parity-Flag"><a href="#奇偶标志PF-Parity-Flag" class="headerlink" title="奇偶标志PF(Parity Flag)"></a>奇偶标志PF(Parity Flag)</h2><p>奇偶标志PF用于反映运算结果中“1”的个数的奇偶性。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV AL,3</span><br><span class="line">ADD AL,3</span><br><span class="line">ADD AL,2</span><br></pre></td></tr></table></figure>
+
+<p>对比前后运算结果如图:</p>
+<p><img src="/posts/c59138e6/image-20240421202057165.png" alt="image-20240421202057165"></p>
+<h2 id="辅助进位标志AF-Auxiliary-Carry-Flag"><a href="#辅助进位标志AF-Auxiliary-Carry-Flag" class="headerlink" title="辅助进位标志AF(Auxiliary Carry Flag)"></a>辅助进位标志AF(Auxiliary Carry Flag)</h2><p>在发生下列情况时，辅助进位标志AF的值被置为1，否则其值为0：	</p>
+<ol>
+<li>在字操作时，发生低字节向高字节进位或借位时。</li>
+<li>在字节操作时，发生低4位向高4位进位或借位时。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EAX,0x55EEFFFF						</span><br><span class="line">ADD EAX,2								</span><br><span class="line"></span><br><span class="line">MOV AX,5EFE</span><br><span class="line">ADD AX,2</span><br><span class="line"></span><br><span class="line">MOV AL,4E</span><br><span class="line">ADD AL,1</span><br></pre></td></tr></table></figure>
+
+<p>第一组结果：</p>
+<p><img src="/posts/c59138e6/image-20240421202645283.png" alt="image-20240421202645283"></p>
+<p>第二组结果：</p>
+<p><img src="/posts/c59138e6/image-20240421202832557.png" alt="image-20240421202832557"></p>
+<p>第三组结果为：</p>
+<p><img src="/posts/c59138e6/image-20240421203105105.png" alt="image-20240421203105105"></p>
+<h2 id="零标志ZF-Zero-Flag"><a href="#零标志ZF-Zero-Flag" class="headerlink" title="零标志ZF(Zero Flag)"></a>零标志ZF(Zero Flag)</h2><p>零标志ZF用来反映运算结果是否为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XOR EAX,EAX	</span><br><span class="line">	</span><br><span class="line">MOV EAX,2	</span><br><span class="line">SUB EAX,2	</span><br></pre></td></tr></table></figure>
+
+<p>三次运算结果：</p>
+<p><img src="/posts/c59138e6/image-20240421203727491.png" alt="image-20240421203727491"></p>
+<h2 id="符号标志SF-Sign-Flag"><a href="#符号标志SF-Sign-Flag" class="headerlink" title="符号标志SF(Sign Flag)"></a>符号标志SF(Sign Flag)</h2><p>符号标志SF用来反映运算结果的符号位，它与运算结果的最高位相同。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV AL,7F</span><br><span class="line">ADD AL,2</span><br></pre></td></tr></table></figure>
+
+<p>运算结果如图：</p>
+<p><img src="/posts/c59138e6/image-20240421203940791.png" alt="image-20240421203940791"></p>
+<h2 id="溢出标志OF-Overflow-Flag"><a href="#溢出标志OF-Overflow-Flag" class="headerlink" title="溢出标志OF(Overflow Flag)"></a>溢出标志OF(Overflow Flag)</h2><p>溢出标志OF用于反映有符号数加减运算所得结果是否溢出。</p>
+<p>如果运算结果超过当前运算位数所能表示的范围，则称为溢出，OF的值被置为1，否则，OF的值被清为0。</p>
+<p><strong>最高位进位与溢出的区别：</strong></p>
+<ul>
+<li>进位标志表示无符号数运算结果是否超出范围.</li>
+<li>溢出标志表示有符号数运算结果是否超出范围.</li>
+<li>溢出主要是给有符号运算使用的，在有符号的运算中，有如下的规律.</li>
+<li>正 + 正 &#x3D; 正 如果结果是负数，则说明有溢出.</li>
+<li>负 + 负 &#x3D; 负 如果结果是正数，则说明有溢出.</li>
+<li>正 + 负 永远都不会有溢出.</li>
+</ul>
+<p><img src="/posts/c59138e6/image-20240421204329481.png" alt="image-20240421204329481"></p>
+<p><strong>总结：</strong></p>
+<ol>
+<li><strong>无符号数：0 ….. FF</strong></li>
+<li><strong>负数：80 ….. FF</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、无符号、有符号都不溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,8	</span><br><span class="line">	ADD AL,8	</span><br><span class="line">		</span><br><span class="line">2、无符号溢出、有符号不溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,FF	</span><br><span class="line">	ADD AL,2	</span><br><span class="line">		</span><br><span class="line">3、无符号不溢出、有符号溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,7F	</span><br><span class="line">	ADD AL,2	</span><br><span class="line">		</span><br><span class="line">4、无符号、有符号都溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,FE	</span><br><span class="line">	ADD AL,80	</span><br></pre></td></tr></table></figure>
+
+<h2 id="CPU-是如何检测溢出的"><a href="#CPU-是如何检测溢出的" class="headerlink" title="CPU 是如何检测溢出的"></a>CPU 是如何检测溢出的</h2><p>在加法和减法运算完成后，CPU 使用一种非常有趣的方法确定溢出标志的值：</p>
+<p>​		<strong>运算结果最高有效位向高位的进位值CF）与到最高有效位的进位值异或，其结果放到溢出标志位中。</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">例如 8 位二进制数 10000000 和 11111110 相加，第 6 位向最高位有效位（第 7 位）无进位，但第 7 位向高位有进位值（CF=1）。</span><br><span class="line"></span><br><span class="line">	由于 1 XOR 0 = 1，因此 of=1。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/posts/c59138e6/image-20240421204934779.png" alt="image-20240421204934779"></p>
+<h2 id="ADC指令：带进位加法"><a href="#ADC指令：带进位加法" class="headerlink" title="ADC指令：带进位加法"></a>ADC指令：带进位加法</h2><p><strong>格式：ADC  R&#x2F;M,R&#x2F;M&#x2F;IMM   两边不能同时为内存  宽度要一样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ADC AL,CL		</span><br><span class="line">		</span><br><span class="line">ADC BYTE PTR DS:[12FFC4],2		</span><br><span class="line">		</span><br><span class="line">ADC BYTE PTR DS:[12FFC4],AL		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SBB指令：带借位减法"><a href="#SBB指令：带借位减法" class="headerlink" title="SBB指令：带借位减法"></a>SBB指令：带借位减法</h2><p><strong>格式：SBB  R&#x2F;M,R&#x2F;M   两边不能同时为内存      宽度要一样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SBB AL,CL		</span><br><span class="line">		</span><br><span class="line">SBB BYTE PTR DS:[12FFC4],2		</span><br><span class="line">		</span><br><span class="line">SBB BYTE PTR DS:[12FFC4],AL		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="XCHG指令：交换数据"><a href="#XCHG指令：交换数据" class="headerlink" title="XCHG指令：交换数据"></a>XCHG指令：交换数据</h2><p><strong>格式：XCHG  R&#x2F;M,R&#x2F;M&#x2F;IMM   两边不能同时为内存  宽度要一样</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XCHG AL,CL			</span><br><span class="line">			</span><br><span class="line">XCHG DWORD PTR DS:[12FFC4],EAX			</span><br><span class="line">			</span><br><span class="line">XCHG BYTE PTR DS:[12FFC4],AL			</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="MOVS指令：移动数据-内存-内存"><a href="#MOVS指令：移动数据-内存-内存" class="headerlink" title="MOVS指令：移动数据  内存-内存"></a>MOVS指令：移动数据  内存-内存</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BYTE/WORD/DWORD						</span><br><span class="line">						</span><br><span class="line">MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSB	</span><br><span class="line">						</span><br><span class="line">MOVS WORD PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSW	</span><br><span class="line">						</span><br><span class="line">MOVS DWORD PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例子：				</span><br><span class="line">				</span><br><span class="line">MOV EDI,12FFD8				</span><br><span class="line">MOV ESI,12FFD0				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">				</span><br><span class="line">修改标志寄存器中D位的值，然后在执行下面的指令：				</span><br><span class="line">				</span><br><span class="line">MOV EDI,12FFD8				</span><br><span class="line">MOV ESI,12FFD0				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="STOS指令：讲Al-AX-EAX的值存储到-EDI-指定的内存单元"><a href="#STOS指令：讲Al-AX-EAX的值存储到-EDI-指定的内存单元" class="headerlink" title="STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元"></a>STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">STOS BYTE PTR ES:[EDI]			简写为STOSB	</span><br><span class="line">				</span><br><span class="line">STOS WORD PTR ES:[EDI]			简写为STOSW	</span><br><span class="line">				</span><br><span class="line">STOS DWORD PTR ES:[EDI]			简写为STOSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EAX,12345678					</span><br><span class="line">MOV EDI,12FFC4					</span><br><span class="line">STOS BYTE PTR ES:[EDI]				观察EDI的值	</span><br><span class="line">STOS WORD PTR ES:[EDI]					</span><br><span class="line">STOS DWORD PTR ES:[EDI]					</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">修改标志寄存器中D位的值，然后在执行下面的指令：					</span><br><span class="line">					</span><br><span class="line">MOV EAX,12345678					</span><br><span class="line">MOV EDI,12FFC4					</span><br><span class="line">STOS BYTE PTR ES:[EDI]				观察EDI的值	</span><br><span class="line">STOS WORD PTR ES:[EDI]					</span><br><span class="line">STOS DWORD PTR ES:[EDI]					</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="REP指令：按计数寄存器-ECX-中指定的次数重复执行字符串指令"><a href="#REP指令：按计数寄存器-ECX-中指定的次数重复执行字符串指令" class="headerlink" title="REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令"></a>REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV ECX,10	</span><br><span class="line">	</span><br><span class="line">REP MOVSD	</span><br><span class="line">	</span><br><span class="line">REP STOSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>汇编</category>
+        <category>寄存器</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+        <tag>寄存器</tag>
+        <tag>二进制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>freemarker模板生成器</title>
     <url>/posts/ba4d2b82.html</url>
     <content><![CDATA[<h2 id="FreeMarker介绍"><a href="#FreeMarker介绍" class="headerlink" title="FreeMarker介绍"></a>FreeMarker介绍</h2><p>FreeMarker是Apache的开源模板引擎，入门简单、灵活扩展</p>
@@ -107,6 +204,171 @@
         <tag>SpringBoot</tag>
         <tag>FreeMarker</tag>
         <tag>模板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇编-堆栈</title>
+    <url>/posts/92e57483.html</url>
+    <content><![CDATA[<h1 id="用mov，lea，sub，add模拟堆栈"><a href="#用mov，lea，sub，add模拟堆栈" class="headerlink" title="用mov，lea，sub，add模拟堆栈"></a>用mov，lea，sub，add模拟堆栈</h1><h2 id="堆栈模拟结构图："><a href="#堆栈模拟结构图：" class="headerlink" title="堆栈模拟结构图："></a>堆栈模拟结构图：</h2><p><img src="/posts/92e57483/image-20240421180255181.png" alt="image-20240421180255181"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、BASE,TOP是2个32位的通用寄存器，里面存储的是内存单元编号(内存地址).</span><br><span class="line"></span><br><span class="line">2、BASE里面存储了一个地址，记录的起始地址.</span><br><span class="line"></span><br><span class="line">3、TOP里面也存储了一个地址，记录的是结束的地址.</span><br><span class="line"></span><br><span class="line">4、存入数据的时候，TOP的值减4(为方便演示，每次存取都是4个字节)</span><br><span class="line"></span><br><span class="line">5、释放数据的时候，TOP的值加4(为方便演示，每次存取都是4个字节)</span><br><span class="line"></span><br><span class="line">6、如果要读取中间的某个数据的时候可以通过TOP 或者 BASE 加上偏移的方式去读取</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="一-初始化BASE-TOP"><a href="#一-初始化BASE-TOP" class="headerlink" title="一 初始化BASE TOP"></a>一 初始化BASE TOP</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EBX,0X18FFF0	BASE</span><br><span class="line">MOV EDX,0X18FFF0	TOP</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-压入数据"><a href="#二-压入数据" class="headerlink" title="二 压入数据"></a>二 压入数据</h2><ul>
+<li><h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><ul>
+<li><pre><code class="ASM">  MOV DWORD PTR DS:[EDX-4],0XAAAAAAAA
+  SUB EDX,4
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 方式二</span><br><span class="line"></span><br><span class="line">    - ```ASM</span><br><span class="line">        SUB EDX,4</span><br><span class="line">        MOV DWORD PTR DS:[EDX],0XBBBBBBBB</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><h3 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h3><ul>
+<li><pre><code class="ASM">  MOV DWORD PTR DS:[EDX],0XCCCCCCCC
+  LEA EDX,DWORD PTR DS:[EDX-4]
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 方式四</span><br><span class="line"></span><br><span class="line">    - ```ASM</span><br><span class="line">        LEA EDX,DWORD PTR DS:[EDX-4]</span><br><span class="line">        MOV DWORD PTR DS:[EDX],0XEEEEEEEE</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="三-读取第N个数据"><a href="#三-读取第N个数据" class="headerlink" title="三 读取第N个数据"></a>三 读取第N个数据</h2><ul>
+<li><h3 id="方式一通过BASE加偏移读取"><a href="#方式一通过BASE加偏移读取" class="headerlink" title="方式一	通过BASE加偏移读取"></a>方式一	通过BASE加偏移读取</h3><ul>
+<li><pre><code class="asm">  读取第一个压入栈的数据
+  MOV ESI,DWORD PTR DS:[EBX]
+  读取第四个压入栈的数据
+  MVO ESI,DWORD PTR DS:[EBX-0XC]
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">- ### 方式二    通过TOP加偏移来读取数据</span><br><span class="line"></span><br><span class="line">    - ```asm</span><br><span class="line">        读取第二个压入的数据</span><br><span class="line">        MOV EDI,DWORD PTR DS:[EDX+8]</span><br><span class="line">        读取第三个压入的数据</span><br><span class="line">        MOV EDI.DWORD PTR DS:[EDX+4]</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="四-弹出数据"><a href="#四-弹出数据" class="headerlink" title="四 弹出数据"></a>四 弹出数据</h2><ul>
+<li><h3 id="方式一-1"><a href="#方式一-1" class="headerlink" title="方式一"></a>方式一</h3><ul>
+<li><pre><code class="asm">  MOV ECX,DWORD PTR DS:[EDX]
+  ADD EDX,4
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 方式二</span><br><span class="line"></span><br><span class="line">    - ```asm</span><br><span class="line">        MOV ECX.DWORD PTR DS:[EDX]</span><br><span class="line">        LEA EDX,DWORD PTR DS:[EDX+4]</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><h3 id="方式三-1"><a href="#方式三-1" class="headerlink" title="方式三"></a>方式三</h3><ul>
+<li><pre><code>  LEA EDX,DWORD PTR DS:[EDX+4]
+  MOV ECX,DWORD PTR DS:[EDX-4]
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 如上内存的读写方式叫：堆栈</span><br><span class="line"></span><br><span class="line">### 堆栈的优点： 临时存储大量的数据，便于查找</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 堆栈的操作指令</span><br><span class="line"></span><br><span class="line">### PUSH指令</span><br><span class="line"></span><br><span class="line">```asm</span><br><span class="line">1、PUSH r32</span><br><span class="line"></span><br><span class="line">2、PUSH r16</span><br><span class="line"></span><br><span class="line">3、PUSH m16</span><br><span class="line"></span><br><span class="line">4、PUSH m32</span><br><span class="line"></span><br><span class="line">5、PUSH imm8/imm16/imm32</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="POP指令"><a href="#POP指令" class="headerlink" title="POP指令"></a>POP指令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、POP r32</span><br><span class="line"></span><br><span class="line">2、POP r16</span><br><span class="line"></span><br><span class="line">3、POP m16</span><br><span class="line"></span><br><span class="line">4、POP m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSHAD-PUSHA指令"><a href="#PUSHAD-PUSHA指令" class="headerlink" title="PUSHAD PUSHA指令"></a>PUSHAD PUSHA指令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这两个指令的作用是把通用寄存器压栈。</span><br><span class="line">PUSHAD	操作数的大小是32位	寄存器的入栈顺序依次是：EAX,ECX,EDX,EBX,ESP(初始值)，EBP,ESI,EDI.</span><br><span class="line">PUSHA	操作数的大小是16位	寄存器的入栈顺序依次是：AX,CX,DX,BX,SP(初始值)，BP,SI,DI.</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="POPAD-POPA指令"><a href="#POPAD-POPA指令" class="headerlink" title="POPAD POPA指令"></a>POPAD POPA指令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这两个指令用于把栈中的值弹出到通用寄存器。</span><br><span class="line">POPAD	操作数的大小是32位	出栈顺序依次是：EDI,ESI,EBP,EBX,EDX,ECX,EAX;</span><br><span class="line">POPA	操作数的大小是16位	出栈顺序依次是：DI,SI,BP,BX,DX,CX,AX;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>汇编</category>
+        <category>堆栈</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+        <tag>堆栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇编-JCC</title>
+    <url>/posts/310aa763.html</url>
+    <content><![CDATA[<h1 id="JMP指令"><a href="#JMP指令" class="headerlink" title="JMP指令"></a>JMP指令</h1><p><strong>JMP指令：修改EIP的值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EIP, 寄存器/立即数 </span><br><span class="line">简写===&gt;  </span><br><span class="line">JMP 寄存器/立即数</span><br></pre></td></tr></table></figure>
+
+<h1 id="CALL指令"><a href="#CALL指令" class="headerlink" title="CALL指令"></a>CALL指令</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PUSH 地址B</span><br><span class="line">MOV EIP,地址A/寄存器 </span><br><span class="line"></span><br><span class="line">简写为===&gt; </span><br><span class="line">CALL 地址A/寄存器</span><br></pre></td></tr></table></figure>
+
+<h1 id="RET指令"><a href="#RET指令" class="headerlink" title="RET指令"></a>RET指令</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">LEA ESP,[ESP+4]</span><br><span class="line">MOV EIP,[ESP-4]</span><br><span class="line">简写为===&gt;</span><br><span class="line">RET</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="比较指令"><a href="#比较指令" class="headerlink" title="比较指令"></a>比较指令</h1><h2 id="CMP-指令：CMP-R-M-R-M-IMM"><a href="#CMP-指令：CMP-R-M-R-M-IMM" class="headerlink" title="CMP 指令：CMP R&#x2F;M, R&#x2F;M&#x2F;IMM"></a>CMP 指令：CMP R&#x2F;M, R&#x2F;M&#x2F;IMM</h2><p><strong>该指令是比较两个操作数,实际上,它相当于SUB指令,但是相减的结构并不保存到第一个操作数中。</strong></p>
+<p><strong>只是根据相减的结果来改变零标志位的,当两个操作数相等的时候,零标志位置1。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EAX,100			</span><br><span class="line">MOV ECX,100			</span><br><span class="line">CMP EAX,ECX			观察Z位</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">MOV EAX,100			</span><br><span class="line">MOV ECX,200			</span><br><span class="line">CMP EAX,ECX			观察S位</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">CMP AX,WORD PTR DS:[405000]			</span><br><span class="line">			</span><br><span class="line">CMP AL,BYTE PTR DS:[405000]			</span><br><span class="line">			</span><br><span class="line">CMP EAX,DWORD PTR DS:[405000]			</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="TEST指令"><a href="#TEST指令" class="headerlink" title="TEST指令"></a>TEST指令</h2><p><strong>指令格式：TEST  R&#x2F;M,R&#x2F;M&#x2F;IMM</strong></p>
+<p><strong>该指令在一定程序上和CMP指令时类似的,两个数值进行与操作,结果不保存,但是会改变相应标志位.</strong></p>
+<p>与的操作表项如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 and 1 = 1			</span><br><span class="line">			</span><br><span class="line">1 and 0 = 0			</span><br><span class="line">			</span><br><span class="line">0 and 1 = 0			</span><br><span class="line">			</span><br><span class="line">0 and 0 = 0			</span><br><span class="line">			</span><br><span class="line">常见用法：用这个指令,可以确定某寄存器是否等于0。			</span><br><span class="line">			</span><br><span class="line">TEST EAX,EAX			观察Z位</span><br><span class="line">			</span><br><span class="line">但是如果EAX的二进制某些位为1的话,那么运算的结果就不为零。			</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="JCC指令"><a href="#JCC指令" class="headerlink" title="JCC指令"></a>JCC指令</h1><h2 id="JE-JZ"><a href="#JE-JZ" class="headerlink" title="JE, JZ"></a>JE, JZ</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果为零则跳转(相等时跳转)		ZF=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="JNE-JNZ"><a href="#JNE-JNZ" class="headerlink" title="JNE,JNZ"></a>JNE,JNZ</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果不为零则跳转(不相等时跳转)  	ZF=0</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果为负则跳转						SF=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="JNS"><a href="#JNS" class="headerlink" title="JNS"></a>JNS</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果为非负则跳转						SF=0</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JP-JPE"><a href="#JP-JPE" class="headerlink" title="JP, JPE"></a>JP, JPE</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果中1的个数为偶数则跳转						PF=1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JNP-JPO"><a href="#JNP-JPO" class="headerlink" title="JNP, JPO"></a>JNP, JPO</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果中1的个数为偶数则跳转						PF=0</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JO"><a href="#JO" class="headerlink" title="JO"></a>JO</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果溢出了则跳转						OF=1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JNO"><a href="#JNO" class="headerlink" title="JNO"></a>JNO</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">结果没有溢出则跳转						OF=0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JB-JNAE"><a href="#JB-JNAE" class="headerlink" title="JB, JNAE"></a>JB, JNAE</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">小于则跳转 (无符号数)						CF=1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JNB-JAE"><a href="#JNB-JAE" class="headerlink" title="JNB, JAE"></a>JNB, JAE</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大于等于则跳转 (无符号数)						CF=0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JBE-JNA"><a href="#JBE-JNA" class="headerlink" title="JBE, JNA"></a>JBE, JNA</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">小于等于则跳转 (无符号数)						CF=1 or ZF=1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JNBE-JA"><a href="#JNBE-JA" class="headerlink" title="JNBE, JA"></a>JNBE, JA</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大于则跳转(无符号数)						CF=0 and ZF=0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JL-JNGE"><a href="#JL-JNGE" class="headerlink" title="JL, JNGE"></a>JL, JNGE</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">小于则跳转 (有符号数)						SF≠ OF</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JNL-JGE"><a href="#JNL-JGE" class="headerlink" title="JNL, JGE"></a>JNL, JGE</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大于等于则跳转 (有符号数)						SF=OF</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JLE-JNG"><a href="#JLE-JNG" class="headerlink" title="JLE, JNG"></a>JLE, JNG</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">小于等于则跳转 (有符号数)						ZF=1 or SF≠ OF</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JNLE-JG"><a href="#JNLE-JG" class="headerlink" title="JNLE, JG"></a>JNLE, JG</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大于则跳转(有符号数)						ZF=0 and SF=OF</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="有符号无符号的区别："><a href="#有符号无符号的区别：" class="headerlink" title="有符号无符号的区别："></a>有符号无符号的区别：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CMP AL,CL	</span><br><span class="line">JG 0x12345678	</span><br><span class="line">JA 0x12345678	</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>汇编</category>
+        <category>二进制</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+        <tag>JCC指令</tag>
       </tags>
   </entry>
   <entry>
@@ -200,100 +462,205 @@
       </tags>
   </entry>
   <entry>
-    <title>FELAGS寄存器</title>
-    <url>/posts/c59138e6.html</url>
-    <content><![CDATA[<h1 id="EFLAGS标志寄存器"><a href="#EFLAGS标志寄存器" class="headerlink" title="EFLAGS标志寄存器"></a>EFLAGS标志寄存器</h1><h2 id="如图所示："><a href="#如图所示：" class="headerlink" title="如图所示："></a>如图所示：</h2><p><img src="/posts/c59138e6/image-20240421193957952.png" alt="image-20240421193957952"></p>
-<h2 id="OD里面EFLAGS的位置与值："><a href="#OD里面EFLAGS的位置与值：" class="headerlink" title="OD里面EFLAGS的位置与值："></a>OD里面EFLAGS的位置与值：</h2><p><img src="/posts/c59138e6/image-20240421194813053.png" alt="image-20240421194813053"></p>
-<p><strong>将EFL的值 0000 0206 转成二进制 0000 0000 0000 0000 0000 0010 0000 0110</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">从右往左看</span><br><span class="line">CF 第零位	进位标志		值为0</span><br><span class="line">PF 第二位	奇偶标志		值为1</span><br><span class="line">AF 第四位	辅助进位标志		值为0</span><br><span class="line">ZF 第六位	零标志			值为0</span><br><span class="line">SF 第七位	符号标志		值为0</span><br><span class="line">OF 第十一位	溢出标志		值为0</span><br></pre></td></tr></table></figure>
+    <title>汇编基础</title>
+    <url>/posts/84aee333.html</url>
+    <content><![CDATA[<h3 id="数据宽度"><a href="#数据宽度" class="headerlink" title="数据宽度"></a>数据宽度</h3><p><em><strong>容器的大小其实就是数据宽度</strong></em></p>
+<p>数学上的数字，是没有大小限制的，可以无限的大。但在计算机中，由于受硬件的制约，<strong>数据都是有长度限制的</strong>（我们称为数据宽度）。</p>
+<h3 id="数据宽度的表示"><a href="#数据宽度的表示" class="headerlink" title="数据宽度的表示"></a>数据宽度的表示</h3><h4 id="4位宽度表示：假设计算机只能存储4位2进制数"><a href="#4位宽度表示：假设计算机只能存储4位2进制数" class="headerlink" title="4位宽度表示：假设计算机只能存储4位2进制数"></a>4位宽度表示：假设计算机只能存储4位2进制数</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111</span><br><span class="line">0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F</span><br></pre></td></tr></table></figure>
 
-<h2 id="进位标志CF（Carry-Flag）"><a href="#进位标志CF（Carry-Flag）" class="headerlink" title="进位标志CF（Carry Flag）"></a>进位标志CF（Carry Flag）</h2><p>如果运算结果的最高位产生了一个进位或借位，那么，其值为1，否则其值为0。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV AL,0xFF			</span><br><span class="line">ADD AL,2			</span><br></pre></td></tr></table></figure>
+<p><img src="/posts/84aee333/2024-04-19_09-18-05.png" alt="2024-04-19_09-18-05"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 5 6 7 8 9 A B C D E F</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 </span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8</span><br><span class="line">		  F  E  D  C  B  A  9  8</span><br></pre></td></tr></table></figure>
 
-<p>对比前后如图所示：</p>
-<p><img src="/posts/c59138e6/image-20240421201444097.png" alt="image-20240421201444097"></p>
-<h2 id="奇偶标志PF-Parity-Flag"><a href="#奇偶标志PF-Parity-Flag" class="headerlink" title="奇偶标志PF(Parity Flag)"></a>奇偶标志PF(Parity Flag)</h2><p>奇偶标志PF用于反映运算结果中“1”的个数的奇偶性。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV AL,3</span><br><span class="line">ADD AL,3</span><br><span class="line">ADD AL,2</span><br></pre></td></tr></table></figure>
+<h4 id="8位宽度表示：假设计算机只能存储8位2进制数"><a href="#8位宽度表示：假设计算机只能存储8位2进制数" class="headerlink" title="8位宽度表示：假设计算机只能存储8位2进制数"></a>8位宽度表示：假设计算机只能存储8位2进制数</h4><p><img src="/posts/84aee333/2024-04-19_09-25-38.png" alt="2024-04-19_09-25-38"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7F</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ... -128</span><br><span class="line">		 FF FE FD FC FB FA F9 F8 F7 F6 F5 F4...80</span><br></pre></td></tr></table></figure>
 
-<p>对比前后运算结果如图:</p>
-<p><img src="/posts/c59138e6/image-20240421202057165.png" alt="image-20240421202057165"></p>
-<h2 id="辅助进位标志AF-Auxiliary-Carry-Flag"><a href="#辅助进位标志AF-Auxiliary-Carry-Flag" class="headerlink" title="辅助进位标志AF(Auxiliary Carry Flag)"></a>辅助进位标志AF(Auxiliary Carry Flag)</h2><p>在发生下列情况时，辅助进位标志AF的值被置为1，否则其值为0：	</p>
-<ol>
-<li>在字操作时，发生低字节向高字节进位或借位时。</li>
-<li>在字节操作时，发生低4位向高4位进位或借位时。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EAX,0x55EEFFFF						</span><br><span class="line">ADD EAX,2								</span><br><span class="line"></span><br><span class="line">MOV AX,5EFE</span><br><span class="line">ADD AX,2</span><br><span class="line"></span><br><span class="line">MOV AL,4E</span><br><span class="line">ADD AL,1</span><br></pre></td></tr></table></figure>
+<h4 id="16位宽度表示：假设计算机只能存储16位2进制数"><a href="#16位宽度表示：假设计算机只能存储16位2进制数" class="headerlink" title="16位宽度表示：假设计算机只能存储16位2进制数"></a>16位宽度表示：假设计算机只能存储16位2进制数</h4><p><img src="/posts/84aee333/20240419092929733.png" alt="image-20240419092929733"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFF FFFE FFFD FFFC FFFB FFFA FFF9 FFF8 ...</span><br></pre></td></tr></table></figure>
 
-<p>第一组结果：</p>
-<p><img src="/posts/c59138e6/image-20240421202645283.png" alt="image-20240421202645283"></p>
-<p>第二组结果：</p>
-<p><img src="/posts/c59138e6/image-20240421202832557.png" alt="image-20240421202832557"></p>
-<p>第三组结果为：</p>
-<p><img src="/posts/c59138e6/image-20240421203105105.png" alt="image-20240421203105105"></p>
-<h2 id="零标志ZF-Zero-Flag"><a href="#零标志ZF-Zero-Flag" class="headerlink" title="零标志ZF(Zero Flag)"></a>零标志ZF(Zero Flag)</h2><p>零标志ZF用来反映运算结果是否为0。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XOR EAX,EAX	</span><br><span class="line">	</span><br><span class="line">MOV EAX,2	</span><br><span class="line">SUB EAX,2	</span><br></pre></td></tr></table></figure>
+<h4 id="32位宽度表示：假设计算机只能存储32位2进制数"><a href="#32位宽度表示：假设计算机只能存储32位2进制数" class="headerlink" title="32位宽度表示：假设计算机只能存储32位2进制数"></a>32位宽度表示：假设计算机只能存储32位2进制数</h4><p><img src="/posts/84aee333/20240419093214090.png" alt="image-20240419093214090"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFFFFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFFFFFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFFFFFF FFFFFFFE FFFFFFFD FFFFFFFC FFFFFFFB FFFFFFFA FFFFFFF9 FFFFFFF8 ...</span><br></pre></td></tr></table></figure>
 
-<p>三次运算结果：</p>
-<p><img src="/posts/c59138e6/image-20240421203727491.png" alt="image-20240421203727491"></p>
-<h2 id="符号标志SF-Sign-Flag"><a href="#符号标志SF-Sign-Flag" class="headerlink" title="符号标志SF(Sign Flag)"></a>符号标志SF(Sign Flag)</h2><p>符号标志SF用来反映运算结果的符号位，它与运算结果的最高位相同。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV AL,7F</span><br><span class="line">ADD AL,2</span><br></pre></td></tr></table></figure>
+<h3 id="二级制的逻辑运算符"><a href="#二级制的逻辑运算符" class="headerlink" title="二级制的逻辑运算符"></a>二级制的逻辑运算符</h3><h4 id="逻辑运算：或（or-）-只要有一个1就是1"><a href="#逻辑运算：或（or-）-只要有一个1就是1" class="headerlink" title="逻辑运算：或（or | ） 只要有一个1就是1"></a>逻辑运算：或（or | ） 只要有一个1就是1</h4><p><img src="/posts/84aee333/20240419093840769.png" alt="image-20240419093840769"></p>
+<h4 id="逻辑运算：与（and-两个都为1才是1"><a href="#逻辑运算：与（and-两个都为1才是1" class="headerlink" title="逻辑运算：与（and &amp;) 两个都为1才是1"></a>逻辑运算：与（and &amp;) 两个都为1才是1</h4><p><img src="/posts/84aee333/20240419093907504.png" alt="image-20240419093907504"></p>
+<h4 id="逻辑运算：异或（xor-）不一样位1"><a href="#逻辑运算：异或（xor-）不一样位1" class="headerlink" title="逻辑运算：异或（xor  ^）不一样位1"></a>逻辑运算：异或（xor  ^）不一样位1</h4><p><img src="/posts/84aee333/20240419093935716.png" alt="image-20240419093935716"></p>
+<h4 id="逻辑运算：非（not-！）1是0-0是1"><a href="#逻辑运算：非（not-！）1是0-0是1" class="headerlink" title="逻辑运算：非（not ！）1是0 0是1"></a>逻辑运算：非（not ！）1是0 0是1</h4><p><img src="/posts/84aee333/20240419094001630.png" alt="image-20240419094001630"></p>
+<h3 id="32位通用寄存器"><a href="#32位通用寄存器" class="headerlink" title="32位通用寄存器"></a>32位通用寄存器</h3><h4 id="32位通用寄存器的指定用途："><a href="#32位通用寄存器的指定用途：" class="headerlink" title="32位通用寄存器的指定用途："></a>32位通用寄存器的指定用途：</h4><table>
+<thead>
+<tr>
+<th>寄存器</th>
+<th>主要用途</th>
+<th>编号</th>
+<th>储存数据的范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EAX</td>
+<td>累加器</td>
+<td>0</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>ECX</td>
+<td>计数</td>
+<td>1</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EDX</td>
+<td>I&#x2F;O指针</td>
+<td>2</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EBX</td>
+<td>DS段的数据指针</td>
+<td>3</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>堆栈指针</td>
+<td>4</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EBP</td>
+<td>SS段的数据指针</td>
+<td>5</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>ESI</td>
+<td>字符串操作的源指针：SS段的数据指针</td>
+<td>6</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>字符串操作的目标指针：ES段的数据指针</td>
+<td>7</td>
+<td>0 - 0xFFFFFFFF</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>通用寄存器</th>
+<th></th>
+<th>编号（二进制）</th>
+<th>编号（十进制）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>32位</td>
+<td>16位</td>
+<td>8位</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>EAX</td>
+<td>AX</td>
+<td>AL</td>
+<td>000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ECX</td>
+<td>CX</td>
+<td>CL</td>
+<td>001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDX</td>
+<td>DX</td>
+<td>DL</td>
+<td>010</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EBX</td>
+<td>BX</td>
+<td>BL</td>
+<td>011</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>SP</td>
+<td>AH</td>
+<td>100</td>
+<td>4</td>
+</tr>
+<tr>
+<td>EBP</td>
+<td>BP</td>
+<td>CH</td>
+<td>101</td>
+<td>5</td>
+</tr>
+<tr>
+<td>ESI</td>
+<td>SI</td>
+<td>DH</td>
+<td>110</td>
+<td>6</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>DI</td>
+<td>BH</td>
+<td>111</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p><img src="/posts/84aee333/20240419095409509.png" alt="image-20240419095409509"></p>
+<h4 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h4><h5 id="MOV的语法："><a href="#MOV的语法：" class="headerlink" title="MOV的语法："></a>MOV的语法：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. MOV r/m8,r8				r通用寄存器</span><br><span class="line">2. MOV r/m16,r16			m代表内存</span><br><span class="line">3. MOV r/m32,r32			imm代表立即数</span><br><span class="line">4. MOV r8,r/m8				r8代表8位通用寄存器</span><br><span class="line">5. MOV r16,r/m16			m8代表8位内存</span><br><span class="line">6. MOV r32,r/m32			imm8代表8位立即数</span><br><span class="line">7. MOV r8,imm8				...</span><br><span class="line">8. MOV r16,imm16</span><br><span class="line">9. MOV r32,imm32</span><br></pre></td></tr></table></figure>
 
-<p>运算结果如图：</p>
-<p><img src="/image-20240421203940791.png" alt="image-20240421203940791"></p>
-<h2 id="溢出标志OF-Overflow-Flag"><a href="#溢出标志OF-Overflow-Flag" class="headerlink" title="溢出标志OF(Overflow Flag)"></a>溢出标志OF(Overflow Flag)</h2><p>溢出标志OF用于反映有符号数加减运算所得结果是否溢出。</p>
-<p>如果运算结果超过当前运算位数所能表示的范围，则称为溢出，OF的值被置为1，否则，OF的值被清为0。</p>
-<p><strong>最高位进位与溢出的区别：</strong></p>
+<h5 id="MOV使用"><a href="#MOV使用" class="headerlink" title="MOV使用"></a>MOV使用</h5><p>指令格式：<strong>MOV 目标操作数，源操作数</strong></p>
+<p><strong>作用：拷贝源操作数到目标操作数</strong></p>
 <ul>
-<li>进位标志表示无符号数运算结果是否超出范围.</li>
-<li>溢出标志表示有符号数运算结果是否超出范围.</li>
-<li>溢出主要是给有符号运算使用的，在有符号的运算中，有如下的规律.</li>
-<li>正 + 正 &#x3D; 正 如果结果是负数，则说明有溢出.</li>
-<li>负 + 负 &#x3D; 负 如果结果是正数，则说明有溢出.</li>
-<li>正 + 负 永远都不会有溢出.</li>
+<li>源操作数可以是立即数、通用寄存器、段寄存器、或者内存单元.</li>
+<li>目标操作数可以是通用寄存器、段寄存器或者内存单元.</li>
+<li>操作数的宽度必须一样.</li>
+<li>源操作数和目标操作数不能同时为内存单元.</li>
 </ul>
-<p><img src="/posts/c59138e6/image-20240421204329481.png" alt="image-20240421204329481"></p>
-<p><strong>总结：</strong></p>
-<ol>
-<li><strong>无符号数：0 ….. FF</strong></li>
-<li><strong>负数：80 ….. FF</strong></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、无符号、有符号都不溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,8	</span><br><span class="line">	ADD AL,8	</span><br><span class="line">		</span><br><span class="line">2、无符号溢出、有符号不溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,FF	</span><br><span class="line">	ADD AL,2	</span><br><span class="line">		</span><br><span class="line">3、无符号不溢出、有符号溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,7F	</span><br><span class="line">	ADD AL,2	</span><br><span class="line">		</span><br><span class="line">4、无符号、有符号都溢出		</span><br><span class="line">		</span><br><span class="line">	MOV AL,FE	</span><br><span class="line">	ADD AL,80	</span><br></pre></td></tr></table></figure>
+<h4 id="ADD指令"><a href="#ADD指令" class="headerlink" title="ADD指令"></a>ADD指令</h4><h5 id="ADD语法"><a href="#ADD语法" class="headerlink" title="ADD语法"></a>ADD语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ADD AL, imm8 </span><br><span class="line"></span><br><span class="line">ADD AX, imm16</span><br><span class="line"></span><br><span class="line">ADD EAX, imm32</span><br><span class="line"></span><br><span class="line">ADD r/m8, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m16,imm16</span><br><span class="line"></span><br><span class="line">ADD r/m32,imm32</span><br><span class="line"></span><br><span class="line">ADD r/m16, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m32, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m8, r8</span><br><span class="line"></span><br><span class="line">ADD r/m16, r16</span><br><span class="line"></span><br><span class="line">ADD r/m32, r32</span><br><span class="line"></span><br><span class="line">ADD r8, r/m8</span><br><span class="line"></span><br><span class="line">ADD r16, r/m16</span><br><span class="line"></span><br><span class="line">ADD r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="CPU-是如何检测溢出的"><a href="#CPU-是如何检测溢出的" class="headerlink" title="CPU 是如何检测溢出的"></a>CPU 是如何检测溢出的</h2><p>在加法和减法运算完成后，CPU 使用一种非常有趣的方法确定溢出标志的值：</p>
-<p>​		<strong>运算结果最高有效位向高位的进位值CF）与到最高有效位的进位值异或，其结果放到溢出标志位中。</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">例如 8 位二进制数 10000000 和 11111110 相加，第 6 位向最高位有效位（第 7 位）无进位，但第 7 位向高位有进位值（CF=1）。</span><br><span class="line"></span><br><span class="line">	由于 1 XOR 0 = 1，因此 of=1。</span><br></pre></td></tr></table></figure>
+<h5 id="ADD作用"><a href="#ADD作用" class="headerlink" title="ADD作用"></a>ADD作用</h5><p><strong>ADD指令用于将两个数相加，并将结果存储在第一个操作数中。</strong></p>
+<h4 id="SUB指令"><a href="#SUB指令" class="headerlink" title="SUB指令"></a>SUB指令</h4><h5 id="SUB语法"><a href="#SUB语法" class="headerlink" title="SUB语法"></a>SUB语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SUB AL, imm8 </span><br><span class="line"></span><br><span class="line">SUB AX, imm16</span><br><span class="line"></span><br><span class="line">SUB EAX, imm32</span><br><span class="line"></span><br><span class="line">SUB r/m8, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m16,imm16</span><br><span class="line"></span><br><span class="line">SUB r/m32,imm32</span><br><span class="line"></span><br><span class="line">SUB r/m16, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m32, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m8, r8</span><br><span class="line"></span><br><span class="line">SUB r/m16, r16</span><br><span class="line"></span><br><span class="line">SUB r/m32, r32</span><br><span class="line"></span><br><span class="line">SUB r8, r/m8</span><br><span class="line"></span><br><span class="line">SUB r16, r/m16</span><br><span class="line"></span><br><span class="line">SUB r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="/posts/c59138e6/image-20240421204934779.png" alt="image-20240421204934779"></p>
-<h2 id="ADC指令：带进位加法"><a href="#ADC指令：带进位加法" class="headerlink" title="ADC指令：带进位加法"></a>ADC指令：带进位加法</h2><p><strong>格式：ADC  R&#x2F;M,R&#x2F;M&#x2F;IMM   两边不能同时为内存  宽度要一样</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ADC AL,CL		</span><br><span class="line">		</span><br><span class="line">ADC BYTE PTR DS:[12FFC4],2		</span><br><span class="line">		</span><br><span class="line">ADC BYTE PTR DS:[12FFC4],AL		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="SUB指令作用"><a href="#SUB指令作用" class="headerlink" title="SUB指令作用"></a>SUB指令作用</h5><p><strong>SUB用于从第一个操作数中减去第二个操作数的值</strong></p>
+<h4 id="AND指令"><a href="#AND指令" class="headerlink" title="AND指令"></a>AND指令</h4><h5 id="AND语法"><a href="#AND语法" class="headerlink" title="AND语法"></a>AND语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">AND AL, imm8</span><br><span class="line"></span><br><span class="line">AND AX, imm16</span><br><span class="line"></span><br><span class="line">AND EAX, imm32</span><br><span class="line"></span><br><span class="line">AND r/m8, imm8</span><br><span class="line"></span><br><span class="line">AND r/m16,imm16</span><br><span class="line"></span><br><span class="line">AND r/m32,imm32</span><br><span class="line"></span><br><span class="line">AND r/m16, imm8</span><br><span class="line"></span><br><span class="line">AND r/m32, imm8</span><br><span class="line"></span><br><span class="line">AND r/m8, r8</span><br><span class="line"></span><br><span class="line">AND r/m16, r16</span><br><span class="line"></span><br><span class="line">AND r/m32, r32</span><br><span class="line"></span><br><span class="line">AND r8, r/m8</span><br><span class="line"></span><br><span class="line">AND r16, r/m16</span><br><span class="line"></span><br><span class="line">AND r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h5 id="AND指令操作"><a href="#AND指令操作" class="headerlink" title="AND指令操作"></a>AND指令操作</h5><p>指令格式：<strong>AND 目标操作数 源操作数</strong></p>
+<p>作用：对两个操作数进行按位逻辑与操作，结果送回目的操作数，即目的←目的^源</p>
+<ul>
+<li>用于操作数的某些保留（和“1”相与），而使某些位清除（和”0”相与）</li>
+</ul>
+<h4 id="OR指令"><a href="#OR指令" class="headerlink" title="OR指令"></a>OR指令</h4><h5 id="OR语法"><a href="#OR语法" class="headerlink" title="OR语法"></a>OR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">OR AL, imm8</span><br><span class="line"></span><br><span class="line">OR AX, imm16</span><br><span class="line"></span><br><span class="line">OR EAX, imm32</span><br><span class="line"></span><br><span class="line">OR r/m8, imm8</span><br><span class="line"></span><br><span class="line">OR r/m16,imm16</span><br><span class="line"></span><br><span class="line">OR r/m32,imm32</span><br><span class="line"></span><br><span class="line">OR r/m16, imm8</span><br><span class="line"></span><br><span class="line">OR r/m32, imm8</span><br><span class="line"></span><br><span class="line">OR r/m8, r8</span><br><span class="line"></span><br><span class="line">OR r/m16, r16</span><br><span class="line"></span><br><span class="line">OR r/m32, r32</span><br><span class="line"></span><br><span class="line">OR r8, r/m8</span><br><span class="line"></span><br><span class="line">OR r16, r/m16</span><br><span class="line"></span><br><span class="line">OR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h5 id="OR指令使用"><a href="#OR指令使用" class="headerlink" title="OR指令使用"></a>OR指令使用</h5><p>指令格式：<strong>OR 目的操作数 源操作数</strong></p>
+<p>作用：<strong>对两个操作数进行按位逻辑或操作，结果送回目的操作数，即目的←目的V源</strong></p>
+<ul>
+<li>用于使操作数的某些位保留(和”0”相或)，而使某些位置1（和”1”相或）</li>
+</ul>
+<h4 id="XOR指令"><a href="#XOR指令" class="headerlink" title="XOR指令"></a>XOR指令</h4><h5 id="XOR语法"><a href="#XOR语法" class="headerlink" title="XOR语法"></a>XOR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XOR AL, imm8</span><br><span class="line"></span><br><span class="line">XOR AX, imm16</span><br><span class="line"></span><br><span class="line">XOR EAX, imm32</span><br><span class="line"></span><br><span class="line">XOR r/m8, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m16,imm16</span><br><span class="line"></span><br><span class="line">XOR r/m32,imm32</span><br><span class="line"></span><br><span class="line">XOR r/m16, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m32, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m8, r8</span><br><span class="line"></span><br><span class="line">XOR r/m16, r16</span><br><span class="line"></span><br><span class="line">XOR r/m32, r32</span><br><span class="line"></span><br><span class="line">XOR r8, r/m8</span><br><span class="line"></span><br><span class="line">XOR r16, r/m16</span><br><span class="line"></span><br><span class="line">XOR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="SBB指令：带借位减法"><a href="#SBB指令：带借位减法" class="headerlink" title="SBB指令：带借位减法"></a>SBB指令：带借位减法</h2><p><strong>格式：SBB  R&#x2F;M,R&#x2F;M   两边不能同时为内存      宽度要一样</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SBB AL,CL		</span><br><span class="line">		</span><br><span class="line">SBB BYTE PTR DS:[12FFC4],2		</span><br><span class="line">		</span><br><span class="line">SBB BYTE PTR DS:[12FFC4],AL		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="XOR指令使用"><a href="#XOR指令使用" class="headerlink" title="XOR指令使用"></a>XOR指令使用</h5><p>指令格式：<strong>XOR 目的操作数 源操作数</strong></p>
+<p>作用：逻辑异或运算，二进制位相同0，不同为1</p>
+<h4 id="NOT指令"><a href="#NOT指令" class="headerlink" title="NOT指令"></a>NOT指令</h4><h5 id="NOT语法"><a href="#NOT语法" class="headerlink" title="NOT语法"></a>NOT语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NOT r/m8</span><br><span class="line"></span><br><span class="line">NOT r/m16</span><br><span class="line"></span><br><span class="line">NOT r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="XCHG指令：交换数据"><a href="#XCHG指令：交换数据" class="headerlink" title="XCHG指令：交换数据"></a>XCHG指令：交换数据</h2><p><strong>格式：XCHG  R&#x2F;M,R&#x2F;M&#x2F;IMM   两边不能同时为内存  宽度要一样</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XCHG AL,CL			</span><br><span class="line">			</span><br><span class="line">XCHG DWORD PTR DS:[12FFC4],EAX			</span><br><span class="line">			</span><br><span class="line">XCHG BYTE PTR DS:[12FFC4],AL			</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="MOVS指令：移动数据-内存-内存"><a href="#MOVS指令：移动数据-内存-内存" class="headerlink" title="MOVS指令：移动数据  内存-内存"></a>MOVS指令：移动数据  内存-内存</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">BYTE/WORD/DWORD						</span><br><span class="line">						</span><br><span class="line">MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSB	</span><br><span class="line">						</span><br><span class="line">MOVS WORD PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSW	</span><br><span class="line">						</span><br><span class="line">MOVS DWORD PTR ES:[EDI],BYTE PTR DS:[ESI]					简写为：MOVSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例子：				</span><br><span class="line">				</span><br><span class="line">MOV EDI,12FFD8				</span><br><span class="line">MOV ESI,12FFD0				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">				</span><br><span class="line">修改标志寄存器中D位的值，然后在执行下面的指令：				</span><br><span class="line">				</span><br><span class="line">MOV EDI,12FFD8				</span><br><span class="line">MOV ESI,12FFD0				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line">MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]				</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="STOS指令：讲Al-AX-EAX的值存储到-EDI-指定的内存单元"><a href="#STOS指令：讲Al-AX-EAX的值存储到-EDI-指定的内存单元" class="headerlink" title="STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元"></a>STOS指令：讲Al&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">STOS BYTE PTR ES:[EDI]			简写为STOSB	</span><br><span class="line">				</span><br><span class="line">STOS WORD PTR ES:[EDI]			简写为STOSW	</span><br><span class="line">				</span><br><span class="line">STOS DWORD PTR ES:[EDI]			简写为STOSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EAX,12345678					</span><br><span class="line">MOV EDI,12FFC4					</span><br><span class="line">STOS BYTE PTR ES:[EDI]				观察EDI的值	</span><br><span class="line">STOS WORD PTR ES:[EDI]					</span><br><span class="line">STOS DWORD PTR ES:[EDI]					</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">修改标志寄存器中D位的值，然后在执行下面的指令：					</span><br><span class="line">					</span><br><span class="line">MOV EAX,12345678					</span><br><span class="line">MOV EDI,12FFC4					</span><br><span class="line">STOS BYTE PTR ES:[EDI]				观察EDI的值	</span><br><span class="line">STOS WORD PTR ES:[EDI]					</span><br><span class="line">STOS DWORD PTR ES:[EDI]					</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="REP指令：按计数寄存器-ECX-中指定的次数重复执行字符串指令"><a href="#REP指令：按计数寄存器-ECX-中指定的次数重复执行字符串指令" class="headerlink" title="REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令"></a>REP指令：按计数寄存器 (ECX) 中指定的次数重复执行字符串指令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV ECX,10	</span><br><span class="line">	</span><br><span class="line">REP MOVSD	</span><br><span class="line">	</span><br><span class="line">REP STOSD	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<h5 id="NOT指令使用"><a href="#NOT指令使用" class="headerlink" title="NOT指令使用"></a>NOT指令使用</h5><p>指令格式：<strong>NOT 源操作数</strong></p>
+<p>作用：逻辑取反运算，二进制位0变为1，1变为0</p>
 ]]></content>
       <categories>
         <category>汇编</category>
-        <category>寄存器</category>
       </categories>
       <tags>
         <tag>汇编</tag>
-        <tag>二进制</tag>
-        <tag>寄存器</tag>
       </tags>
   </entry>
   <entry>
@@ -850,282 +1217,6 @@
       </categories>
       <tags>
         <tag>阅读笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇编基础</title>
-    <url>/posts/84aee333.html</url>
-    <content><![CDATA[<h3 id="数据宽度"><a href="#数据宽度" class="headerlink" title="数据宽度"></a>数据宽度</h3><p><em><strong>容器的大小其实就是数据宽度</strong></em></p>
-<p>数学上的数字，是没有大小限制的，可以无限的大。但在计算机中，由于受硬件的制约，<strong>数据都是有长度限制的</strong>（我们称为数据宽度）。</p>
-<h3 id="数据宽度的表示"><a href="#数据宽度的表示" class="headerlink" title="数据宽度的表示"></a>数据宽度的表示</h3><h4 id="4位宽度表示：假设计算机只能存储4位2进制数"><a href="#4位宽度表示：假设计算机只能存储4位2进制数" class="headerlink" title="4位宽度表示：假设计算机只能存储4位2进制数"></a>4位宽度表示：假设计算机只能存储4位2进制数</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111</span><br><span class="line">0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F</span><br></pre></td></tr></table></figure>
-
-<p><img src="/posts/84aee333/2024-04-19_09-18-05.png" alt="2024-04-19_09-18-05"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 5 6 7 8 9 A B C D E F</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 </span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8</span><br><span class="line">		  F  E  D  C  B  A  9  8</span><br></pre></td></tr></table></figure>
-
-<h4 id="8位宽度表示：假设计算机只能存储8位2进制数"><a href="#8位宽度表示：假设计算机只能存储8位2进制数" class="headerlink" title="8位宽度表示：假设计算机只能存储8位2进制数"></a>8位宽度表示：假设计算机只能存储8位2进制数</h4><p><img src="/posts/84aee333/2024-04-19_09-25-38.png" alt="2024-04-19_09-25-38"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7F</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ... -128</span><br><span class="line">		 FF FE FD FC FB FA F9 F8 F7 F6 F5 F4...80</span><br></pre></td></tr></table></figure>
-
-<h4 id="16位宽度表示：假设计算机只能存储16位2进制数"><a href="#16位宽度表示：假设计算机只能存储16位2进制数" class="headerlink" title="16位宽度表示：假设计算机只能存储16位2进制数"></a>16位宽度表示：假设计算机只能存储16位2进制数</h4><p><img src="/posts/84aee333/20240419092929733.png" alt="image-20240419092929733"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFF FFFE FFFD FFFC FFFB FFFA FFF9 FFF8 ...</span><br></pre></td></tr></table></figure>
-
-<h4 id="32位宽度表示：假设计算机只能存储32位2进制数"><a href="#32位宽度表示：假设计算机只能存储32位2进制数" class="headerlink" title="32位宽度表示：假设计算机只能存储32位2进制数"></a>32位宽度表示：假设计算机只能存储32位2进制数</h4><p><img src="/posts/84aee333/20240419093214090.png" alt="image-20240419093214090"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">无符号数：0 1 2 3 4 ...... FFFFFFFF(10进制255)</span><br><span class="line">有符号数：</span><br><span class="line">	正数：0 1 2 3 4 5 6 7 ... 7FFFFFFF</span><br><span class="line">	负数：-1 -2 -3 -4 -5 -6 -7 -8 ...</span><br><span class="line">		 FFFFFFFF FFFFFFFE FFFFFFFD FFFFFFFC FFFFFFFB FFFFFFFA FFFFFFF9 FFFFFFF8 ...</span><br></pre></td></tr></table></figure>
-
-<h3 id="二级制的逻辑运算符"><a href="#二级制的逻辑运算符" class="headerlink" title="二级制的逻辑运算符"></a>二级制的逻辑运算符</h3><h4 id="逻辑运算：或（or-）-只要有一个1就是1"><a href="#逻辑运算：或（or-）-只要有一个1就是1" class="headerlink" title="逻辑运算：或（or | ） 只要有一个1就是1"></a>逻辑运算：或（or | ） 只要有一个1就是1</h4><p><img src="/posts/84aee333/20240419093840769.png" alt="image-20240419093840769"></p>
-<h4 id="逻辑运算：与（and-两个都为1才是1"><a href="#逻辑运算：与（and-两个都为1才是1" class="headerlink" title="逻辑运算：与（and &amp;) 两个都为1才是1"></a>逻辑运算：与（and &amp;) 两个都为1才是1</h4><p><img src="/posts/84aee333/20240419093907504.png" alt="image-20240419093907504"></p>
-<h4 id="逻辑运算：异或（xor-）不一样位1"><a href="#逻辑运算：异或（xor-）不一样位1" class="headerlink" title="逻辑运算：异或（xor  ^）不一样位1"></a>逻辑运算：异或（xor  ^）不一样位1</h4><p><img src="/posts/84aee333/20240419093935716.png" alt="image-20240419093935716"></p>
-<h4 id="逻辑运算：非（not-！）1是0-0是1"><a href="#逻辑运算：非（not-！）1是0-0是1" class="headerlink" title="逻辑运算：非（not ！）1是0 0是1"></a>逻辑运算：非（not ！）1是0 0是1</h4><p><img src="/posts/84aee333/20240419094001630.png" alt="image-20240419094001630"></p>
-<h3 id="32位通用寄存器"><a href="#32位通用寄存器" class="headerlink" title="32位通用寄存器"></a>32位通用寄存器</h3><h4 id="32位通用寄存器的指定用途："><a href="#32位通用寄存器的指定用途：" class="headerlink" title="32位通用寄存器的指定用途："></a>32位通用寄存器的指定用途：</h4><table>
-<thead>
-<tr>
-<th>寄存器</th>
-<th>主要用途</th>
-<th>编号</th>
-<th>储存数据的范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>EAX</td>
-<td>累加器</td>
-<td>0</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>ECX</td>
-<td>计数</td>
-<td>1</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EDX</td>
-<td>I&#x2F;O指针</td>
-<td>2</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EBX</td>
-<td>DS段的数据指针</td>
-<td>3</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>ESP</td>
-<td>堆栈指针</td>
-<td>4</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EBP</td>
-<td>SS段的数据指针</td>
-<td>5</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>ESI</td>
-<td>字符串操作的源指针：SS段的数据指针</td>
-<td>6</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-<tr>
-<td>EDI</td>
-<td>字符串操作的目标指针：ES段的数据指针</td>
-<td>7</td>
-<td>0 - 0xFFFFFFFF</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>通用寄存器</th>
-<th></th>
-<th>编号（二进制）</th>
-<th>编号（十进制）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>32位</td>
-<td>16位</td>
-<td>8位</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>EAX</td>
-<td>AX</td>
-<td>AL</td>
-<td>000</td>
-<td>0</td>
-</tr>
-<tr>
-<td>ECX</td>
-<td>CX</td>
-<td>CL</td>
-<td>001</td>
-<td>1</td>
-</tr>
-<tr>
-<td>EDX</td>
-<td>DX</td>
-<td>DL</td>
-<td>010</td>
-<td>2</td>
-</tr>
-<tr>
-<td>EBX</td>
-<td>BX</td>
-<td>BL</td>
-<td>011</td>
-<td>3</td>
-</tr>
-<tr>
-<td>ESP</td>
-<td>SP</td>
-<td>AH</td>
-<td>100</td>
-<td>4</td>
-</tr>
-<tr>
-<td>EBP</td>
-<td>BP</td>
-<td>CH</td>
-<td>101</td>
-<td>5</td>
-</tr>
-<tr>
-<td>ESI</td>
-<td>SI</td>
-<td>DH</td>
-<td>110</td>
-<td>6</td>
-</tr>
-<tr>
-<td>EDI</td>
-<td>DI</td>
-<td>BH</td>
-<td>111</td>
-<td>7</td>
-</tr>
-</tbody></table>
-<p><img src="/posts/84aee333/20240419095409509.png" alt="image-20240419095409509"></p>
-<h4 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h4><h5 id="MOV的语法："><a href="#MOV的语法：" class="headerlink" title="MOV的语法："></a>MOV的语法：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. MOV r/m8,r8				r通用寄存器</span><br><span class="line">2. MOV r/m16,r16			m代表内存</span><br><span class="line">3. MOV r/m32,r32			imm代表立即数</span><br><span class="line">4. MOV r8,r/m8				r8代表8位通用寄存器</span><br><span class="line">5. MOV r16,r/m16			m8代表8位内存</span><br><span class="line">6. MOV r32,r/m32			imm8代表8位立即数</span><br><span class="line">7. MOV r8,imm8				...</span><br><span class="line">8. MOV r16,imm16</span><br><span class="line">9. MOV r32,imm32</span><br></pre></td></tr></table></figure>
-
-<h5 id="MOV使用"><a href="#MOV使用" class="headerlink" title="MOV使用"></a>MOV使用</h5><p>指令格式：<strong>MOV 目标操作数，源操作数</strong></p>
-<p><strong>作用：拷贝源操作数到目标操作数</strong></p>
-<ul>
-<li>源操作数可以是立即数、通用寄存器、段寄存器、或者内存单元.</li>
-<li>目标操作数可以是通用寄存器、段寄存器或者内存单元.</li>
-<li>操作数的宽度必须一样.</li>
-<li>源操作数和目标操作数不能同时为内存单元.</li>
-</ul>
-<h4 id="ADD指令"><a href="#ADD指令" class="headerlink" title="ADD指令"></a>ADD指令</h4><h5 id="ADD语法"><a href="#ADD语法" class="headerlink" title="ADD语法"></a>ADD语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ADD AL, imm8 </span><br><span class="line"></span><br><span class="line">ADD AX, imm16</span><br><span class="line"></span><br><span class="line">ADD EAX, imm32</span><br><span class="line"></span><br><span class="line">ADD r/m8, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m16,imm16</span><br><span class="line"></span><br><span class="line">ADD r/m32,imm32</span><br><span class="line"></span><br><span class="line">ADD r/m16, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m32, imm8</span><br><span class="line"></span><br><span class="line">ADD r/m8, r8</span><br><span class="line"></span><br><span class="line">ADD r/m16, r16</span><br><span class="line"></span><br><span class="line">ADD r/m32, r32</span><br><span class="line"></span><br><span class="line">ADD r8, r/m8</span><br><span class="line"></span><br><span class="line">ADD r16, r/m16</span><br><span class="line"></span><br><span class="line">ADD r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="ADD作用"><a href="#ADD作用" class="headerlink" title="ADD作用"></a>ADD作用</h5><p><strong>ADD指令用于将两个数相加，并将结果存储在第一个操作数中。</strong></p>
-<h4 id="SUB指令"><a href="#SUB指令" class="headerlink" title="SUB指令"></a>SUB指令</h4><h5 id="SUB语法"><a href="#SUB语法" class="headerlink" title="SUB语法"></a>SUB语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SUB AL, imm8 </span><br><span class="line"></span><br><span class="line">SUB AX, imm16</span><br><span class="line"></span><br><span class="line">SUB EAX, imm32</span><br><span class="line"></span><br><span class="line">SUB r/m8, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m16,imm16</span><br><span class="line"></span><br><span class="line">SUB r/m32,imm32</span><br><span class="line"></span><br><span class="line">SUB r/m16, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m32, imm8</span><br><span class="line"></span><br><span class="line">SUB r/m8, r8</span><br><span class="line"></span><br><span class="line">SUB r/m16, r16</span><br><span class="line"></span><br><span class="line">SUB r/m32, r32</span><br><span class="line"></span><br><span class="line">SUB r8, r/m8</span><br><span class="line"></span><br><span class="line">SUB r16, r/m16</span><br><span class="line"></span><br><span class="line">SUB r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="SUB指令作用"><a href="#SUB指令作用" class="headerlink" title="SUB指令作用"></a>SUB指令作用</h5><p><strong>SUB用于从第一个操作数中减去第二个操作数的值</strong></p>
-<h4 id="AND指令"><a href="#AND指令" class="headerlink" title="AND指令"></a>AND指令</h4><h5 id="AND语法"><a href="#AND语法" class="headerlink" title="AND语法"></a>AND语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">AND AL, imm8</span><br><span class="line"></span><br><span class="line">AND AX, imm16</span><br><span class="line"></span><br><span class="line">AND EAX, imm32</span><br><span class="line"></span><br><span class="line">AND r/m8, imm8</span><br><span class="line"></span><br><span class="line">AND r/m16,imm16</span><br><span class="line"></span><br><span class="line">AND r/m32,imm32</span><br><span class="line"></span><br><span class="line">AND r/m16, imm8</span><br><span class="line"></span><br><span class="line">AND r/m32, imm8</span><br><span class="line"></span><br><span class="line">AND r/m8, r8</span><br><span class="line"></span><br><span class="line">AND r/m16, r16</span><br><span class="line"></span><br><span class="line">AND r/m32, r32</span><br><span class="line"></span><br><span class="line">AND r8, r/m8</span><br><span class="line"></span><br><span class="line">AND r16, r/m16</span><br><span class="line"></span><br><span class="line">AND r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="AND指令操作"><a href="#AND指令操作" class="headerlink" title="AND指令操作"></a>AND指令操作</h5><p>指令格式：<strong>AND 目标操作数 源操作数</strong></p>
-<p>作用：对两个操作数进行按位逻辑与操作，结果送回目的操作数，即目的←目的^源</p>
-<ul>
-<li>用于操作数的某些保留（和“1”相与），而使某些位清除（和”0”相与）</li>
-</ul>
-<h4 id="OR指令"><a href="#OR指令" class="headerlink" title="OR指令"></a>OR指令</h4><h5 id="OR语法"><a href="#OR语法" class="headerlink" title="OR语法"></a>OR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">OR AL, imm8</span><br><span class="line"></span><br><span class="line">OR AX, imm16</span><br><span class="line"></span><br><span class="line">OR EAX, imm32</span><br><span class="line"></span><br><span class="line">OR r/m8, imm8</span><br><span class="line"></span><br><span class="line">OR r/m16,imm16</span><br><span class="line"></span><br><span class="line">OR r/m32,imm32</span><br><span class="line"></span><br><span class="line">OR r/m16, imm8</span><br><span class="line"></span><br><span class="line">OR r/m32, imm8</span><br><span class="line"></span><br><span class="line">OR r/m8, r8</span><br><span class="line"></span><br><span class="line">OR r/m16, r16</span><br><span class="line"></span><br><span class="line">OR r/m32, r32</span><br><span class="line"></span><br><span class="line">OR r8, r/m8</span><br><span class="line"></span><br><span class="line">OR r16, r/m16</span><br><span class="line"></span><br><span class="line">OR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="OR指令使用"><a href="#OR指令使用" class="headerlink" title="OR指令使用"></a>OR指令使用</h5><p>指令格式：<strong>OR 目的操作数 源操作数</strong></p>
-<p>作用：<strong>对两个操作数进行按位逻辑或操作，结果送回目的操作数，即目的←目的V源</strong></p>
-<ul>
-<li>用于使操作数的某些位保留(和”0”相或)，而使某些位置1（和”1”相或）</li>
-</ul>
-<h4 id="XOR指令"><a href="#XOR指令" class="headerlink" title="XOR指令"></a>XOR指令</h4><h5 id="XOR语法"><a href="#XOR语法" class="headerlink" title="XOR语法"></a>XOR语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XOR AL, imm8</span><br><span class="line"></span><br><span class="line">XOR AX, imm16</span><br><span class="line"></span><br><span class="line">XOR EAX, imm32</span><br><span class="line"></span><br><span class="line">XOR r/m8, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m16,imm16</span><br><span class="line"></span><br><span class="line">XOR r/m32,imm32</span><br><span class="line"></span><br><span class="line">XOR r/m16, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m32, imm8</span><br><span class="line"></span><br><span class="line">XOR r/m8, r8</span><br><span class="line"></span><br><span class="line">XOR r/m16, r16</span><br><span class="line"></span><br><span class="line">XOR r/m32, r32</span><br><span class="line"></span><br><span class="line">XOR r8, r/m8</span><br><span class="line"></span><br><span class="line">XOR r16, r/m16</span><br><span class="line"></span><br><span class="line">XOR r32, r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="XOR指令使用"><a href="#XOR指令使用" class="headerlink" title="XOR指令使用"></a>XOR指令使用</h5><p>指令格式：<strong>XOR 目的操作数 源操作数</strong></p>
-<p>作用：逻辑异或运算，二进制位相同0，不同为1</p>
-<h4 id="NOT指令"><a href="#NOT指令" class="headerlink" title="NOT指令"></a>NOT指令</h4><h5 id="NOT语法"><a href="#NOT语法" class="headerlink" title="NOT语法"></a>NOT语法</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NOT r/m8</span><br><span class="line"></span><br><span class="line">NOT r/m16</span><br><span class="line"></span><br><span class="line">NOT r/m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="NOT指令使用"><a href="#NOT指令使用" class="headerlink" title="NOT指令使用"></a>NOT指令使用</h5><p>指令格式：<strong>NOT 源操作数</strong></p>
-<p>作用：逻辑取反运算，二进制位0变为1，1变为0</p>
-]]></content>
-      <categories>
-        <category>汇编</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇编-堆栈</title>
-    <url>/posts/92e57483.html</url>
-    <content><![CDATA[<h1 id="用mov，lea，sub，add模拟堆栈"><a href="#用mov，lea，sub，add模拟堆栈" class="headerlink" title="用mov，lea，sub，add模拟堆栈"></a>用mov，lea，sub，add模拟堆栈</h1><h2 id="堆栈模拟结构图："><a href="#堆栈模拟结构图：" class="headerlink" title="堆栈模拟结构图："></a>堆栈模拟结构图：</h2><p><img src="/posts/92e57483/image-20240421180255181.png" alt="image-20240421180255181"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、BASE,TOP是2个32位的通用寄存器，里面存储的是内存单元编号(内存地址).</span><br><span class="line"></span><br><span class="line">2、BASE里面存储了一个地址，记录的起始地址.</span><br><span class="line"></span><br><span class="line">3、TOP里面也存储了一个地址，记录的是结束的地址.</span><br><span class="line"></span><br><span class="line">4、存入数据的时候，TOP的值减4(为方便演示，每次存取都是4个字节)</span><br><span class="line"></span><br><span class="line">5、释放数据的时候，TOP的值加4(为方便演示，每次存取都是4个字节)</span><br><span class="line"></span><br><span class="line">6、如果要读取中间的某个数据的时候可以通过TOP 或者 BASE 加上偏移的方式去读取</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="一-初始化BASE-TOP"><a href="#一-初始化BASE-TOP" class="headerlink" title="一 初始化BASE TOP"></a>一 初始化BASE TOP</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MOV EBX,0X18FFF0	BASE</span><br><span class="line">MOV EDX,0X18FFF0	TOP</span><br></pre></td></tr></table></figure>
-
-<h2 id="二-压入数据"><a href="#二-压入数据" class="headerlink" title="二 压入数据"></a>二 压入数据</h2><ul>
-<li><h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><ul>
-<li><pre><code class="ASM">  MOV DWORD PTR DS:[EDX-4],0XAAAAAAAA
-  SUB EDX,4
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 方式二</span><br><span class="line"></span><br><span class="line">    - ```ASM</span><br><span class="line">        SUB EDX,4</span><br><span class="line">        MOV DWORD PTR DS:[EDX],0XBBBBBBBB</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-</li>
-<li><h3 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h3><ul>
-<li><pre><code class="ASM">  MOV DWORD PTR DS:[EDX],0XCCCCCCCC
-  LEA EDX,DWORD PTR DS:[EDX-4]
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 方式四</span><br><span class="line"></span><br><span class="line">    - ```ASM</span><br><span class="line">        LEA EDX,DWORD PTR DS:[EDX-4]</span><br><span class="line">        MOV DWORD PTR DS:[EDX],0XEEEEEEEE</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="三-读取第N个数据"><a href="#三-读取第N个数据" class="headerlink" title="三 读取第N个数据"></a>三 读取第N个数据</h2><ul>
-<li><h3 id="方式一通过BASE加偏移读取"><a href="#方式一通过BASE加偏移读取" class="headerlink" title="方式一	通过BASE加偏移读取"></a>方式一	通过BASE加偏移读取</h3><ul>
-<li><pre><code class="asm">  读取第一个压入栈的数据
-  MOV ESI,DWORD PTR DS:[EBX]
-  读取第四个压入栈的数据
-  MVO ESI,DWORD PTR DS:[EBX-0XC]
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">- ### 方式二    通过TOP加偏移来读取数据</span><br><span class="line"></span><br><span class="line">    - ```asm</span><br><span class="line">        读取第二个压入的数据</span><br><span class="line">        MOV EDI,DWORD PTR DS:[EDX+8]</span><br><span class="line">        读取第三个压入的数据</span><br><span class="line">        MOV EDI.DWORD PTR DS:[EDX+4]</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="四-弹出数据"><a href="#四-弹出数据" class="headerlink" title="四 弹出数据"></a>四 弹出数据</h2><ul>
-<li><h3 id="方式一-1"><a href="#方式一-1" class="headerlink" title="方式一"></a>方式一</h3><ul>
-<li><pre><code class="asm">  MOV ECX,DWORD PTR DS:[EDX]
-  ADD EDX,4
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 方式二</span><br><span class="line"></span><br><span class="line">    - ```asm</span><br><span class="line">        MOV ECX.DWORD PTR DS:[EDX]</span><br><span class="line">        LEA EDX,DWORD PTR DS:[EDX+4]</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-</li>
-<li><h3 id="方式三-1"><a href="#方式三-1" class="headerlink" title="方式三"></a>方式三</h3><ul>
-<li><pre><code>  LEA EDX,DWORD PTR DS:[EDX+4]
-  MOV ECX,DWORD PTR DS:[EDX-4]
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 如上内存的读写方式叫：堆栈</span><br><span class="line"></span><br><span class="line">### 堆栈的优点： 临时存储大量的数据，便于查找</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 堆栈的操作指令</span><br><span class="line"></span><br><span class="line">### PUSH指令</span><br><span class="line"></span><br><span class="line">```asm</span><br><span class="line">1、PUSH r32</span><br><span class="line"></span><br><span class="line">2、PUSH r16</span><br><span class="line"></span><br><span class="line">3、PUSH m16</span><br><span class="line"></span><br><span class="line">4、PUSH m32</span><br><span class="line"></span><br><span class="line">5、PUSH imm8/imm16/imm32</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="POP指令"><a href="#POP指令" class="headerlink" title="POP指令"></a>POP指令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、POP r32</span><br><span class="line"></span><br><span class="line">2、POP r16</span><br><span class="line"></span><br><span class="line">3、POP m16</span><br><span class="line"></span><br><span class="line">4、POP m32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="PUSHAD-PUSHA指令"><a href="#PUSHAD-PUSHA指令" class="headerlink" title="PUSHAD PUSHA指令"></a>PUSHAD PUSHA指令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这两个指令的作用是把通用寄存器压栈。</span><br><span class="line">PUSHAD	操作数的大小是32位	寄存器的入栈顺序依次是：EAX,ECX,EDX,EBX,ESP(初始值)，EBP,ESI,EDI.</span><br><span class="line">PUSHA	操作数的大小是16位	寄存器的入栈顺序依次是：AX,CX,DX,BX,SP(初始值)，BP,SI,DI.</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="POPAD-POPA指令"><a href="#POPAD-POPA指令" class="headerlink" title="POPAD POPA指令"></a>POPAD POPA指令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这两个指令用于把栈中的值弹出到通用寄存器。</span><br><span class="line">POPAD	操作数的大小是32位	出栈顺序依次是：EDI,ESI,EBP,EBX,EDX,ECX,EAX;</span><br><span class="line">POPA	操作数的大小是16位	出栈顺序依次是：DI,SI,BP,BX,DX,CX,AX;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>汇编</category>
-        <category>堆栈</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
-        <tag>堆栈</tag>
       </tags>
   </entry>
 </search>
