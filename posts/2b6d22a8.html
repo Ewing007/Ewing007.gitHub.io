@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/angle180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/angle32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/angle18x18.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/purple/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="MyBatis-Generator">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis代码生成器">
+<meta property="og:url" content="http://example.com/posts/2b6d22a8.html">
+<meta property="og:site_name" content="Ewing的博客">
+<meta property="og:description" content="MyBatis-Generator">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-27T17:03:16.000Z">
+<meta property="article:modified_time" content="2024-04-27T09:58:21.390Z">
+<meta property="article:author" content="Ewing">
+<meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/posts/2b6d22a8.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/2b6d22a8.html","path":"posts/2b6d22a8.html","title":"MyBatis代码生成器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MyBatis代码生成器 | Ewing的博客</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="blogtalk-server.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Ewing的博客" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ewing的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱，奔赴山海</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis-Generator%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Mybatis Generator简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8MyBatis-Generator"><span class="nav-number">2.</span> <span class="nav-text">为什么要使用MyBatis Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">编写代码生成器配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.1.</span> <span class="nav-text">引入配置文件的模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generatorConfiguration%E4%B8%8B%E7%9A%84%E4%B8%89%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.</span> <span class="nav-text">generatorConfiguration下的三标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#properties%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.1.</span> <span class="nav-text">properties标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#properties%E6%A0%87%E7%AD%BE%E5%8C%85%E5%90%ABresource%E5%92%8Curl%E4%B8%A4%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="nav-number">3.2.2.</span> <span class="nav-text">properties标签包含resource和url两个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classPathEntry%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.3.</span> <span class="nav-text">classPathEntry标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.4.</span> <span class="nav-text">context标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#context%E7%9A%84%E5%B1%9E%E6%80%A7%E6%A0%87%E7%AD%BE%EF%BC%9A"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">context的属性标签：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#context%E5%8C%85%E5%90%AB%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AD%90%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">context包含的常用子标签</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ewing"
+      src="/images/ewing.gif">
+  <p class="site-author-name" itemprop="name">Ewing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ewing007" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ewing007" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2742887864@qq.com" title="E-Mail → mailto:2742887864@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/2b6d22a8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ewing.gif">
+      <meta itemprop="name" content="Ewing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ewing的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MyBatis代码生成器 | Ewing的博客">
+      <meta itemprop="description" content="MyBatis-Generator">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MyBatis代码生成器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-27 17:03:16 / 修改时间：09:58:21" itemprop="dateCreated datePublished" datetime="2024-04-27T17:03:16Z">2024-04-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/MyBatis/" itemprop="url" rel="index"><span itemprop="name">MyBatis</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java/MyBatis/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/2b6d22a8.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/2b6d22a8.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">MyBatis-Generator</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Mybatis-Generator简介"><a href="#Mybatis-Generator简介" class="headerlink" title="Mybatis Generator简介"></a>Mybatis Generator简介</h1><p>Mybatis Generator 是Mybatis官方提供的一个代码生成工具，它可以根据数据库表自动生成对应的Java 实体类、Mapper接口和Mapper.xml文件，还可以生成一些高级查询功能，使用Mybatis-Generator可以大大降低开发者的工作量，提高开发效率！</p>
+<h1 id="为什么要使用MyBatis-Generator"><a href="#为什么要使用MyBatis-Generator" class="headerlink" title="为什么要使用MyBatis Generator"></a>为什么要使用MyBatis Generator</h1><p>我们在spring项目中使用MyBatis框架时，需要三组件</p>
+<ul>
+<li>java po对象		–&gt;  与数据库表相对应</li>
+<li>Mapper 接口      –&gt;  操作数据库的接口，增删改查等</li>
+<li>Mapper.xml       –&gt;  sql语句</li>
+</ul>
+<p>在没有使用MyBatis代码生成器的时候，需要手动创建它们，一张表对应一个po实体类、一个Mapper接口、一个Mapper.xml。</p>
+<p>另外对于单表的增删改查是ORM的基本功能，mybatis也做了封装，所以使用mybatis generator可以做到更加高效快捷，避免很多重复的CRUD操作。</p>
+<h1 id="编写代码生成器配置文件"><a href="#编写代码生成器配置文件" class="headerlink" title="编写代码生成器配置文件"></a>编写代码生成器配置文件</h1><h2 id="引入配置文件的模板"><a href="#引入配置文件的模板" class="headerlink" title="引入配置文件的模板"></a>引入配置文件的模板</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="generatorConfiguration下的三标签"><a href="#generatorConfiguration下的三标签" class="headerlink" title="generatorConfiguration下的三标签"></a>generatorConfiguration下的三标签</h2><h3 id="properties标签"><a href="#properties标签" class="headerlink" title="properties标签"></a>properties标签</h3><p>properties标签用于指定一个需要在配置中解析使用的外部属性文件，引入后，可以在配置中使用${property}引用属性文件中的属性值。</p>
+<h3 id="properties标签包含resource和url两个属性"><a href="#properties标签包含resource和url两个属性" class="headerlink" title="properties标签包含resource和url两个属性"></a>properties标签包含resource和url两个属性</h3><p>对于resource和url只能使用其中一个属性来指定，同时使用会报错</p>
+<p>resource：指定classpath下的属性文件<br>url：指定文件系统上的特定位置</p>
+<h3 id="classPathEntry标签"><a href="#classPathEntry标签" class="headerlink" title="classPathEntry标签"></a>classPathEntry标签</h3><p>可以配置多个，也可以不配置，只有一个location属性。</p>
+<p>常见的用法就是通过location属性指定数据库驱动的路径。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">classPathEntry</span> <span class="attr">location</span>=<span class="string">&quot;D:\mysql-connector-java-5.1.29.jar&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="context标签"><a href="#context标签" class="headerlink" title="context标签"></a>context标签</h3><p>至少配置一个，也可以配置多个，context标签用于指定生成一组对象的环境：</p>
+<ul>
+<li>连接的数据库</li>
+<li>要处理的数据表</li>
+<li>生成的实体类</li>
+<li>生成的Mapper接口</li>
+<li>生成Mapper.xml</li>
+</ul>
+<h4 id="context的属性标签："><a href="#context的属性标签：" class="headerlink" title="context的属性标签："></a>context的属性标签：</h4><ul>
+<li><strong>id（必须要有</strong>，<strong>且唯一</strong>）</li>
+<li><strong>targetRuntime（用于指定生成的代码的运行环境：默认值MyBatis3，  MyBatis3Simple：不会输出与Example相关方法）</strong></li>
+<li><strong>introspectedColumnImpl</strong></li>
+<li><strong>defaultModelType</strong></li>
+</ul>
+<h4 id="context包含的常用子标签"><a href="#context包含的常用子标签" class="headerlink" title="context包含的常用子标签"></a>context包含的常用子标签</h4><ul>
+<li><p><strong>javaClientGenerator</strong>：<strong>生成Mapper接口，可选，最多配置一个</strong></p>
+</li>
+<li><p><strong>sqlMapGenerator</strong>：<strong>配置SQL映射生成器(Mapper.xml文件)的属性，可选，最多配置一个</strong></p>
+<ul>
+<li><strong>targetPackage：生成Mapper接口存放的包名</strong></li>
+<li><strong>targetProject：指定目标项目路径，可以使用相对路径或绝对路径</strong></li>
+</ul>
+</li>
+<li><p><strong>javaModelGenerator：控制生成的实体类（必需选，只能一个）</strong></p>
+<ul>
+<li><strong>targetPackage：生成实体类存放的包名</strong></li>
+<li><strong>targetProject：指定目标项目路径，可以使用相对路径或绝对路径</strong></li>
+</ul>
+</li>
+<li><p><strong>javaTypeResolver：配置用来指定JDBC类型和Java类型如何转换，最多可以配置一个</strong></p>
+</li>
+<li><p><strong>jdbcConnection(必需选，只能一个)：用于生成器指定连接的数据库</strong></p>
+<ul>
+<li><strong>driverClass：访问数据库的JDBC驱动程序的完全限定类名</strong></li>
+<li><strong>connectionURL：访问数据库的JDBC连接URL</strong></li>
+<li><strong>userId：访问数据库的用户ID</strong></li>
+<li><strong>password：访问数据库的密码</strong></li>
+</ul>
+</li>
+<li><p><strong>commentGenerator：配置生成注释信息，只能配置一个</strong></p>
+<ul>
+<li><strong>suppressAllComments：阻止生成注释</strong></li>
+<li><strong>suppressDate：阻止生成的注释包含时间戳</strong></li>
+<li><strong>addRemarkComments：注释是否添加数据库表的备注信息</strong></li>
+</ul>
+</li>
+<li><p><strong>plugin</strong></p>
+</li>
+<li><p><strong>table：配置需要通过内省数据库的表，只有在table中配置过的表，才能经过上述其他配置生成最终的代码，最少配置一个</strong></p>
+<ul>
+<li><p><strong>table标签有一个必选属性tableName，该属性指定要生成的表名，可以使用SQL通配符匹配多个表</strong></p>
+</li>
+<li><pre><code class="xml">  &lt;table tableName=&quot;%&quot;&gt;&lt;/table&gt;
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- **connectionFactory**</span><br><span class="line"></span><br><span class="line">## 完整配置文件</span><br><span class="line"></span><br><span class="line">```xml</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;context id=&quot;Mysql&quot; targetRuntime=&quot;MyBatis3&quot; defaultModelType=&quot;flat&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 自动检查关键字，为关键字增加反引号 --&gt;</span><br><span class="line">        &lt;property name=&quot;autoDelimitKeywords&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;beginningDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;endingDelimiter&quot; value=&quot;`&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--覆盖生成XML文件--&gt;</span><br><span class="line">        &lt;plugin type=&quot;org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin&quot; /&gt;</span><br><span class="line">        &lt;!-- 生成的实体类添加toString()方法 --&gt;</span><br><span class="line">        &lt;plugin type=&quot;org.mybatis.generator.plugins.ToStringPlugin&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 不生成注释 --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 配置数据源，需要根据自己的项目修改 --&gt;</span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;com.mysql.cj.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL=&quot;jdbc:mysql://rm-cn-lbj3my4bn000bs8o.rwlb.rds.aliyuncs.com/train_business?serverTimezone=Asia/Shanghai&quot;</span><br><span class="line">                        userId=&quot;train_business&quot;</span><br><span class="line">                        password=&quot;train_12306&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- domain类的位置 targetProject是相对pom.xml的路径--&gt;</span><br><span class="line">        &lt;javaModelGenerator targetProject=&quot;../train-business/src/main/java&quot;</span><br><span class="line">                            targetPackage=&quot;com.java.train.business.domain&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- mapper xml的位置 targetProject是相对pom.xml的路径 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetProject=&quot;../train-business/src/main/resources&quot;</span><br><span class="line">                         targetPackage=&quot;mapper&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- mapper类的位置 targetProject是相对pom.xml的路径 --&gt;</span><br><span class="line">        &lt;javaClientGenerator targetProject=&quot;../train-business/src/main/java&quot;</span><br><span class="line">                             targetPackage=&quot;com.java.train.business.mapper&quot;</span><br><span class="line">                             type=&quot;XMLMAPPER&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--&lt;table tableName=&quot;station&quot; domainObjectName=&quot;Station&quot;/&gt;--&gt;</span><br><span class="line">        &lt;table tableName=&quot;train&quot; domainObjectName=&quot;Train&quot;/&gt;</span><br><span class="line">        &lt;!--&lt;table tableName=&quot;passenger&quot; domainObjectName=&quot;Passenger&quot;/&gt;--&gt;</span><br><span class="line">        &lt;!--&lt;table tableName=&quot;ticket&quot; domainObjectName=&quot;Ticket&quot;/&gt;--&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/cafc68c8.html" rel="prev" title="堆栈图分析">
+                  <i class="fa fa-angle-left"></i> 堆栈图分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ewing</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("12/1/2023 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.min.js","integrity":"sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"blogtalk-server.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/2b6d22a8.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 --> <script type="text/javascript" src="/js/clicklove.js"></script>
+<!-- 页面跟随小星星 --> <script type="text/javascript" src="/js/startflow.js"></script>
+
