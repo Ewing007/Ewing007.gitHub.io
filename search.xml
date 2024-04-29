@@ -267,41 +267,35 @@
       </tags>
   </entry>
   <entry>
-    <title>pinyin_pro</title>
-    <url>/posts/57f07ac7.html</url>
-    <content><![CDATA[<h1 id="拼音（pinyin-pro）概述"><a href="#拼音（pinyin-pro）概述" class="headerlink" title="拼音（pinyin-pro）概述"></a>拼音（pinyin-pro）概述</h1><p>pinyin-pro 是一个专业的JavaScript中文转拼音的库，具备多音节识别准确、体积轻量、性能优异、功能丰富等特性。</p>
-<p>其支持如下：</p>
-<ul>
-<li>支持拼音&#x2F;声母&#x2F;韵母&#x2F;首字母&#x2F;音调&#x2F;全部信息</li>
-<li>支持人名姓氏模式</li>
-<li>支持文本和拼音匹配</li>
-<li>支持自定义拼音</li>
-<li>支持获取带拼音汉字的 HTML 字符串</li>
-<li>支持获取汉字的所有拼音</li>
-<li>支持拼音输入转换</li>
-<li>极致的性能和极高的拼音识别准确率</li>
+    <title>堆栈图分析</title>
+    <url>/posts/cafc68c8.html</url>
+    <content><![CDATA[<h1 id="函数-调用-参数-返回值"><a href="#函数-调用-参数-返回值" class="headerlink" title="函数&#x2F;调用&#x2F;参数&#x2F;返回值"></a>函数&#x2F;调用&#x2F;参数&#x2F;返回值</h1><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>计算机的函数，是一个<strong>固定的一个程序段</strong>，或称其为一个<strong>子程序</strong>，它在可以实现<strong>固定运算功能</strong>的同时还带有一<strong>入口</strong>和一个<strong>出口</strong>，所谓的入口，就是函数所带的各个<strong>参数</strong>，我们可以通过这个入口，把函数的参数值代入子程序，供计算机处理，所谓出口，就是指函数的计算结果,也称为<strong>返回值</strong>，在计算机求得之后，由此口带回给调用它的程序。</p>
+<h2 id="汇编中的函数"><a href="#汇编中的函数" class="headerlink" title="汇编中的函数"></a>汇编中的函数</h2><p><img src="/posts/cafc68c8/image-20240426174600320.png" alt="image-20240426174600320"></p>
+<h2 id="函数的入口"><a href="#函数的入口" class="headerlink" title="函数的入口"></a>函数的入口</h2><p><img src="/posts/cafc68c8/image-20240426174736542.png" alt="image-20240426174736542"></p>
+<h2 id="函数的出口"><a href="#函数的出口" class="headerlink" title="函数的出口"></a>函数的出口</h2><p><img src="/posts/cafc68c8/image-20240426174819449.png" alt="image-20240426174819449"></p>
+<h1 id="windows下的堆栈-堆栈平衡"><a href="#windows下的堆栈-堆栈平衡" class="headerlink" title="windows下的堆栈&#x2F;堆栈平衡"></a>windows下的堆栈&#x2F;堆栈平衡</h1><h2 id="windows堆栈"><a href="#windows堆栈" class="headerlink" title="windows堆栈"></a>windows堆栈</h2><p><img src="/posts/cafc68c8/image-20240426175108989.png" alt="image-20240426175108989"></p>
+<h2 id="windows堆栈的特点："><a href="#windows堆栈的特点：" class="headerlink" title="windows堆栈的特点："></a>windows堆栈的特点：</h2><ul>
+<li>先进后出</li>
+<li>向低地址扩展</li>
 </ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># NPM</span></span><br><span class="line">$ npm install pinyin-pro --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># Yarn</span></span><br><span class="line">$ yarn add pinyin-pro</span><br><span class="line"></span><br><span class="line"><span class="comment"># pnpm</span></span><br><span class="line">$ pnpm install pinyin-pro</span><br></pre></td></tr></table></figure>
-
-<h3 id="Script-链接"><a href="#Script-链接" class="headerlink" title="Script 链接"></a>Script 链接</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;!-- 引入固定版本 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/pinyin-pro@3.18.2/dist/index.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;!-- 自动引入最新版本 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/pinyin-pro&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="pinyin：拼音转换"><a href="#pinyin：拼音转换" class="headerlink" title="pinyin：拼音转换"></a>pinyin：拼音转换</h2><p><code>pinyin-pro</code> 内部导出了 <code>pinyin</code> 函数，可以进行拼音转换，获取相关内容。</p>
-<h3 id="拼音"><a href="#拼音" class="headerlink" title="拼音"></a>拼音</h3><p>通过 <code>options.type</code> 参数设置，可以获得数组和字符串不同的返回格式，也可以通过 <code>options.toneType</code> 参数控制音调在拼音中的显示格式</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; pinyin &#125; <span class="keyword">from</span> <span class="string">&#x27;pinyin-pro&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取带音调拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>); <span class="comment">// &#x27;hàn yǔ pīn yīn&#x27;</span></span><br><span class="line"><span class="comment">// 获取不带声调的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;none&#x27;</span> &#125;); <span class="comment">// &#x27;han yu pin yin&#x27;</span></span><br><span class="line"><span class="comment">// 获取声调转换为数字后缀的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;num&#x27;</span> &#125;); <span class="comment">// &#x27;han4 yu3 pin1 yin1&#x27;</span></span><br><span class="line"><span class="comment">// 获取数组形式带音调拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">type</span>: <span class="string">&#x27;array&#x27;</span> &#125;); <span class="comment">// [&quot;hàn&quot;, &quot;yǔ&quot;, &quot;pīn&quot;, &quot;yīn&quot;]</span></span><br><span class="line"><span class="comment">// 获取数组形式不带声调的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;none&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;array&#x27;</span> &#125;); <span class="comment">// [&quot;han&quot;, &quot;yu&quot;, &quot;pin&quot;, &quot;yin&quot;]</span></span><br><span class="line"><span class="comment">// 获取数组形式声调转换为数字后缀的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;num&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;array&#x27;</span> &#125;); <span class="comment">// [&quot;han4&quot;, &quot;yu3&quot;, &quot;pin1&quot;, &quot;yin1&quot;]</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>pingyin-pro还有很多其他各种类型的文字转化，如拼音格式转换、文本和拼音匹配、获取带汉字拼音的 HTML 字符串等等等，请查阅官方文档。</p>
-<p><strong><code>[快速开始 | pinyin-pro](https://pinyin-pro.cn/guide/start.html)</code></strong></p>
+<h2 id="堆栈平衡"><a href="#堆栈平衡" class="headerlink" title="堆栈平衡"></a>堆栈平衡</h2><p>windows中的堆栈，是一块普通的内存，主要用来存储一些临时的数据和参数等</p>
+<p>可以把Windows中的堆栈想象成是一个公用的箱子,函数就像是使用箱子的人</p>
+<p>函数在执行的时候，会用到这个箱子，把一些数据存到里面，但用完的时候</p>
+<p>一定要记得把东西拿走，否则会乱的，也就是说，你放进去什么东西，走的时候</p>
+<p>也要拿走，这个就是堆栈平衡.</p>
+<h1 id="堆栈图分析（—）"><a href="#堆栈图分析（—）" class="headerlink" title="堆栈图分析（—）"></a>堆栈图分析（—）</h1><p>[堆栈图分析（一）]: .&#x2F;堆栈图分析&#x2F;堆栈图.xlsx	“堆栈图分析引用(一)”</p>
+<h1 id="堆栈图分析（二）"><a href="#堆栈图分析（二）" class="headerlink" title="堆栈图分析（二）"></a>堆栈图分析（二）</h1><p>[堆栈图分析（二）]: .&#x2F;堆栈图分析&#x2F;堆栈图二.xlsx	“堆栈图分析引用(二)”</p>
 ]]></content>
       <categories>
-        <category>javascript</category>
-        <category>java</category>
-        <category>SpringBoot</category>
+        <category>逆向</category>
+        <category>二进制</category>
+        <category>汇编</category>
       </categories>
       <tags>
-        <tag>java</tag>
-        <tag>SpringBoot</tag>
-        <tag>javascript</tag>
-        <tag>vue</tag>
+        <tag>汇编</tag>
+        <tag>二进制</tag>
+        <tag>逆向</tag>
+        <tag>堆栈</tag>
       </tags>
   </entry>
   <entry>
@@ -373,35 +367,41 @@
       </tags>
   </entry>
   <entry>
-    <title>堆栈图分析</title>
-    <url>/posts/cafc68c8.html</url>
-    <content><![CDATA[<h1 id="函数-调用-参数-返回值"><a href="#函数-调用-参数-返回值" class="headerlink" title="函数&#x2F;调用&#x2F;参数&#x2F;返回值"></a>函数&#x2F;调用&#x2F;参数&#x2F;返回值</h1><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>计算机的函数，是一个<strong>固定的一个程序段</strong>，或称其为一个<strong>子程序</strong>，它在可以实现<strong>固定运算功能</strong>的同时还带有一<strong>入口</strong>和一个<strong>出口</strong>，所谓的入口，就是函数所带的各个<strong>参数</strong>，我们可以通过这个入口，把函数的参数值代入子程序，供计算机处理，所谓出口，就是指函数的计算结果,也称为<strong>返回值</strong>，在计算机求得之后，由此口带回给调用它的程序。</p>
-<h2 id="汇编中的函数"><a href="#汇编中的函数" class="headerlink" title="汇编中的函数"></a>汇编中的函数</h2><p><img src="/posts/cafc68c8/image-20240426174600320.png" alt="image-20240426174600320"></p>
-<h2 id="函数的入口"><a href="#函数的入口" class="headerlink" title="函数的入口"></a>函数的入口</h2><p><img src="/posts/cafc68c8/image-20240426174736542.png" alt="image-20240426174736542"></p>
-<h2 id="函数的出口"><a href="#函数的出口" class="headerlink" title="函数的出口"></a>函数的出口</h2><p><img src="/posts/cafc68c8/image-20240426174819449.png" alt="image-20240426174819449"></p>
-<h1 id="windows下的堆栈-堆栈平衡"><a href="#windows下的堆栈-堆栈平衡" class="headerlink" title="windows下的堆栈&#x2F;堆栈平衡"></a>windows下的堆栈&#x2F;堆栈平衡</h1><h2 id="windows堆栈"><a href="#windows堆栈" class="headerlink" title="windows堆栈"></a>windows堆栈</h2><p><img src="/posts/cafc68c8/image-20240426175108989.png" alt="image-20240426175108989"></p>
-<h2 id="windows堆栈的特点："><a href="#windows堆栈的特点：" class="headerlink" title="windows堆栈的特点："></a>windows堆栈的特点：</h2><ul>
-<li>先进后出</li>
-<li>向低地址扩展</li>
+    <title>pinyin_pro</title>
+    <url>/posts/57f07ac7.html</url>
+    <content><![CDATA[<h1 id="拼音（pinyin-pro）概述"><a href="#拼音（pinyin-pro）概述" class="headerlink" title="拼音（pinyin-pro）概述"></a>拼音（pinyin-pro）概述</h1><p>pinyin-pro 是一个专业的JavaScript中文转拼音的库，具备多音节识别准确、体积轻量、性能优异、功能丰富等特性。</p>
+<p>其支持如下：</p>
+<ul>
+<li>支持拼音&#x2F;声母&#x2F;韵母&#x2F;首字母&#x2F;音调&#x2F;全部信息</li>
+<li>支持人名姓氏模式</li>
+<li>支持文本和拼音匹配</li>
+<li>支持自定义拼音</li>
+<li>支持获取带拼音汉字的 HTML 字符串</li>
+<li>支持获取汉字的所有拼音</li>
+<li>支持拼音输入转换</li>
+<li>极致的性能和极高的拼音识别准确率</li>
 </ul>
-<h2 id="堆栈平衡"><a href="#堆栈平衡" class="headerlink" title="堆栈平衡"></a>堆栈平衡</h2><p>windows中的堆栈，是一块普通的内存，主要用来存储一些临时的数据和参数等</p>
-<p>可以把Windows中的堆栈想象成是一个公用的箱子,函数就像是使用箱子的人</p>
-<p>函数在执行的时候，会用到这个箱子，把一些数据存到里面，但用完的时候</p>
-<p>一定要记得把东西拿走，否则会乱的，也就是说，你放进去什么东西，走的时候</p>
-<p>也要拿走，这个就是堆栈平衡.</p>
-<h1 id="堆栈图分析（—）"><a href="#堆栈图分析（—）" class="headerlink" title="堆栈图分析（—）"></a>堆栈图分析（—）</h1><p>[堆栈图分析（一）]: .&#x2F;堆栈图.xlsx	“堆栈图分析引用(一)”</p>
-<h1 id="堆栈图分析（二）"><a href="#堆栈图分析（二）" class="headerlink" title="堆栈图分析（二）"></a>堆栈图分析（二）</h1><p>[堆栈图分析（二）]: .&#x2F;堆栈图二.xlsx	“堆栈图分析引用(二)”</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># NPM</span></span><br><span class="line">$ npm install pinyin-pro --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># Yarn</span></span><br><span class="line">$ yarn add pinyin-pro</span><br><span class="line"></span><br><span class="line"><span class="comment"># pnpm</span></span><br><span class="line">$ pnpm install pinyin-pro</span><br></pre></td></tr></table></figure>
+
+<h3 id="Script-链接"><a href="#Script-链接" class="headerlink" title="Script 链接"></a>Script 链接</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;!-- 引入固定版本 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/pinyin-pro@3.18.2/dist/index.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;!-- 自动引入最新版本 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/pinyin-pro&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="pinyin：拼音转换"><a href="#pinyin：拼音转换" class="headerlink" title="pinyin：拼音转换"></a>pinyin：拼音转换</h2><p><code>pinyin-pro</code> 内部导出了 <code>pinyin</code> 函数，可以进行拼音转换，获取相关内容。</p>
+<h3 id="拼音"><a href="#拼音" class="headerlink" title="拼音"></a>拼音</h3><p>通过 <code>options.type</code> 参数设置，可以获得数组和字符串不同的返回格式，也可以通过 <code>options.toneType</code> 参数控制音调在拼音中的显示格式</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; pinyin &#125; <span class="keyword">from</span> <span class="string">&#x27;pinyin-pro&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取带音调拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>); <span class="comment">// &#x27;hàn yǔ pīn yīn&#x27;</span></span><br><span class="line"><span class="comment">// 获取不带声调的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;none&#x27;</span> &#125;); <span class="comment">// &#x27;han yu pin yin&#x27;</span></span><br><span class="line"><span class="comment">// 获取声调转换为数字后缀的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;num&#x27;</span> &#125;); <span class="comment">// &#x27;han4 yu3 pin1 yin1&#x27;</span></span><br><span class="line"><span class="comment">// 获取数组形式带音调拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">type</span>: <span class="string">&#x27;array&#x27;</span> &#125;); <span class="comment">// [&quot;hàn&quot;, &quot;yǔ&quot;, &quot;pīn&quot;, &quot;yīn&quot;]</span></span><br><span class="line"><span class="comment">// 获取数组形式不带声调的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;none&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;array&#x27;</span> &#125;); <span class="comment">// [&quot;han&quot;, &quot;yu&quot;, &quot;pin&quot;, &quot;yin&quot;]</span></span><br><span class="line"><span class="comment">// 获取数组形式声调转换为数字后缀的拼音</span></span><br><span class="line"><span class="title function_">pinyin</span>(<span class="string">&#x27;汉语拼音&#x27;</span>, &#123; <span class="attr">toneType</span>: <span class="string">&#x27;num&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;array&#x27;</span> &#125;); <span class="comment">// [&quot;han4&quot;, &quot;yu3&quot;, &quot;pin1&quot;, &quot;yin1&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>pingyin-pro还有很多其他各种类型的文字转化，如拼音格式转换、文本和拼音匹配、获取带汉字拼音的 HTML 字符串等等等，请查阅官方文档。</p>
+<p><strong><code>[快速开始 | pinyin-pro](https://pinyin-pro.cn/guide/start.html)</code></strong></p>
 ]]></content>
       <categories>
-        <category>逆向</category>
-        <category>二进制</category>
-        <category>汇编</category>
+        <category>javascript</category>
+        <category>java</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>汇编</tag>
-        <tag>二进制</tag>
-        <tag>逆向</tag>
-        <tag>堆栈</tag>
+        <tag>java</tag>
+        <tag>SpringBoot</tag>
+        <tag>javascript</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
