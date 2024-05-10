@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-04-29T06:15:15.679Z</updated>
+  <updated>2024-05-08T03:53:28.355Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>quartz调度器的使用</title>
+    <link href="http://example.com/posts/cea7c876.html"/>
+    <id>http://example.com/posts/cea7c876.html</id>
+    <published>2024-05-08T10:35:41.000Z</published>
+    <updated>2024-05-08T03:53:28.355Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Quartz"><a href="#Quartz" class="headerlink" title="Quartz"></a>Quartz</h1><p>Quartz是<code>OpenSymphony</code>开源组织在<code>Job scheduling</code>领域又一个开源项目，完全由Java开发，可以用来执行定时任务，类似于<code>java.util.Timer</code>。但是相较于Timer， Quartz增加了很多功能：</p><ul><li>持久性作业 - 就是保持调度定时的状态;</li><li>作业管理 - 对调度作业进行有效的管理;</li></ul><h1 id="Quartz基本使用"><a href="#Quartz基本使用" class="headerlink" title="Quartz基本使用"></a>Quartz基本使用</h1><p>Quartz核心类有以下三部分：</p><ul><li><strong>任务Job：需要实现的任务类，实现execute()方法，执行后完成任务</strong></li><li><strong>触发器Trigger：包括SimpleTrigger和crontrigger</strong></li><li><strong>调度器Scheduler：任务调度器，负责基于Trigger触发器，执行Job任务</strong></li></ul><p>主要关系如下：</p><p><img src="/posts/undefined/image-20240508105001382.png" alt="image-20240508105001382"></p><h1 id="Quartz-Demo搭建"><a href="#Quartz-Demo搭建" class="headerlink" title="Quartz Demo搭建"></a>Quartz Demo搭建</h1><h2 id="导入相关依赖jar包"><a href="#导入相关依赖jar包" class="headerlink" title="导入相关依赖jar包"></a>导入相关依赖jar包</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-quartz<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="新建一个任务，实现了-org-quartz-Job-接口"><a href="#新建一个任务，实现了-org-quartz-Job-接口" class="headerlink" title="新建一个任务，实现了 org.quartz.Job 接口"></a>新建一个任务，实现了 <code>org.quartz.Job</code> 接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.java.train.batch.job;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.quartz.Job;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionContext;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2024-05-03-14:34</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//@DisallowConcurrentExecution</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestJob</span> <span class="keyword">implements</span> <span class="title class_">Job</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">(JobExecutionContext context)</span> <span class="keyword">throws</span> JobExecutionException &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;quartz Job start&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;quartz Job end&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="新建Quartz的配置文件QuartzConfig创建Scheduler，实现定时调度"><a href="#新建Quartz的配置文件QuartzConfig创建Scheduler，实现定时调度" class="headerlink" title="新建Quartz的配置文件QuartzConfig创建Scheduler，实现定时调度"></a>新建Quartz的配置文件QuartzConfig创建Scheduler，实现定时调度</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.java.train.batch.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.java.train.batch.job.TestJob;</span><br><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: Ewing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2024-05-03-14:36</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">QuartzConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> JobDetail <span class="title function_">jobDetail</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//创建JobDetail实例，并于PrintWordsJob类绑定（Job1执行内容）</span></span><br><span class="line">        <span class="keyword">return</span> JobBuilder.newJob(TestJob.class)</span><br><span class="line">                .withIdentity(<span class="string">&quot;job1&quot;</span>,<span class="string">&quot;group1&quot;</span>)<span class="comment">//指定工作的名称</span></span><br><span class="line">                .storeDurably()<span class="comment">//每一次任务后执行存储</span></span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Trigger <span class="title function_">trigger</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//创建Trigger实例，每隔5秒执行一次</span></span><br><span class="line">        <span class="keyword">return</span> TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(<span class="string">&quot;trigger&quot;</span>,<span class="string">&quot;group1&quot;</span>)</span><br><span class="line">                .forJob(jobDetail())<span class="comment">//绑定工作任务</span></span><br><span class="line">                .startNow()<span class="comment">//立即生效</span></span><br><span class="line">                .withSchedule(CronScheduleBuilder.cronSchedule(<span class="string">&quot;0/5 * * * * ?&quot;</span>))</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="执行结果每5秒打印一次"><a href="#执行结果每5秒打印一次" class="headerlink" title="执行结果每5秒打印一次"></a>执行结果每5秒打印一次</h2><p><img src="/image-20240508111547401.png" alt="image-20240508111547401"></p>]]></content>
+    
+    
+    <summary type="html">quartz调度器的使用</summary>
+    
+    
+    
+    <category term="java" scheme="http://example.com/categories/java/"/>
+    
+    <category term="SpringBoot" scheme="http://example.com/categories/java/SpringBoot/"/>
+    
+    <category term="Quartz" scheme="http://example.com/categories/java/SpringBoot/Quartz/"/>
+    
+    <category term="框架" scheme="http://example.com/categories/java/SpringBoot/Quartz/%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
+    
+    <category term="java" scheme="http://example.com/tags/java/"/>
+    
+    <category term="Quartz" scheme="http://example.com/tags/Quartz/"/>
+    
+    <category term="框架" scheme="http://example.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>pinyin_pro</title>
@@ -37,9 +70,9 @@
     <category term="SpringBoot" scheme="http://example.com/categories/javascript/java/SpringBoot/"/>
     
     
-    <category term="java" scheme="http://example.com/tags/java/"/>
-    
     <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
+    
+    <category term="java" scheme="http://example.com/tags/java/"/>
     
     <category term="javascript" scheme="http://example.com/tags/javascript/"/>
     
@@ -68,13 +101,13 @@
     <category term="SpringBoot" scheme="http://example.com/categories/java/MyBatis/SpringBoot/"/>
     
     
-    <category term="java" scheme="http://example.com/tags/java/"/>
-    
-    <category term="mysql" scheme="http://example.com/tags/mysql/"/>
+    <category term="MyBatis" scheme="http://example.com/tags/MyBatis/"/>
     
     <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
     
-    <category term="MyBatis" scheme="http://example.com/tags/MyBatis/"/>
+    <category term="mysql" scheme="http://example.com/tags/mysql/"/>
+    
+    <category term="java" scheme="http://example.com/tags/java/"/>
     
   </entry>
   
@@ -126,9 +159,9 @@
     <category term="FreeMarker" scheme="http://example.com/categories/FreeMarker/"/>
     
     
-    <category term="Spring" scheme="http://example.com/tags/Spring/"/>
-    
     <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
+    
+    <category term="Spring" scheme="http://example.com/tags/Spring/"/>
     
     <category term="FreeMarker" scheme="http://example.com/tags/FreeMarker/"/>
     
@@ -232,17 +265,17 @@
     <category term="mysql" scheme="http://example.com/categories/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/mysql/"/>
     
     
-    <category term="jdbc" scheme="http://example.com/tags/jdbc/"/>
+    <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
+    
+    <category term="mysql" scheme="http://example.com/tags/mysql/"/>
     
     <category term="java" scheme="http://example.com/tags/java/"/>
     
-    <category term="mysql" scheme="http://example.com/tags/mysql/"/>
+    <category term="jdbc" scheme="http://example.com/tags/jdbc/"/>
     
     <category term="工具类" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/"/>
     
     <category term="Spring" scheme="http://example.com/tags/Spring/"/>
-    
-    <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
     
   </entry>
   
@@ -288,11 +321,11 @@
     <category term="FreeMarker" scheme="http://example.com/categories/java/FreeMarker/"/>
     
     
+    <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
+    
     <category term="java" scheme="http://example.com/tags/java/"/>
     
     <category term="Spring" scheme="http://example.com/tags/Spring/"/>
-    
-    <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
     
     <category term="FreeMarker" scheme="http://example.com/tags/FreeMarker/"/>
     
